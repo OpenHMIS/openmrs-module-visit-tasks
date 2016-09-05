@@ -11,7 +11,7 @@
  *
  * Copyright (C) OpenHMIS.  All Rights Reserved.
  */
-package org.openmrs.module.visit_task.api.model;
+package org.openmrs.module.visit_tasks.api.model;
 
 import org.openmrs.BaseOpenmrsMetadata;
 import org.openmrs.User;
@@ -19,11 +19,11 @@ import org.openmrs.User;
 import java.util.Date;
 
 public class VisitTask extends BaseOpenmrsMetadata {
-	private Integer visitTasksId;
+	private Integer visitTaskId;
 	private User createdBy;
 	private Date createdOn;
-	private String taskText;
-	private VisitTaskStatus visitTaskStatus;
+	private String name;
+	private VisitTaskStatus status;
 	private User closedBy;
 	private Date closedOn;
 	private User voidedBy;
@@ -31,12 +31,12 @@ public class VisitTask extends BaseOpenmrsMetadata {
 
 	@Override
 	public Integer getId() {
-		return this.visitTasksId;
+		return this.visitTaskId;
 	}
 
 	@Override
 	public void setId(Integer id) {
-		this.visitTasksId = id;
+		this.visitTaskId = id;
 	}
 
 	public User getCreatedBy() {
@@ -55,20 +55,20 @@ public class VisitTask extends BaseOpenmrsMetadata {
 		this.createdOn = createdOn;
 	}
 
-	public String getTaskText() {
-		return taskText;
+	public String getName() {
+		return name;
 	}
 
-	public void setTaskText(String taskText) {
-		this.taskText = taskText;
+	public void setName(String taskText) {
+		this.name = name;
 	}
 
-	public VisitTaskStatus getVisitTaskStatus() {
-		return visitTaskStatus;
+	public VisitTaskStatus getStatus() {
+		return status;
 	}
 
-	public void setVisitTaskStatus(VisitTaskStatus visitTaskStatus) {
-		this.visitTaskStatus = visitTaskStatus;
+	public void setStatus(VisitTaskStatus status) {
+		this.status = status;
 	}
 
 	public User getClosedBy() {

@@ -28,20 +28,18 @@
 	</require_modules>
 
 	<!-- Module Activator -->
-	<activator>${project.parent.groupId}.${project.parent.artifactId}.VisitTasksActivator</activator>
+	<activator>org.openmrs.module.visit_tasks.VisitTaskActivator</activator>
 	
 	
 	<!-- Adds link to admin page -->
 	<extension>
 		<point>org.openmrs.admin.list</point>
-		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.AdminList</class>
+		<class>org.openmrs.module.visit_tasks.extension.html.AdminList</class>
 	</extension>
 	
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
-
-        VisitTasks.hbm.xml
-				
+        VisitTask.hbm.xml
 	</mappingFiles>
 
 	<!-- Internationalization -->

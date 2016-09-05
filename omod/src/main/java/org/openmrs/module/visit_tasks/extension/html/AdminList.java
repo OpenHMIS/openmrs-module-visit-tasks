@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.visit_task.extension.html;
+package org.openmrs.module.visit_tasks.extension.html;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class AdminList extends AdministrationSectionExt {
 	 * @see AdministrationSectionExt#getTitle()
 	 */
 	public String getTitle() {
-		return "visit_task.title";
+		return "visit_tasks.title";
 	}
 	
 	/**

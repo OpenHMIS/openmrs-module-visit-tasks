@@ -11,7 +11,7 @@
  *
  * Copyright (C) OpenHMIS.  All Rights Reserved.
  */
-package org.openmrs.module.visit_task.api.model;
+package org.openmrs.module.visit_tasks.api.model;
 
 /**
  * The allowable {@link VisitTask} status states.
@@ -26,12 +26,7 @@ public enum VisitTaskStatus {
 	/**
 	 * A visit task has been completed.
 	 */
-	CLOSED(),
-
-	/**
-	 * A visit task has been voided.
-	 */
-	VOIDED();
+	CLOSED();
 
 	private VisitTaskStatus(){
 	}
