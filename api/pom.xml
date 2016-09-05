@@ -8,7 +8,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>visit-task-api</artifactId>
+	<artifactId>visit-tasks-api</artifactId>
 	<packaging>jar</packaging>
 	<name>Visit Tasks API</name>
 	<description>API project for OpenHMIS Visit Tasks</description>
