@@ -7,7 +7,7 @@
 	<name>${project.parent.name}</name>
 	<version>${project.parent.version}</version>
 	<package>${project.parent.groupId}.${project.parent.artifactId}</package>
-	<author>${module-author}</author>
+	<author>OpenHMIS</author>
 	<description>
 		${project.parent.description}
 	</description>
@@ -28,7 +28,7 @@
 	</require_modules>
 
 	<!-- Module Activator -->
-	<activator>org.openmrs.module.visit_tasks.VisitTaskActivator</activator>
+	<activator>org.openmrs.module.visit_tasks.VisitTaskModuleActivator</activator>
 	
 	
 	<!-- Adds link to admin page -->
@@ -40,6 +40,7 @@
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
         VisitTask.hbm.xml
+        VisitPredefinedTask.hbm.xml
 	</mappingFiles>
 
 	<!-- Internationalization -->

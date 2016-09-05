@@ -12,5 +12,6 @@
         <!-- <property name="hbm2ddl.auto">update</property> -->
 
         <mapping file="VisitTask.hbm.xml" />
+        <mapping file="VisitPredefinedTask.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
