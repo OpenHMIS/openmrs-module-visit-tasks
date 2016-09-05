@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.visit_task.api.impl;
+package org.openmrs.module.visit_tasks.api.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,9 +17,9 @@ import org.openmrs.module.openhmis.commons.api.PagingInfo;
 import org.openmrs.module.openhmis.commons.api.entity.impl.BaseMetadataDataServiceImpl;
 import org.openmrs.module.openhmis.commons.api.entity.security.IMetadataAuthorizationPrivileges;
 import org.openmrs.module.openhmis.commons.api.f.Action1;
-import org.openmrs.module.visit_task.api.IVisitTaskDataService;
-import org.openmrs.module.visit_task.api.model.VisitTask;
-import org.openmrs.module.visit_task.api.model.VisitTaskStatus;
+import org.openmrs.module.visit_tasks.api.IVisitTaskDataService;
+import org.openmrs.module.visit_tasks.api.model.VisitTask;
+import org.openmrs.module.visit_tasks.api.model.VisitTaskStatus;
 
 import java.util.List;
 
