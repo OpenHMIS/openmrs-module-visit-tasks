@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+/api/target/
+/omod/target/
+/omod/visit-task-omod.iml
+/omod/visit-tasks-omod.iml
+/visit-task.iml
+/api/visit-task-api.iml
