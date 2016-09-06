@@ -1,9 +1,12 @@
 package org.openmrs.module.visit_tasks.api.model;
 
-import org.openmrs.BaseOpenmrsMetadata;
+import org.openmrs.module.openhmis.commons.api.entity.model.BaseSerializableOpenmrsMetadata;
 
-public class VisitPredefinedTask extends BaseOpenmrsMetadata {
-	public static final long serialVersionUID = 1L;
+/**
+ * Model class that represents a Predefined Task.
+ */
+public class VisitPredefinedTask extends BaseSerializableOpenmrsMetadata {
+	public static final long serialVersionUID = 0L;
 
 	private Integer visitPredefinedTaskId;
 
@@ -13,9 +16,5 @@ public class VisitPredefinedTask extends BaseOpenmrsMetadata {
 
 	@Override public void setId(Integer id) {
 		this.visitPredefinedTaskId = id;
-	}
-
-	public String toString() {
-		return getName();
 	}
 }

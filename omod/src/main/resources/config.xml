@@ -2,65 +2,83 @@
 
 <module configVersion="1.2">
 
-	<!-- Module Properties -->
-	<id>${project.parent.artifactId}</id>
-	<name>${project.parent.name}</name>
-	<version>${project.parent.version}</version>
-	<package>${project.parent.groupId}.${project.parent.artifactId}</package>
-	<author>OpenHMIS</author>
-	<description>
-		${project.parent.description}
-	</description>
-	<updateURL>https://modules.openmrs.org/modules/download/${project.parent.artifactId}/update.rdf</updateURL>
-	<require_version>${openMRSVersion}</require_version>
-	<!-- / Module Properties -->
+    <!-- Module Properties -->
+    <id>${project.parent.artifactId}</id>
+    <name>${project.parent.name}</name>
+    <version>${project.parent.version}</version>
+    <package>${project.parent.groupId}.${project.parent.artifactId}</package>
+    <author>OpenHMIS</author>
+    <description>
+        ${project.parent.description}
+    </description>
+    <updateURL>https://modules.openmrs.org/modules/download/${project.parent.artifactId}/update.rdf</updateURL>
+    <require_version>${openMRSVersion}</require_version>
+    <!-- / Module Properties -->
 
-	<aware_of_modules>
-		<aware_of_module version="3.3.1">org.openmrs.module.uiframework</aware_of_module>
-		<aware_of_module version="2.3">org.openmrs.module.appframework</aware_of_module>
-		<aware_of_module version="2.2">org.openmrs.module.providermanagement</aware_of_module>
-		<aware_of_module version="1.7">org.openmrs.module.uicommons</aware_of_module>
-	</aware_of_modules>
+    <aware_of_modules>
+        <aware_of_module version="3.3.1">org.openmrs.module.uiframework</aware_of_module>
+        <aware_of_module version="2.3">org.openmrs.module.appframework</aware_of_module>
+        <aware_of_module version="2.2">org.openmrs.module.providermanagement</aware_of_module>
+        <aware_of_module version="1.7">org.openmrs.module.uicommons</aware_of_module>
+    </aware_of_modules>
 
-	<require_modules>
-		<require_module version="2.9">org.openmrs.module.webservices.rest</require_module>
-		<require_module version="3.0">org.openmrs.module.openhmis.commons</require_module>
-	</require_modules>
+    <require_modules>
+        <require_module version="2.9">org.openmrs.module.webservices.rest</require_module>
+        <require_module version="3.0">org.openmrs.module.openhmis.commons</require_module>
+    </require_modules>
 
-	<!-- Module Activator -->
-	<activator>org.openmrs.module.visit_tasks.VisitTaskModuleActivator</activator>
-	
-	
-	<!-- Adds link to admin page -->
-	<extension>
-		<point>org.openmrs.admin.list</point>
-		<class>org.openmrs.module.visit_tasks.extension.html.AdminList</class>
-	</extension>
-	
-	<!-- Maps hibernate file's, if present -->
-	<mappingFiles>
+    <!-- Module Activator -->
+    <activator>org.openmrs.module.visit_tasks.VisitTaskModuleActivator</activator>
+
+
+    <!-- Adds link to admin page -->
+    <extension>
+        <point>org.openmrs.admin.list</point>
+        <class>org.openmrs.module.visit_tasks.extension.html.AdminList</class>
+    </extension>
+
+    <!-- Maps hibernate file's, if present -->
+    <mappingFiles>
         VisitTask.hbm.xml
         VisitPredefinedTask.hbm.xml
-	</mappingFiles>
+    </mappingFiles>
 
-	<!-- Internationalization -->
-	<!-- All message codes should start with ${project.parent.artifactId}. -->
-	<messages>
-		<lang>en</lang>
-		<file>messages.properties</file>
-	</messages>
-	<messages>
-		<lang>fr</lang>
-		<file>messages_fr.properties</file>
-	</messages>
-	<messages>
-		<lang>es</lang>
-		<file>messages_es.properties</file>
-	</messages>
-	<!-- /Internationalization -->
+    <!-- Internationalization -->
+    <!-- All message codes should start with ${project.parent.artifactId}. -->
+    <messages>
+        <lang>en</lang>
+        <file>messages.properties</file>
+    </messages>
+    <messages>
+        <lang>fr</lang>
+        <file>messages_fr.properties</file>
+    </messages>
+    <messages>
+        <lang>es</lang>
+        <file>messages_es.properties</file>
+    </messages>
+    <!-- /Internationalization -->
 
-	<!-- Privileges -->
+    <!-- Privileges -->
+    <!-- App privileges for OpenMRS 2.x -->
+    <privilege>
+        <name>App: View Visit Task App</name>
+        <description>Able to see the Visit Task App Icon on the home page</description>
+    </privilege>
+    <privilege>
+        <name>Task: View Visit Task Metadata</name>
+        <description>Able to view visit task module metadata</description>
+    </privilege>
 
+    <privilege>
+        <name>Task: Manage Visit Task Metadata</name>
+        <description>Able to add/edit/retire visit task module metadata</description>
+    </privilege>
+
+    <privilege>
+        <name>Task: Purge Visit Task Metadata</name>
+        <description>Able to purge visit task module metadata</description>
+    </privilege>
 
 </module>
 
