@@ -11,18 +11,18 @@
  *
  * Copyright (C) OpenHMIS.  All Rights Reserved.
  */
-package org.openmrs.module.visit_tasks.api.security;
+package org.openmrs.module.visit_tasks.uiframework;
 
-import org.openmrs.module.openhmis.commons.api.entity.security.IMetadataAuthorizationPrivileges;
-import org.openmrs.module.visit_tasks.api.util.PrivilegeConstants;
+import org.openmrs.module.openhmis.commons.uiframework.UiConfigurationFactory;
 
 /**
- * Default authorization privileges for {@link org.openmrs.OpenmrsMetadata} data services.
+ * The OpenMRS UI Framework configuration settings.
  */
-public class BasicMetadataAuthorizationPrivileges extends BasicObjectAuthorizationPrivileges
-		implements IMetadataAuthorizationPrivileges {
+public class UiConfigurationVisitTasks extends UiConfigurationFactory {
+
 	@Override
-	public String getRetirePrivilege() {
-		return PrivilegeConstants.TASK_MANAGE_VISIT_TASK_METADATA;
+	public String getModuleId() {
+		return "visit_tasks";
 	}
+
 }

@@ -11,18 +11,18 @@
  *
  * Copyright (C) OpenHMIS.  All Rights Reserved.
  */
-package org.openmrs.module.visit_tasks.api.security;
+package org.openmrs.module.visit_tasks.web;
 
-import org.openmrs.module.openhmis.commons.api.entity.security.IMetadataAuthorizationPrivileges;
-import org.openmrs.module.visit_tasks.api.util.PrivilegeConstants;
+import org.openmrs.module.openhmis.commons.web.WebConstants;
+import org.openmrs.module.visit_tasks.api.util.ModuleConstants;
 
 /**
- * Default authorization privileges for {@link org.openmrs.OpenmrsMetadata} data services.
+ * Constants class for the module web resources.
  */
-public class BasicMetadataAuthorizationPrivileges extends BasicObjectAuthorizationPrivileges
-		implements IMetadataAuthorizationPrivileges {
-	@Override
-	public String getRetirePrivilege() {
-		return PrivilegeConstants.TASK_MANAGE_VISIT_TASK_METADATA;
+public class ModuleWebConstants extends WebConstants {
+	public static final String MODULE_ROOT = WebConstants.MODULE_BASE + ModuleConstants.MODULE_NAME + "/";
+	public static final String MODULE_RESOURCE_ROOT = WebConstants.MODULE_RESOURCE_BASE + ModuleConstants.MODULE_NAME + "/";
+
+	protected ModuleWebConstants() {
 	}
 }

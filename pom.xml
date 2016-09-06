@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.openmrs.module</groupId>
@@ -38,7 +39,7 @@
 		<developerConnection>scm:git:git@github.com:OpenHMIS/openmrs-module-visit-tasks.git</developerConnection>
 		<url>scm:git:git@github.com:OpenHMIS/openmrs-module-visit-tasks.git</url>
 	</scm>
-	
+
 	<properties>
 		<openMRSVersion>1.9.9</openMRSVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -130,7 +131,6 @@
 			</dependency>
 
 			<!-- End Openmrs modules  -->
-
 			<!-- Begin OpenHMIS modules -->
 
 			<dependency>
@@ -299,8 +299,8 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-  <modules>
-    <module>api</module>
-    <module>omod</module>
-  </modules>
+	<modules>
+		<module>api</module>
+		<module>omod</module>
+	</modules>
 </project>

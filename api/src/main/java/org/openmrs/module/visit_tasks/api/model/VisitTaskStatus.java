@@ -28,6 +28,6 @@ public enum VisitTaskStatus {
 	 */
 	CLOSED();
 
-	private VisitTaskStatus(){
+	private VisitTaskStatus() {
 	}
 }

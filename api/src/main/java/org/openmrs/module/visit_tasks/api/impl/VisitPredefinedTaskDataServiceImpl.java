@@ -8,11 +8,11 @@ import org.openmrs.module.visit_tasks.api.security.BasicMetadataAuthorizationPri
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Data service implementation class for {@link org.openmrs.module.visit_tasks.api.model.VisitPredefinedTask}s.
+ * Data service implementation class for {@link VisitPredefinedTask}s.
  */
 @Transactional
-public class VisitPredefinedTaskDataServiceImpl  extends BaseMetadataDataServiceImpl<VisitPredefinedTask> implements
-		IVisitPredefinedTaskDataService{
+public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceImpl<VisitPredefinedTask> implements
+		IVisitPredefinedTaskDataService {
 	@Override
 	protected IMetadataAuthorizationPrivileges getPrivileges() {
 		return new BasicMetadataAuthorizationPrivileges();
