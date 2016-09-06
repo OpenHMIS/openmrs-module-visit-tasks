@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * provides {@VisitTask} service implementations.
  */
-public class VisitTaskServiceDataImpl extends BaseMetadataDataServiceImpl<VisitTask> implements IVisitTaskDataService {
+public class VisitTaskDataServiceImpl extends BaseMetadataDataServiceImpl<VisitTask> implements IVisitTaskDataService {
 	protected final Log LOG = LogFactory.getLog(this.getClass());
 
 	@Override
