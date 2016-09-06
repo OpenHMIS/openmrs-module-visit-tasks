@@ -19,11 +19,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * REST controller for inventory resources.
+ * REST controller for visit tasks resources.
  */
 @Controller
 @RequestMapping("/rest/" + ModuleRestConstants.MODULE_REST_ROOT)
-public class VisitPredefinedTaskResourceController extends MainResourceController {
+public class VisitTaskResourceController extends MainResourceController {
 	@Override
 	public String getNamespace() {
 		return ModuleRestConstants.MODULE_REST_ROOT;
