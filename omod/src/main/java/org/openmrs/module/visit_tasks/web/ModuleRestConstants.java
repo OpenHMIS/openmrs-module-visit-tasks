@@ -19,8 +19,7 @@ import org.openmrs.module.webservices.rest.web.RestConstants;
  * Constants class for REST urls.
  */
 public class ModuleRestConstants extends ModuleWebConstants {
-	public static final String MODULE_REST_ROOT = RestConstants.VERSION_2 + "/visittasks/";
-
+	public static final String MODULE_REST_ROOT = RestConstants.VERSION_2 + "/visit_tasks/";
 	public static final String VISIT_PREDEFINED_TASK_RESOURCE = MODULE_REST_ROOT + "visitPredefinedTask";
 
 	protected ModuleRestConstants() {
