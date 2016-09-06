@@ -39,7 +39,7 @@
                                  referencedTableName="users" referencedColumnNames="user_id"
                                  deferrable="false" initiallyDeferred="false" />
     </changeSet>
-    <changeSet id="openmrs.visit-task-v1.0-1" author="dubdabasoduba">
+    <changeSet id="openmrs.visit-predefined-task-v1.0-1" author="dubdabasoduba">
         <createTable tableName="visit_predefined_task">
             <column name="visit_predefined_task_id" autoIncrement="true" type="int">
                 <constraints nullable="false" primaryKey="true"/>
@@ -48,31 +48,31 @@
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="varchar(1024)" defaultValue=""/>
-            <column name="status" type="varchar(17)"><constraints nullable="false"/></column>
             <column name="created_by" type="int"><constraints nullable="false"/> </column>
-            <column name="created_on" type="DATETIME"><constraints nullable="false"/> </column>
-            <column name="closed_by" type="int"/>
-            <column name="closed_on" type="DATETIME"/>
-            <column name="voided_by" type="int"/>
-            <column name="voided_on" type="DATETIME"/>
+            <column name="date_created" type="DATETIME"><constraints nullable="false"/> </column>
+            <column name="changed_by" type="int"/>
+            <column name="date_changed" type="DATETIME"/>
+            <column name="retired" type="TINYINT"/>
+            <column name="retired_reason" type="varchar(1024)" defaultValue=""/>
+            <column name="retired_by" type="int"/>
+            <column name="date_retired" type="DATETIME"/>
             <column name="uuid" type="char(38)"><constraints nullable="false" unique="true"/> </column>
         </createTable>
 
         <createIndex tableName="visit_predefined_task" indexName="visit_predefined_name_idx" unique="false">
             <column name="name"/>
-            <column name="status"/>
         </createIndex>
 
         <addForeignKeyConstraint constraintName="visit_predefined_task_created_by_fk"
                                  baseTableName="visit_predefined_task" baseColumnNames="created_by"
                                  referencedTableName="users" referencedColumnNames="user_id"
                                  deferrable="false" initiallyDeferred="false" />
-        <addForeignKeyConstraint constraintName="visit_predefined_task_closed_by_fk"
-                                 baseTableName="visit_predefined_task" baseColumnNames="closed_by"
+        <addForeignKeyConstraint constraintName="visit_predefined_task_retired_by_fk"
+                                 baseTableName="visit_predefined_task" baseColumnNames="retired_by"
                                  referencedTableName="users" referencedColumnNames="user_id"
                                  deferrable="false" initiallyDeferred="false" />
-        <addForeignKeyConstraint constraintName="visit_predefined_task_voided_by_fk"
-                                 baseTableName="visit_predefined_task" baseColumnNames="voided_by"
+        <addForeignKeyConstraint constraintName="visit_predefined_task_changed_by_fk"
+                                 baseTableName="visit_predefined_task" baseColumnNames="changed_by"
                                  referencedTableName="users" referencedColumnNames="user_id"
                                  deferrable="false" initiallyDeferred="false" />
     </changeSet>
