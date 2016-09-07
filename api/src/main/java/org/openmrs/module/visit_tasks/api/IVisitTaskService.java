@@ -15,6 +15,6 @@ import java.util.List;
 public interface IVisitTaskService extends IEntityDataService<VisitTask> {
 
 	@Transactional(readOnly = true)
-	List<VisitTask> getVisitTasks(VisitTaskStatus visitTaskStatus, PagingInfo pagingInfo);
+	List<VisitTask> getVisitTasksByStatus(VisitTaskStatus visitTaskStatus, PagingInfo pagingInfo);
 
 }

@@ -40,13 +40,11 @@ public class VisitTaskServiceImpl extends BaseEntityDataServiceImpl<VisitTask> i
 	}
 
 	@Override
-	public List<VisitTask> getVisitTasks(final VisitTaskStatus status, PagingInfo pagingInfo) {
+	public List<VisitTask> getVisitTasksByStatus(final VisitTaskStatus status, PagingInfo pagingInfo) {
 		return executeCriteria(VisitTask.class, pagingInfo, new Action1<Criteria>() {
 			@Override
 			public void apply(Criteria criteria) {
-				if (status != null) {
-					criteria.add(Restrictions.eq("status", status));
-				}
+				criteria.add(Restrictions.eq("status", status));
 			}
 		}, getDefaultSort());
 	}
