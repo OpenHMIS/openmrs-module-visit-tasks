@@ -3,7 +3,7 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
-<hibernate-mapping package="org.openmrs.module.visit_tasks.api.model" auto-import="false">
+<hibernate-mapping package="org.openmrs.module.visit_tasks.api.model">
     <class name="VisitTask" table="visit_task">
         <cache usage="read-write"/>
 
@@ -29,6 +29,7 @@
         <property name="voidReason" type="java.lang.String" column="void_reason" length="255" />
 
         <!-- bi-directional many-to-one association to User -->
+        <many-to-one name="visit" class="org.openmrs.Visit" column="visit_id" not-null="true" />
         <many-to-one name="creator" class="org.openmrs.User" column="creator" />
         <many-to-one name="closedBy" class="org.openmrs.User" column="closed_by" />
         <many-to-one name="voidedBy" class="org.openmrs.User" column="voided_by" />
