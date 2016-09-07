@@ -29,18 +29,18 @@
 
 	<!-- Module Activator -->
 	<activator>org.openmrs.module.visit_tasks.VisitTaskModuleActivator</activator>
-	
-	
+
+
 	<!-- Adds link to admin page -->
 	<extension>
 		<point>org.openmrs.admin.list</point>
 		<class>org.openmrs.module.visit_tasks.extension.html.AdminList</class>
 	</extension>
-	
+
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
-        VisitTask.hbm.xml
-        VisitPredefinedTask.hbm.xml
+		VisitTask.hbm.xml
+		VisitPredefinedTask.hbm.xml
 	</mappingFiles>
 
 	<!-- Internationalization -->
@@ -60,7 +60,25 @@
 	<!-- /Internationalization -->
 
 	<!-- Privileges -->
+	<!-- App privileges for OpenMRS 2.x -->
+	<privilege>
+		<name>App: View Visit Task App</name>
+		<description>Able to see the Visit Task App Icon on the home page</description>
+	</privilege>
+	<privilege>
+		<name>Task: View Visit Task Metadata</name>
+		<description>Able to view visit task module metadata</description>
+	</privilege>
 
+	<privilege>
+		<name>Task: Manage Visit Task Metadata</name>
+		<description>Able to add/edit/retire visit task module metadata</description>
+	</privilege>
+
+	<privilege>
+		<name>Task: Purge Visit Task Metadata</name>
+		<description>Able to purge visit task module metadata</description>
+	</privilege>
 
 </module>
 
