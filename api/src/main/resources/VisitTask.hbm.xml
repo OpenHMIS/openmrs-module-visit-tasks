@@ -4,7 +4,7 @@
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="org.openmrs.module.visit_tasks.api.model" auto-import="false">
-    <class name="VisitTask"  table="visit_task">
+    <class name="VisitTask" table="visit_task">
         <cache usage="read-write"/>
 
         <id name="id" type="int" column="visit_task_id">
@@ -16,13 +16,20 @@
 
         <property name="name" type="java.lang.String" column="name" not-null="true" length="255" />
         <property name="description" type="java.lang.String" column="description" length="1024" />
-        <property name="status" type="java.lang.String" column="status" />
-        <property name="createdOn" type="java.util.Date" column="created_on" length="19" />
+        <property name="status" column="status" not-null="false" length="12">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">org.openmrs.module.visit_tasks.api.model.VisitTaskStatus</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <property name="dateCreated" type="java.util.Date" column="date_created" length="19" />
         <property name="closedOn" type="java.util.Date" column="closed_on" length="19" />
-        <property name="voidedOn" type="java.util.Date" column="voided_on" length="19" />
+        <property name="voided" type="java.lang.Boolean" column="voided" length="1" not-null="true" />
+        <property name="dateVoided" type="java.util.Date" column="date_voided" length="19" />
+        <property name="voidReason" type="java.lang.String" column="void_reason" length="255" />
 
         <!-- bi-directional many-to-one association to User -->
-        <many-to-one name="createdBy" class="org.openmrs.User" column="created_by" />
+        <many-to-one name="creator" class="org.openmrs.User" column="creator" />
         <many-to-one name="closedBy" class="org.openmrs.User" column="closed_by" />
         <many-to-one name="voidedBy" class="org.openmrs.User" column="voided_by" />
 

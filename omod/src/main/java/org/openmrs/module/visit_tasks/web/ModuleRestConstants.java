@@ -13,15 +13,14 @@
  */
 package org.openmrs.module.visit_tasks.web;
 
+import org.openmrs.module.openhmis.commons.web.WebConstants;
 import org.openmrs.module.webservices.rest.web.RestConstants;
 
 /**
  * Constants class for REST urls.
  */
-public class ModuleRestConstants extends ModuleWebConstants {
-	public static final String MODULE_REST_ROOT = RestConstants.VERSION_2 + "/visit_tasks/";
+public class ModuleRestConstants extends WebConstants {
+	public static final String MODULE_REST_ROOT = RestConstants.VERSION_2 + "/visitTasks/";
 	public static final String VISIT_PREDEFINED_TASK_RESOURCE = MODULE_REST_ROOT + "visitPredefinedTask";
-
-	protected ModuleRestConstants() {
-	}
+	public static final String VISIT_TASKS_RESOURCE = MODULE_REST_ROOT + "visitTask";
 }

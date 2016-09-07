@@ -20,7 +20,7 @@ import org.openmrs.module.visit_tasks.api.util.PrivilegeConstants;
  * Default authorization privileges for {@link org.openmrs.OpenmrsMetadata} data services.
  */
 public class BasicMetadataAuthorizationPrivileges extends BasicObjectAuthorizationPrivileges
-		implements IMetadataAuthorizationPrivileges {
+        implements IMetadataAuthorizationPrivileges {
 	@Override
 	public String getRetirePrivilege() {
 		return PrivilegeConstants.TASK_MANAGE_VISIT_TASK_METADATA;
