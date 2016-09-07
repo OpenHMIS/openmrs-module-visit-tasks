@@ -9,7 +9,7 @@
 				"extensionPointId": "org.openmrs.referenceapplication.homepageLink",
 				"type": "link",
 				"label": "Visit Tasks",
-				"url": "#",
+				"url": "visitTasks/visitTasksLanding.page",
 				"icon": "icon-list-ul",
 				"requiredPrivilege": "App: View Visit Task App"
 			}
