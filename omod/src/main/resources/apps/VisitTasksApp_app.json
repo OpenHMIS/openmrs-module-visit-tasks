@@ -1,0 +1,18 @@
+[
+	{
+		"id": "${project.parent.artifactId}",
+		"description": "Provides inventory services that can be used by other modules",
+		"order": 20,
+		"extensions": [
+			{
+				"id": "module.visit_tasks.visit_tasksLandingPageLink",
+				"extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+				"type": "link",
+				"label": "Visit Tasks",
+				"url": "#",
+				"icon": "icon-list-ul",
+				"requiredPrivilege": "App: View Visit Task App"
+			}
+		]
+	}
+]

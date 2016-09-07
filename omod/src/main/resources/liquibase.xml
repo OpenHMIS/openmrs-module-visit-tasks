@@ -53,7 +53,7 @@
 				<constraints nullable="false"/>
 			</column>
 			<column name="description" type="varchar(1024)" defaultValue=""/>
-			<column name="created_by" type="int">
+			<column name="creator" type="int">
 				<constraints nullable="false"/>
 			</column>
 			<column name="date_created" type="DATETIME">
@@ -62,7 +62,7 @@
 			<column name="changed_by" type="int"/>
 			<column name="date_changed" type="DATETIME"/>
 			<column name="retired" type="TINYINT"/>
-			<column name="retired_reason" type="varchar(1024)" defaultValue=""/>
+			<column name="retire_reason" type="varchar(1024)" defaultValue=""/>
 			<column name="retired_by" type="int"/>
 			<column name="date_retired" type="DATETIME"/>
 			<column name="uuid" type="char(38)">
@@ -75,7 +75,7 @@
 		</createIndex>
 
 		<addForeignKeyConstraint constraintName="visit_predefined_task_created_by_fk"
-		                         baseTableName="visit_predefined_task" baseColumnNames="created_by"
+		                         baseTableName="visit_predefined_task" baseColumnNames="creator"
 		                         referencedTableName="users" referencedColumnNames="user_id"
 		                         deferrable="false" initiallyDeferred="false"/>
 		<addForeignKeyConstraint constraintName="visit_predefined_task_retired_by_fk"
