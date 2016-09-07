@@ -3,7 +3,7 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
-<hibernate-mapping package="org.openmrs.module.visit_tasks.api.model" auto-import="false">
+<hibernate-mapping package="org.openmrs.module.visit_tasks.api.model">
     <class name="VisitTask" table="visit_task">
         <cache usage="read-write"/>
 
