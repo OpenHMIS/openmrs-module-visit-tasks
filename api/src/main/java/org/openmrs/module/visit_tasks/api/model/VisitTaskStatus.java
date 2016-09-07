@@ -21,13 +21,16 @@ public enum VisitTaskStatus {
 	/**
 	 * A visit task is open/ongoing.
 	 */
-	OPEN(),
+	OPEN(0),
 
 	/**
 	 * A visit task has been completed.
 	 */
-	CLOSED();
+	CLOSED(1);
 
-	private VisitTaskStatus() {
+	private int value;
+
+	private VisitTaskStatus(int value) {
+		this.value = value;
 	}
 }

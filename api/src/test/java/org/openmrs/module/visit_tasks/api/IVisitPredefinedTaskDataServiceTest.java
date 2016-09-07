@@ -17,8 +17,10 @@ package org.openmrs.module.visit_tasks.api;
 import org.openmrs.module.openhmis.commons.api.entity.IMetadataDataServiceTest;
 import org.openmrs.module.visit_tasks.api.model.VisitPredefinedTask;
 
-public class IVisitPredefinedTaskDataServiceTest extends IMetadataDataServiceTest<IVisitPredefinedTaskDataService, VisitPredefinedTask> {
-	public static final String VISIT_PREDEFINED_TASK_DATASET = TestConstants.BASE_DATASET_DIR + "VisitPredefinedTaskTest.xml";
+public class IVisitPredefinedTaskDataServiceTest
+        extends IMetadataDataServiceTest<IVisitPredefinedTaskDataService, VisitPredefinedTask> {
+	public static final String VISIT_PREDEFINED_TASK_DATASET = TestConstants.BASE_DATASET_DIR
+	        + "VisitPredefinedTaskTest.xml";
 
 	@Override
 	public void before() throws Exception {

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceImpl<VisitPredefinedTask> implements
-		IVisitPredefinedTaskDataService {
+        IVisitPredefinedTaskDataService {
 	@Override
 	protected IMetadataAuthorizationPrivileges getPrivileges() {
 		return new BasicMetadataAuthorizationPrivileges();

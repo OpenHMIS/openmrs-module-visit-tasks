@@ -19,17 +19,16 @@
   		    http://www.springframework.org/schema/util
   		    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-   	<bean id="sessionFactory" class="org.openmrs.api.db.hibernate.HibernateSessionFactoryBean">
-		<property name="configLocations">
-			<list>
-				<value>classpath:hibernate.cfg.xml</value>
-				<value>classpath:test-hibernate.cfg.xml</value>
-			</list>
-		</property>
-	</bean>
+    <bean id="sessionFactory" class="org.openmrs.api.db.hibernate.HibernateSessionFactoryBean">
+        <property name="configLocations">
+            <list>
+                <value>classpath:hibernate.cfg.xml</value>
+                <value>classpath:test-hibernate.cfg.xml</value>
+            </list>
+        </property>
+    </bean>
 
-	<bean id="genericRepository" class="org.openmrs.module.openhmis.commons.api.entity.db.hibernate.HibernateRepository">
-		<constructor-arg name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
+    <bean id="genericRepository" class="org.openmrs.module.openhmis.commons.api.entity.db.hibernate.HibernateRepository">
+        <constructor-arg name="sessionFactory" ref="sessionFactory" />
+    </bean>
 </beans>

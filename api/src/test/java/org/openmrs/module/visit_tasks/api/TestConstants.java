@@ -15,4 +15,5 @@ package org.openmrs.module.visit_tasks.api;
 
 public class TestConstants {
 	public static final String BASE_DATASET_DIR = "org/openmrs/module/visit_tasks/api/include/";
+	public static final String VISIT_TASK_DATASET = BASE_DATASET_DIR + "VisitTaskTest.xml";
 }

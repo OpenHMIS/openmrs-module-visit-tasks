@@ -19,6 +19,5 @@ package org.openmrs.module.visit_tasks.api.util;
 public class ModuleConstants {
 	public static final String MODULE_NAME = "visit_tasks";
 
-	protected ModuleConstants() {
-	}
+	protected ModuleConstants() {}
 }
