@@ -1,11 +1,11 @@
 package org.openmrs.module.visit_tasks.api.model;
 
-import org.openmrs.module.openhmis.commons.api.entity.model.BaseSerializableOpenmrsMetadata;
+import org.openmrs.BaseOpenmrsMetadata;
 
 /**
  * Model class that represents a Visit Predefined Task.
  */
-public class VisitPredefinedTask extends BaseSerializableOpenmrsMetadata {
+public class VisitPredefinedTask extends BaseOpenmrsMetadata {
 	public static final long serialVersionUID = 0L;
 
 	private Integer visitPredefinedTaskId;
