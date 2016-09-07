@@ -10,11 +10,13 @@ public class VisitPredefinedTask extends BaseOpenmrsMetadata {
 
 	private Integer visitPredefinedTaskId;
 
-	@Override public Integer getId() {
+	@Override
+	public Integer getId() {
 		return this.visitPredefinedTaskId;
 	}
 
-	@Override public void setId(Integer id) {
+	@Override
+	public void setId(Integer id) {
 		this.visitPredefinedTaskId = id;
 	}
 }
