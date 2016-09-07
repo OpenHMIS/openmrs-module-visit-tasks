@@ -42,5 +42,5 @@ public class VisitTaskModuleActivator extends BaseModuleActivator {
 	public void stopped() {
 		LOG.info("Visit Task Module stopped");
 	}
-		
+
 }

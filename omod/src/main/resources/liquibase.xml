@@ -11,13 +11,16 @@
             <column name="name" type="varchar(255)" defaultValue="" >
                 <constraints nullable="false"/></column>
             <column name="description" type="varchar(1024)" defaultValue=""/>
-            <column name="status" type="varchar(17)"><constraints nullable="false"/></column>
-            <column name="created_by" type="int"><constraints nullable="false"/></column>
-            <column name="created_on" type="DATETIME"><constraints nullable="false"/></column>
+            <column name="status" type="varchar(17)" defaultValue="OPEN"><constraints nullable="true"/></column>
+            <column name="creator" type="int"><constraints nullable="false"/></column>
+            <column name="date_created" type="DATETIME"><constraints nullable="false"/></column>
             <column name="closed_by" type="int" />
             <column name="closed_on" type="DATETIME" />
+            <column name="voided" type="boolean" defaultValueBoolean="false"><constraints nullable="false"/></column>
             <column name="voided_by" type="int" />
-            <column name="voided_on" type="DATETIME" />
+            <column name="date_voided" type="datetime" />
+            <column name="void_reason" type="varchar(255)" defaultValue="null"/>
+
             <column name="uuid" type="char(38)"><constraints nullable="false" unique="true" /></column>
         </createTable>
 
@@ -26,8 +29,8 @@
             <column name="status" />
         </createIndex>
 
-        <addForeignKeyConstraint constraintName="visit_task_created_by_fk"
-                                 baseTableName="visit_task" baseColumnNames="created_by"
+        <addForeignKeyConstraint constraintName="visit_task_creator_fk"
+                                 baseTableName="visit_task" baseColumnNames="creator"
                                  referencedTableName="users" referencedColumnNames="user_id"
                                  deferrable="false" initiallyDeferred="false" />
         <addForeignKeyConstraint constraintName="visit_task_closed_by_fk"
