@@ -119,12 +119,27 @@
 				<version>1.2</version>
 				<scope>provided</scope>
 			</dependency>
-
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>appframework-api</artifactId>
+				<version>2.0</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
 
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>uicommons-api</artifactId>
-				<version>${uicommonsVersion}</version>
+				<artifactId>appframework-api</artifactId>
+				<version>2.0</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>providermanagement-api</artifactId>
+				<version>2.0</version>
+				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
 
@@ -139,7 +154,7 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>uiframework-api</artifactId>
-				<version>3.4</version>
+				<version>[2.0,)</version>
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>

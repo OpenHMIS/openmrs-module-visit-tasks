@@ -22,7 +22,7 @@ public class UiConfigurationVisitTasks extends UiConfigurationFactory {
 
 	@Override
 	public String getModuleId() {
-		return "visitTasks";
+		return "visit_tasks";
 	}
 
 }
