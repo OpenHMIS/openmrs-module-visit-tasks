@@ -17,7 +17,7 @@
 				"id": "${project.parent.artifactId}.manageVisitTasksModuleLink",
 				"extensionPointId": "org.openmrs.module.visit-tasks.landing",
 				"label": "Manage Visit Tasks Module",
-				"url": "${project.parent.artifactId}/visitTaskManage/manageModule.page",
+				"url": "${project.parent.artifactId}/visitTasksManage/manageModule.page",
 				"icon": "icon-cogs",
 				"requiredPrivilege": "Task: Manage Visit Task Module"
 			},
@@ -29,6 +29,15 @@
 				"url": "#",
 				"icon": "icon-edit",
 				"requiredPrivilege": "Task: View Visit Task Metadata"
+			},
+			{
+				"id": "${project.parent.artifactId}.VisitTasksLink",
+				"extensionPointId": "patientDashboard.visitActions",
+				"type": "link",
+				"label": "Visit Tasks",
+				"url": "${project.parent.artifactId}/visitTasks/entities.page?patientId={{patient.uuid}}&visitId={{visit.uuid}}",
+				"icon": "icon-plus",
+				"require": "visit.active"
 			}
 		]
 	}

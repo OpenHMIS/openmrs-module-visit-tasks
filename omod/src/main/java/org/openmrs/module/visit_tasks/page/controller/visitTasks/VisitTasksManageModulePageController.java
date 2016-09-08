@@ -44,7 +44,7 @@ public class VisitTasksManageModulePageController {
 	public void get(PageModel model, PageRequest request, UiUtils ui) throws IOException {
 		AppFrameworkService appFrameworkService = Context.getService(AppFrameworkService.class);
 		List<Extension> extensions =
-		        appFrameworkService.getExtensionsForCurrentUser(ModuleWebConstants.MANAGE_MODULE_PAGE_EXTENSION_POINT_ID);
+		        appFrameworkService.getExtensionsForCurrentUser(ModuleWebConstants.VISIT_TASKS_MANAGE_MODULE_PAGE_EXTENSION_POINT_ID);
 		model.addAttribute("extensions", extensions);
 	}
 }

@@ -45,7 +45,7 @@ public class VisitTasksLandingPageController {
 	public void get(PageModel model, @SpringBean("appFrameworkService") AppFrameworkService appFrameworkService,
 	        PageRequest request, UiUtils ui) throws IOException {
 		List<Extension> extensions =
-		        appFrameworkService.getExtensionsForCurrentUser(ModuleWebConstants.LANDING_PAGE_EXTENSION_POINT_ID);
+		        appFrameworkService.getExtensionsForCurrentUser(ModuleWebConstants.VISIT_TASKS_LANDING_PAGE_EXTENSION_POINT_ID);
 		model.addAttribute("extensions", extensions);
 	}
 }
