@@ -12,6 +12,15 @@
 				"url": "${project.parent.artifactId}/visitTasksLanding.page",
 				"icon": "icon-list-ul",
 				"requiredPrivilege": "App: View Visit Task App"
+			},
+			{
+				"id": "${project.parent.artifactId}.VisitTasksLink",
+				"extensionPointId": "patientDashboard.visitActions",
+				"type": "link",
+				"label": "Visit Tasks",
+				"url": "${project.parent.artifactId}/visitTasks/entities.page?patientId={{patient.uuid}}&visitId={{visit.uuid}}",
+				"icon": "icon-plus",
+				"require": "visit.active"
 			}
 		]
 	}
