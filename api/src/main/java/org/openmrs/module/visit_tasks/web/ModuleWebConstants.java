@@ -23,7 +23,9 @@ public class ModuleWebConstants extends WebConstants {
 	public static final String MODULE_ROOT = WebConstants.MODULE_BASE + ModuleConstants.MODULE_NAME + "/";
 	public static final String MODULE_RESOURCE_ROOT = WebConstants.MODULE_RESOURCE_BASE + ModuleConstants.MODULE_NAME + "/";
 
-	public static final String LANDING_PAGE_EXTENSION_POINT_ID = "org.openmrs.module.visit-tasks.landing";
+	public static final String VISIT_TASKS_LANDING_PAGE_EXTENSION_POINT_ID = "org.openmrs.module.visit-tasks.landing";
+	public static final String VISIT_TASKS_MANAGE_MODULE_PAGE_EXTENSION_POINT_ID =
+	        "org.openmrs.module.visit-tasks.manage.module";
 
 	protected ModuleWebConstants() {}
 }

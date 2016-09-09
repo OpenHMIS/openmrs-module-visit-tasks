@@ -31,10 +31,11 @@ public class PrivilegeConstants {
 	public static final String TASK_MANAGE_VISIT_TASK_METADATA = "Task: Manage Visit Task Metadata";
 	public static final String TASK_PURGE_VISIT_TASK_METADATA = "Task: Purge Visit Task Metadata";
 	public static final String TASK_VIEW_VISIT_TASK_METADATA = "Task: View Visit Task Metadata";
+	public static final String TASK_ACCESS_MANAGE_VISIT_TASK_PAGE = "Task: Manage Visit Task Module";
 
 	public static final String[] PRIVILEGE_NAMES =
 	        new String[] { APP_VIEW_VISIT_TASK_APP, TASK_MANAGE_VISIT_TASK_METADATA, TASK_PURGE_VISIT_TASK_METADATA,
-	                TASK_VIEW_VISIT_TASK_METADATA };
+	                TASK_VIEW_VISIT_TASK_METADATA, TASK_ACCESS_MANAGE_VISIT_TASK_PAGE };
 
 	protected PrivilegeConstants() {}
 

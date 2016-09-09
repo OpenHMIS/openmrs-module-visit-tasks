@@ -12,14 +12,14 @@
  * Copyright (C) OpenHMIS.  All Rights Reserved.
  *
  */
-package org.openmrs.module.visit_tasks.page.controller;
+package org.openmrs.module.visit_tasks.page.controller.visitTasks;
 
 import org.openmrs.annotation.OpenmrsProfile;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.domain.Extension;
 import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.visit_tasks.web.ModuleWebConstants;
 import org.openmrs.ui.framework.UiUtils;
-import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.page.PageModel;
 import org.openmrs.ui.framework.page.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -28,12 +28,11 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Controller for the visit task landing page.
+ * Controller for the inventory management landing page.
  */
 @Controller
 @OpenmrsProfile(modules = { "uiframework:*.*" })
-public class VisitTasksLandingPageController {
-
+public class VisitTasksManageModulePageController {
 	/**
 	 * Process requests to show the home page
 	 * @param model
@@ -42,10 +41,10 @@ public class VisitTasksLandingPageController {
 	 * @param ui
 	 * @throws IOException
 	 */
-	public void get(PageModel model, @SpringBean("appFrameworkService") AppFrameworkService appFrameworkService,
-	        PageRequest request, UiUtils ui) throws IOException {
+	public void get(PageModel model, PageRequest request, UiUtils ui) throws IOException {
+		AppFrameworkService appFrameworkService = Context.getService(AppFrameworkService.class);
 		List<Extension> extensions =
-		        appFrameworkService.getExtensionsForCurrentUser(ModuleWebConstants.VISIT_TASKS_LANDING_PAGE_EXTENSION_POINT_ID);
+		        appFrameworkService.getExtensionsForCurrentUser(ModuleWebConstants.VISIT_TASKS_MANAGE_MODULE_PAGE_EXTENSION_POINT_ID);
 		model.addAttribute("extensions", extensions);
 	}
 }
