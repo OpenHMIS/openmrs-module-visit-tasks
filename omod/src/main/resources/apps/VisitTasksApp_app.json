@@ -14,19 +14,11 @@
 				"requiredPrivilege": "App: View Visit Task App"
 			},
 			{
-				"id": "${project.parent.artifactId}.manageVisitTasksModuleLink",
-				"extensionPointId": "org.openmrs.module.visit-tasks.landing",
-				"label": "Manage Visit Tasks Module",
-				"url": "${project.parent.artifactId}/visitTasksManage/manageModule.page",
-				"icon": "icon-cogs",
-				"requiredPrivilege": "Task: Manage Visit Task Module"
-			},
-			{
 				"id": "${project.parent.artifactId}.managePredefinedTasksLink",
-				"extensionPointId": "org.openmrs.module.visit-tasks.manage.module",
+				"extensionPointId": "org.openmrs.module.visittasks.landing",
 				"type": "link",
 				"label": "Manage Visit Predefined Tasks",
-				"url": "#",
+				"url": "${project.parent.artifactId}/predefinedTasks/entities.page#/",
 				"icon": "icon-edit",
 				"requiredPrivilege": "Task: View Visit Task Metadata"
 			},

@@ -24,7 +24,7 @@
 	<bean parent="serviceContext">
 		<property name="moduleService">
 			<list merge="true">
-				<value>org.openmrs.module.visit_tasks.api.IVisitTaskDataService</value>
+				<value>org.openmrs.module.visittasks.api.IVisitTaskDataService</value>
 				<ref bean="visitTaskService" />
 			</list>
 		</property>
@@ -33,7 +33,7 @@
 	<bean parent="serviceContext">
 		<property name="moduleService">
 			<list merge="true">
-				<value>org.openmrs.module.visit_tasks.api.IVisitPredefinedTaskDataService</value>
+				<value>org.openmrs.module.visittasks.api.IVisitPredefinedTaskDataService</value>
 				<ref bean="visitPredefinedTaskService" />
 			</list>
 		</property>
@@ -43,7 +43,7 @@
 	<bean id="visitTaskService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager" ref="transactionManager" />
 		<property name="target">
-			<bean class="org.openmrs.module.visit_tasks.api.impl.VisitTaskDataServiceImpl">
+			<bean class="org.openmrs.module.visittasks.api.impl.VisitTaskDataServiceImpl">
 				<property name="repository" ref="genericRepository" />
 			</bean>
 		</property>
@@ -54,7 +54,7 @@
     <bean id="visitPredefinedTaskService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager" ref="transactionManager" />
         <property name="target">
-            <bean class="org.openmrs.module.visit_tasks.api.impl.VisitPredefinedTaskDataServiceImpl">
+            <bean class="org.openmrs.module.visittasks.api.impl.VisitPredefinedTaskDataServiceImpl">
                 <property name="repository" ref="genericRepository" />
             </bean>
         </property>

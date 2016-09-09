@@ -19,7 +19,7 @@ requirejs(['predefinedTasks/configs/entity.module'], function() {
 });
 
 emr.loadMessages([
-    "openhmis.inventory.department.name",
+    "visittasks.visitPredefinedTask.name",
     "general.edit",
     "general.new",
     "general.name",

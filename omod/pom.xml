@@ -5,11 +5,11 @@
 
 	<parent>
 		<groupId>org.openmrs.module</groupId>
-		<artifactId>visit-tasks</artifactId>
+		<artifactId>visittasks</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>visit-tasks-omod</artifactId>
+	<artifactId>visittasks-omod</artifactId>
 	<packaging>jar</packaging>
 	<name>Visit Tasks OMOD</name>
 	<description>OMOD project for OpenHMIS Visit Tasks</description>

@@ -3,7 +3,7 @@
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
-<hibernate-mapping package="org.openmrs.module.visit_tasks.api.model">
+<hibernate-mapping package="org.openmrs.module.visittasks.api.model">
     <class name="VisitTask" table="visit_task">
         <cache usage="read-write"/>
 
@@ -18,7 +18,7 @@
         <property name="description" type="java.lang.String" column="description" length="1024" />
         <property name="status" column="status" not-null="false" length="12">
             <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">org.openmrs.module.visit_tasks.api.model.VisitTaskStatus</param>
+                <param name="enumClass">org.openmrs.module.visittasks.api.model.VisitTaskStatus</param>
                 <param name="type">12</param>
             </type>
         </property>

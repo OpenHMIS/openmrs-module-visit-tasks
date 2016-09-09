@@ -13,7 +13,7 @@
  */
 package org.openmrs.module.webservices.rest.web.controller;
 
-import org.openmrs.module.visit_tasks.web.ModuleRestConstants;
+import org.openmrs.module.visittasks.web.ModuleRestConstants;
 import org.openmrs.module.webservices.rest.web.v1_0.controller.MainResourceController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
