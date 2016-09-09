@@ -13,9 +13,9 @@
  */
 package org.openmrs.module.visit_tasks.api.model;
 
-import org.openmrs.BaseOpenmrsData;
-import org.openmrs.BaseOpenmrsMetadata;
+import org.openmrs.Patient;
 import org.openmrs.User;
+import org.openmrs.BaseOpenmrsData;
 import org.openmrs.Visit;
 
 import java.util.Date;
@@ -31,6 +31,7 @@ public class VisitTask extends BaseOpenmrsData {
 	private User closedBy;
 	private Date closedOn;
 	private Visit visit;
+	private Patient patient;
 
 	@Override
 	public Integer getId() {
@@ -88,5 +89,13 @@ public class VisitTask extends BaseOpenmrsData {
 
 	public void setVisit(Visit visit) {
 		this.visit = visit;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 }

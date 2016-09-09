@@ -15,10 +15,11 @@ package org.openmrs.module.webservices.rest.resource;
 
 import org.openmrs.annotation.Handler;
 import org.openmrs.module.openhmis.commons.api.entity.IEntityDataService;
-import org.openmrs.module.visit_tasks.api.IVisitTaskService;
+import org.openmrs.module.visit_tasks.api.IVisitTaskDataService;
 import org.openmrs.module.visit_tasks.api.model.VisitTask;
 import org.openmrs.module.visit_tasks.web.ModuleRestConstants;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
+import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.Representation;
 import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceDescription;
 
@@ -43,6 +44,8 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 		description.addProperty("closedBy", Representation.DEFAULT);
 		description.addProperty("closedOn", Representation.DEFAULT);
 		description.addProperty("voided", Representation.DEFAULT);
+		description.addProperty("patient", Representation.REF);
+		description.addProperty("visit", Representation.REF);
 
 		return description;
 	}
@@ -54,6 +57,12 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 
 	@Override
 	public Class<IEntityDataService<VisitTask>> getServiceClass() {
-		return (Class<IEntityDataService<VisitTask>>)(Object)IVisitTaskService.class;
+		return (Class<IEntityDataService<VisitTask>>)(Object)IVisitTaskDataService.class;
 	}
+
+	@Override
+	public DelegatingResourceDescription getCreatableProperties() {
+		return getRepresentationDescription(new DefaultRepresentation());
+	}
+
 }

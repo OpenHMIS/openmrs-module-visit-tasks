@@ -25,16 +25,15 @@
 
 		// @Override
 		extended.getModelFields = function() {
-			var fields = ["operationNumber", "instanceType",
-				"operationDate", "source", "destination", "institution",
-				"department", "items", "status", "patient"];
+			var fields = ["status", "creator", "dateCreated",
+				"voided", "dateVoided", "voidedBy", "closedBy", "closedOn"];
 			return fields;
 		};
 
 		return extended;
 	}
 
-	baseModel.factory("VisitModel", VisitTaskModel);
+	baseModel.factory("VisitTaskModel", VisitTaskModel);
 
 	VisitTaskModel.$inject = ['GenericMetadataModel'];
 

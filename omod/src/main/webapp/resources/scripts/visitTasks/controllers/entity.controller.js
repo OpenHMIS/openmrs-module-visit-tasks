@@ -13,25 +13,24 @@
  *
  */
 
-(function() {
+(function () {
 	'use strict';
 
 	var base = angular.module('app.genericEntityController');
 	base.controller("VisitTasksController", VisitTasksController);
-	VisitTasksController.$inject = ['$stateParams', '$injector', '$scope', '$filter', 'EntityRestFactory',
-		'VisitTaskRestfulService', 'PaginationService', 'VisitTaskFunctions',
-		'CookiesService', 'VisitTaskModel', 'CommonsRestfulFunctions', '$timeout', 'EntityFunctions'];
+	VisitTasksController.$inject = ['$stateParams', '$injector', '$scope', '$filter',
+		'EntityRestFactory', 'VisitTaskRestfulService', 'VisitTaskModel'];
 
 	function VisitTasksController($stateParams, $injector, $scope, $filter, EntityRestFactory,
-	                                   VisitTaskRestfulService, PaginationService, VisitTaskFunctions,
-	                                   CookiesService, VisitTaskModel, CommonsRestfulFunctions, $timeout, EntityFunctions) {
+	                              VisitTaskRestfulService, VisitTaskModel) {
 		var self = this;
 		var entity_name_message_key = emr.message("visit_tasks.page");
 		var REST_ENTITY_NAME = "visitTask";
 
 		// @Override
-		self.setRequiredInitParameters = self.setRequiredInitParameters || function() {
-				self.bindBaseParameters(VISIT_TASKS_MODULE_NAME, REST_ENTITY_NAME, entity_name_message_key, INVENTORY_TASK_DASHBOARD_PAGE_URL);
+		self.setRequiredInitParameters = self.setRequiredInitParameters || function () {
+				self.bindBaseParameters(VISIT_TASKS_MODULE_NAME, REST_ENTITY_NAME,
+					entity_name_message_key, '');
 				//self.checkPrivileges(TASK_ACCESS_CREATE_OPERATION_PAGE);
 			}
 		/**
@@ -40,14 +39,16 @@
 		 */
 		// @Override
 		self.bindExtraVariablesToScope = self.bindExtraVariablesToScope
-			|| function() {
+			|| function () {
+				console.log('bind extra');
 				$scope.loading = false;
+				console.log($stateParams['patientId']);
 
 				//load my visit tasks
 				VisitTaskRestfulService.getMyVisitTasks(self.onLoadMyVisitTasksSuccessful);
 
 				//load predefined visit tasks
-				VisitTaskRestfulService.getPredefinedVisitTasks(onLoadPredefinedVisitTasks);
+				VisitTaskRestfulService.getPredefinedVisitTasks(self.onLoadPredefinedVisitTasksSuccessful);
 			}
 
 		/**
@@ -55,17 +56,24 @@
 		 * @return boolean
 		 */
 		// @Override
-		self.validateBeforeSaveOrUpdate = self.validateBeforeSaveOrUpdate || function() {
+		self.validateBeforeSaveOrUpdate = self.validateBeforeSaveOrUpdate || function () {
+				var requestPayload = {};
+				requestPayload.name = $scope.entity.name;
+				requestPayload.description = $scope.entity.description;
+				requestPayload.status = 'OPEN';
+				requestPayload.visit = '24f3c0e0-495a-4d33-b961-ca83a6d7d904';
+				requestPayload.patient = '96d596cb-37a9-11e2-862a-b4b52f5b1c99';
+				$scope.entity = requestPayload;
 				return true;
 			}
 
-		self.onLoadMyVisitTasksSuccessful = self.onLoadMyVisitTasksSuccessful || function(data) {
-			console.log(data);
+		self.onLoadMyVisitTasksSuccessful = self.onLoadMyVisitTasksSuccessful || function (data) {
+				console.log(data.results);
 				$scope.myVisitTasks = data.results;
 			}
 
-		self.onLoadPredefinedVisitTasks = self.onLoadPredefinedVisitTasks || function(data) {
-			console.log(data);
+		self.onLoadPredefinedVisitTasksSuccessful = self.onLoadPredefinedVisitTasksSuccessful || function (data) {
+				console.log(data.results);
 				$scope.predefinedVisitTasks = data.results;
 			}
 

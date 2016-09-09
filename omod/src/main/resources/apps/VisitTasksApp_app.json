@@ -25,7 +25,7 @@
 				"id": "${project.parent.artifactId}.managePredefinedTasksLink",
 				"extensionPointId": "org.openmrs.module.visit-tasks.manage.module",
 				"type": "link",
-				"label": "Manage Visit Predefind Tasks",
+				"label": "Manage Visit Predefined Tasks",
 				"url": "#",
 				"icon": "icon-edit",
 				"requiredPrivilege": "Task: View Visit Task Metadata"
@@ -35,7 +35,7 @@
 				"extensionPointId": "patientDashboard.visitActions",
 				"type": "link",
 				"label": "Visit Tasks",
-				"url": "${project.parent.artifactId}/visitTasks/entities.page?patientId={{patient.uuid}}&visitId={{visit.uuid}}",
+				"url": "${project.parent.artifactId}/visitTasks/entities.page?patientUuid={{patient.uuid}}&visitUuid={{visit.uuid}}",
 				"icon": "icon-plus",
 				"require": "visit.active"
 			}
