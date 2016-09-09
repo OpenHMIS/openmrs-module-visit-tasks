@@ -30,6 +30,7 @@
 
         <!-- bi-directional many-to-one association to User -->
         <many-to-one name="visit" class="org.openmrs.Visit" column="visit_id" not-null="true" />
+        <many-to-one name="patient" class="org.openmrs.Patient" column="patient_id" not-null="true" />
         <many-to-one name="creator" class="org.openmrs.User" column="creator" />
         <many-to-one name="closedBy" class="org.openmrs.User" column="closed_by" />
         <many-to-one name="voidedBy" class="org.openmrs.User" column="voided_by" />

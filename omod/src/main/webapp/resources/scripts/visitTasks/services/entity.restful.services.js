@@ -28,25 +28,24 @@
 			getPredefinedVisitTasks: getPredefinedVisitTasks,
 		};
 
-		return service
-	}
+		return service;
 
-	function getMyVisitTasks(onLoadMyVisitTasksSuccessful) {
-		var requestParams = [];
-		requestParams['rest_entity_name'] = 'visitTask';
-		EntityRestFactory.loadEntities(requestParams,
-			onLoadMyVisitTasksSuccessful, errorCallback);
-	}
+		function getMyVisitTasks(onLoadMyVisitTasksSuccessful) {
+			var requestParams = [];
+			requestParams['rest_entity_name'] = 'visitTask';
+			EntityRestFactory.loadEntities(requestParams,
+				onLoadMyVisitTasksSuccessful, errorCallback);
+		}
 
-	function getPredefinedVisitTasks(onLoadPredefinedVisitTasks) {
-		var requestParams = [];
-		requestParams['rest_entity_name'] = 'visitPredefinedTask';
-		EntityRestFactory.loadEntities(requestParams,
-			onLoadPredefinedVisitTasks, errorCallback);
-	}
+		function getPredefinedVisitTasks(onLoadPredefinedVisitTasksSuccessful) {
+			var requestParams = [];
+			requestParams['rest_entity_name'] = 'visitPredefinedTask';
+			EntityRestFactory.loadEntities(requestParams,
+				onLoadPredefinedVisitTasksSuccessful, errorCallback);
+		}
 
-	function errorCallback(error) {
-		emr.errorAlert(error);
+		function errorCallback(error) {
+			emr.errorAlert(error);
+		}
 	}
-
 })();

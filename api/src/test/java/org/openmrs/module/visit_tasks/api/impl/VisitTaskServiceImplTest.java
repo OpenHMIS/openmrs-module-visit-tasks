@@ -17,29 +17,29 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.visit_tasks.api.IVisitTaskService;
-import org.openmrs.module.visit_tasks.api.IVisitTaskServiceTest;
+import org.openmrs.module.visit_tasks.api.IVisitTaskDataService;
+import org.openmrs.module.visit_tasks.api.IVisitTaskDataServiceTest;
 import org.openmrs.module.visit_tasks.api.model.VisitTask;
 import org.openmrs.module.visit_tasks.api.model.VisitTaskStatus;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class VisitTaskServiceImplTest extends IVisitTaskServiceTest {
-	private IVisitTaskService visitTaskDataService;
-	private IVisitTaskServiceTest visitTaskDataServiceTest;
+public class VisitTaskServiceImplTest extends IVisitTaskDataServiceTest {
+	private IVisitTaskDataService visitTaskDataService;
+	private IVisitTaskDataServiceTest visitTaskDataServiceTest;
 
 	@Before
 	public void before() throws Exception {
 		super.before();
 
 		visitTaskDataService = createService();
-		visitTaskDataServiceTest = new IVisitTaskServiceTest();
+		visitTaskDataServiceTest = new IVisitTaskDataServiceTest();
 	}
 
 	@Override
-	protected IVisitTaskService createService() {
-		return Context.getService(IVisitTaskService.class);
+	protected IVisitTaskDataService createService() {
+		return Context.getService(IVisitTaskDataService.class);
 	}
 
 	@Test

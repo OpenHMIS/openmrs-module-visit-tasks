@@ -13,11 +13,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.openmrs.Patient;
+import org.openmrs.Visit;
 import org.openmrs.module.openhmis.commons.api.PagingInfo;
 import org.openmrs.module.openhmis.commons.api.entity.impl.BaseEntityDataServiceImpl;
 import org.openmrs.module.openhmis.commons.api.entity.security.IEntityAuthorizationPrivileges;
 import org.openmrs.module.openhmis.commons.api.f.Action1;
-import org.openmrs.module.visit_tasks.api.IVisitTaskService;
+import org.openmrs.module.visit_tasks.api.IVisitTaskDataService;
 import org.openmrs.module.visit_tasks.api.model.VisitTask;
 import org.openmrs.module.visit_tasks.api.model.VisitTaskStatus;
 import java.util.List;
@@ -25,8 +27,8 @@ import java.util.List;
 /**
  * provides {@VisitTask} service implementations.
  */
-public class VisitTaskServiceImpl extends BaseEntityDataServiceImpl<VisitTask> implements
-        IEntityAuthorizationPrivileges, IVisitTaskService {
+public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTask> implements
+        IEntityAuthorizationPrivileges, IVisitTaskDataService {
 	protected final Log LOG = LogFactory.getLog(this.getClass());
 
 	@Override
@@ -40,11 +42,32 @@ public class VisitTaskServiceImpl extends BaseEntityDataServiceImpl<VisitTask> i
 	}
 
 	@Override
-	public List<VisitTask> getVisitTasksByStatus(final VisitTaskStatus status, PagingInfo pagingInfo) {
+	public List<VisitTask> getVisitTasksByVisit(VisitTaskStatus status, final Visit visit, PagingInfo pagingInfo) {
+		return getVisitTasksByVisitAndPatient(status, visit, null, pagingInfo);
+	}
+
+	@Override
+	public List<VisitTask> getVisitTasksByPatient(VisitTaskStatus status, Patient patient, PagingInfo pagingInfo) {
+		return getVisitTasksByVisitAndPatient(status, null, patient, pagingInfo);
+	}
+
+	@Override
+	public List<VisitTask> getVisitTasksByVisitAndPatient(final VisitTaskStatus status, final Visit visit,
+	        final Patient patient, PagingInfo pagingInfo) {
 		return executeCriteria(VisitTask.class, pagingInfo, new Action1<Criteria>() {
 			@Override
 			public void apply(Criteria criteria) {
-				criteria.add(Restrictions.eq("status", status));
+				if (status != null) {
+					criteria.add(Restrictions.eq("status", status));
+				}
+
+				if (visit != null) {
+					criteria.add(Restrictions.eq("visit", visit));
+				}
+
+				if (patient != null) {
+					criteria.add(Restrictions.eq("patient", patient));
+				}
 			}
 		}, getDefaultSort());
 	}

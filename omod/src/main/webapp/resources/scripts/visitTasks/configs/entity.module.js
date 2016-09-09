@@ -37,12 +37,12 @@
 			 */
 			$urlRouterProvider.otherwise('/');
 			$stateProvider.state('/', {
-				url: '/',
+				url: '?patientId&visitId',
 				templateUrl: 'entity.page',
 				controller: 'VisitTasksController'
 			});
 
-			$provide.factory('$exceptionHandler', function($injector) {
+			$provide.factory('$excleptionHandler', function($injector) {
 				return ohmis.handleException;
 			});
 		});

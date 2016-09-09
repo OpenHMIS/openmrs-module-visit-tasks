@@ -14,13 +14,16 @@
 package org.openmrs.module.visit_tasks.api;
 
 import org.openmrs.Visit;
+import org.openmrs.Patient;
+import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.openhmis.commons.api.entity.IEntityDataServiceTest;
 import org.openmrs.module.visit_tasks.api.model.VisitTask;
 
 import java.util.Date;
+import java.util.List;
 
-public class IVisitTaskServiceTest extends IEntityDataServiceTest<IVisitTaskService, VisitTask> {
+public class IVisitTaskDataServiceTest extends IEntityDataServiceTest<IVisitTaskDataService, VisitTask> {
 
 	@Override
 	public void before() throws Exception {
@@ -44,6 +47,14 @@ public class IVisitTaskServiceTest extends IEntityDataServiceTest<IVisitTaskServ
 
 		visitTask.setDescription("New Visit Task Description");
 		visitTask.setVisit(new Visit(1));
+		Patient patient = new Patient(1);
+		PatientService patientService = Context.getPatientService();
+		List<Patient> patients = patientService.getAllPatients();
+		if (patients.size() > 0) {
+			patient = patients.get(0);
+		}
+
+		visitTask.setPatient(patient);
 
 		return visitTask;
 	}

@@ -20,6 +20,7 @@
             <column name="voided" type="boolean" defaultValueBoolean="false"><constraints nullable="false"/></column>
             <column name="voided_by" type="int" />
             <column name="visit_id" type="int"><constraints nullable="false"/></column>
+            <column name="patient_id" type="int"><constraints nullable="false"/></column>
             <column name="date_voided" type="datetime" />
             <column name="void_reason" type="varchar(255)" defaultValue="null"/>
 
@@ -46,6 +47,10 @@
 		<addForeignKeyConstraint constraintName="visit_id_fk"
 								 baseTableName="visit_task" baseColumnNames="visit_id"
 								 referencedTableName="visit" referencedColumnNames="visit_id"
+								 deferrable="false" initiallyDeferred="false" />
+		<addForeignKeyConstraint constraintName="visit_task_patient_id_fk"
+								 baseTableName="visit_task" baseColumnNames="patient_id"
+								 referencedTableName="patient" referencedColumnNames="patient_id"
 								 deferrable="false" initiallyDeferred="false" />
 	</changeSet>
 

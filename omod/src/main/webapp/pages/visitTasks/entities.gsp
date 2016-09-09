@@ -5,7 +5,7 @@
     ui.includeCss("openhmis.commons", "bootstrap.css")
     ui.includeCss("openhmis.commons", "entities2x.css")
     ui.includeCss("uicommons", "ngDialog/ngDialog.min.css")
-    ui.includeCss("openhmis.inventory", "entity.css")
+    ui.includeCss("visit-tasks", "entity.css")
 
     /* load angular libraries */
     ui.includeJavascript("uicommons", "angular.min.js")
