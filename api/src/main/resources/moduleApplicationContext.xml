@@ -21,5 +21,45 @@
 
 	
 	<!-- Services accessible via Context.getService() -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list merge="true">
+				<value>org.openmrs.module.visit_tasks.api.IVisitTaskDataService</value>
+				<ref bean="visitTaskService" />
+			</list>
+		</property>
+	</bean>
+
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list merge="true">
+				<value>org.openmrs.module.visit_tasks.api.IVisitPredefinedTaskDataService</value>
+				<ref bean="visitPredefinedTaskService" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Service bean definitions -->
+	<bean id="visitTaskService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="target">
+			<bean class="org.openmrs.module.visit_tasks.api.impl.VisitTaskDataServiceImpl">
+				<property name="repository" ref="genericRepository" />
+			</bean>
+		</property>
+		<property name="preInterceptors" ref="serviceInterceptors" />
+		<property name="transactionAttributeSource" ref="transactionAttributeSource" />
+	</bean>
+
+    <bean id="visitPredefinedTaskService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="target">
+            <bean class="org.openmrs.module.visit_tasks.api.impl.VisitPredefinedTaskDataServiceImpl">
+                <property name="repository" ref="genericRepository" />
+            </bean>
+        </property>
+        <property name="preInterceptors" ref="serviceInterceptors" />
+        <property name="transactionAttributeSource" ref="transactionAttributeSource" />
+    </bean>
 
 </beans>

@@ -13,21 +13,25 @@
  */
 package org.openmrs.module.visit_tasks.api.model;
 
-import org.openmrs.BaseOpenmrsMetadata;
+import org.openmrs.Patient;
 import org.openmrs.User;
+import org.openmrs.BaseOpenmrsData;
+import org.openmrs.Visit;
 
 import java.util.Date;
 
-public class VisitTask extends BaseOpenmrsMetadata {
+/**
+ * Model class that represents a task to be performed during a Patient's visit.
+ */
+public class VisitTask extends BaseOpenmrsData {
 	private Integer visitTaskId;
-	private User createdBy;
-	private Date createdOn;
 	private String name;
+	private String description;
 	private VisitTaskStatus status;
 	private User closedBy;
 	private Date closedOn;
-	private User voidedBy;
-	private Date voidedOn;
+	private Visit visit;
+	private Patient patient;
 
 	@Override
 	public Integer getId() {
@@ -39,28 +43,20 @@ public class VisitTask extends BaseOpenmrsMetadata {
 		this.visitTaskId = id;
 	}
 
-	public User getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(User createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public Date getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
-	}
-
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String taskText) {
+	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public VisitTaskStatus getStatus() {
@@ -87,20 +83,19 @@ public class VisitTask extends BaseOpenmrsMetadata {
 		this.closedOn = closedOn;
 	}
 
-	public User getVoidedBy() {
-		return voidedBy;
+	public Visit getVisit() {
+		return visit;
 	}
 
-	public void setVoidedBy(User voidedBy) {
-		this.voidedBy = voidedBy;
+	public void setVisit(Visit visit) {
+		this.visit = visit;
 	}
 
-	public Date getVoidedOn() {
-		return voidedOn;
+	public Patient getPatient() {
+		return patient;
 	}
 
-	public void setVoidedOn(Date voidedOn) {
-		this.voidedOn = voidedOn;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 }
-

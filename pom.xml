@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.openmrs.module</groupId>
@@ -38,7 +39,7 @@
 		<developerConnection>scm:git:git@github.com:OpenHMIS/openmrs-module-visit-tasks.git</developerConnection>
 		<url>scm:git:git@github.com:OpenHMIS/openmrs-module-visit-tasks.git</url>
 	</scm>
-	
+
 	<properties>
 		<openMRSVersion>1.9.9</openMRSVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -92,8 +93,6 @@
 
 			<!-- End OpenMRS core -->
 
-			<!-- Begin Openmrs modules -->
-
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>webservices.rest-omod</artifactId>
@@ -103,40 +102,8 @@
 
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>uiframework-api</artifactId>
-				<version>${uiframeworkVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>appframework-api</artifactId>
-				<version>${appframeworkVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>uicommons-api</artifactId>
-				<version>${uicommonsVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>appui-api</artifactId>
-				<version>${appuiVersion}</version>
-				<scope>provided</scope>
-			</dependency>
-
-			<!-- End Openmrs modules  -->
-
-			<!-- Begin OpenHMIS modules -->
-
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
 				<artifactId>openhmis.commons-api</artifactId>
-				<version>3.3.0</version>
+				<version>3.2.0</version>
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
@@ -144,7 +111,7 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>openhmis.commons-api</artifactId>
-				<version>3.3.0</version>
+				<version>3.2.0</version>
 				<type>test-jar</type>
 				<scope>test</scope>
 			</dependency>
@@ -152,7 +119,7 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>openhmis.commons-tools</artifactId>
-				<version>3.3.0</version>
+				<version>3.2.0</version>
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
@@ -160,7 +127,7 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>openhmis.commons-omod</artifactId>
-				<version>3.3.0</version>
+				<version>3.2.0</version>
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
@@ -168,12 +135,78 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>openhmis.commons-omod_2.x</artifactId>
-				<version>3.3.0</version>
+				<version>3.5.0-SNAPSHOT</version>
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
 
-			<!-- End OpenHMIS modules -->
+			<dependency>
+				<groupId>org.reflections</groupId>
+				<artifactId>reflections</artifactId>
+				<version>0.9.8</version>
+				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>javassist</groupId>
+						<artifactId>javassist</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.javatuples</groupId>
+				<artifactId>javatuples</artifactId>
+				<version>1.2</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>2.3</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>jasperreport-api</artifactId>
+				<version>1.5.7</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>appframework-api</artifactId>
+				<version>2.0</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>appframework-api</artifactId>
+				<version>[2.0,)</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>providermanagement-api</artifactId>
+				<version>[2.0,)</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- Depends on uiframework module -->
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>uiframework-api</artifactId>
+				<version>[2.0,)</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -299,8 +332,8 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-  <modules>
-    <module>api</module>
-    <module>omod</module>
-  </modules>
+	<modules>
+		<module>api</module>
+		<module>omod</module>
+	</modules>
 </project>
