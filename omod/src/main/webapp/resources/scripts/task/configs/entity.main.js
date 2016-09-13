@@ -14,13 +14,13 @@
  */
 
 /* initialize and bootstrap application */
-requirejs(['visitTasks/configs/entity.module'], function() {
-	angular.bootstrap(document, ['visitTasksApp']);
+requirejs(['task/configs/entity.module'], function() {
+	angular.bootstrap(document, ['taskApp']);
 });
 
 /* load UI messages */
 emr.loadMessages([
-	"visit-tasks.page",
+	"visittasks.page",
 	"general.name", "general.description", "general.cancel",
 	"general.save"
 ]);

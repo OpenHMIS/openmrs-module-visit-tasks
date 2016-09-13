@@ -14,19 +14,16 @@
 package org.openmrs.module.visittasks.web;
 
 import org.openmrs.module.openhmis.commons.web.WebConstants;
+import org.openmrs.module.visittasks.api.util.ModuleConstants;
 
 /**
  * Constants class for the module web resources.
  */
 public class ModuleWebConstants extends WebConstants {
-<<<<<<< HEAD:api/src/main/java/org/openmrs/module/visit_tasks/web/ModuleWebConstants.java
 	public static final String MODULE_ROOT = WebConstants.MODULE_BASE + ModuleConstants.MODULE_NAME + "/";
 	public static final String MODULE_RESOURCE_ROOT = WebConstants.MODULE_RESOURCE_BASE + ModuleConstants.MODULE_NAME + "/";
 
-	public static final String VISIT_TASKS_LANDING_PAGE_EXTENSION_POINT_ID = "org.openmrs.module.visit_tasks.landing";
-=======
 	public static final String VISIT_TASKS_LANDING_PAGE_EXTENSION_POINT_ID = "org.openmrs.module.visittasks.landing";
->>>>>>> ad6be643042ac75842b3a892b802553c47c68077:api/src/main/java/org/openmrs/module/visittasks/web/ModuleWebConstants.java
 	public static final String VISIT_TASKS_MANAGE_MODULE_PAGE_EXTENSION_POINT_ID =
 	        "org.openmrs.module.visittasks.manage.module";
 

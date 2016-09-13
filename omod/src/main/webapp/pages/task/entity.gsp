@@ -3,14 +3,10 @@
         {icon: "icon-home", link: '/' + OPENMRS_CONTEXT_PATH + '/index.htm'},
         {
             label: "${ ui.message("Patient name")}",
-            link: '${ui.pageLink("openhmis.inventory", "inventoryLanding")}'
+            link: '${ui.pageLink("visittasks", "inventoryLanding")}'
         },
         {
-<<<<<<< HEAD:omod/src/main/webapp/pages/visitTasks/entity.gsp
-            label: "${ ui.message("visit-tasks.admin.create")}",
-=======
             label: "${ ui.message("visittasks.admin.create")}",
->>>>>>> ad6be643042ac75842b3a892b802553c47c68077:omod/src/main/webapp/pages/visitTasksList/entity.gsp
         },
     ];
 
@@ -28,7 +24,7 @@
     </span>
 </div> -->
 
-<form name="itemForm" class="entity-form" ng-class="{'submitted': submitted}" style="font-size:inherit">
+<form name="taskForm" class="entity-form" ng-class="{'submitted': submitted}" style="font-size:inherit">
     <label>Add Visit Task</label>
 
     <fieldset class="format">

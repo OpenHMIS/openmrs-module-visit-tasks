@@ -24,7 +24,7 @@
 
 	function loadpage() {
 		'use strict';
-		var app = angular.module('visitTasksApp', ['ui.bootstrap', 'ngDialog', 'ui.router',
+		var app = angular.module('taskApp', ['ui.bootstrap', 'ngDialog', 'ui.router',
 			'angularUtils.directives.dirPagination', 'app.visitTaskFunctionsFactory', 'app.css',
 			'app.filters', 'app.pagination', 'app.cookies', 'app.genericMetadataModel', 'app.restfulServices',
 			'app.genericEntityController', 'app.genericManageController']);

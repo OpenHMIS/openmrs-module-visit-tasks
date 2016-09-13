@@ -25,7 +25,7 @@
 	                              VisitTaskRestfulService, VisitTaskModel, VisitTaskFunctions, $location) {
 		var self = this;
 		var entity_name_message_key = emr.message("visit_tasks.page");
-		var REST_ENTITY_NAME = "visitTask";
+		var REST_ENTITY_NAME = "task";
 
 		// @Override
 		self.setRequiredInitParameters = self.setRequiredInitParameters || function() {

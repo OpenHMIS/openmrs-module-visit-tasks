@@ -20,15 +20,15 @@
     ui.includeFragment("openhmis.commons", "load.reusable.modules")
 
     /* load stockroom modules */
-    ui.includeJavascript("visit-tasks", "visitTasks/models/entity.model.js")
-    ui.includeJavascript("visit-tasks", "visitTasks/services/entity.restful.services.js")
-    ui.includeJavascript("visit-tasks", "visitTasks/controllers/entity.controller.js")
-    ui.includeJavascript("visit-tasks", "visitTasks/services/entity.functions.js")
-    ui.includeJavascript("visit-tasks", "constants.js")
+    ui.includeJavascript("visittasks", "task/models/entity.model.js")
+    ui.includeJavascript("visittasks", "task/services/entity.restful.services.js")
+    ui.includeJavascript("visittasks", "task/controllers/entity.controller.js")
+    ui.includeJavascript("visittasks", "task/services/entity.functions.js")
+    ui.includeJavascript("visittasks", "constants.js")
 %>
 
-<script data-main="visitTasks/configs/entity.main" src="/${ ui.contextPath() }/moduleResources/uicommons/scripts/require/require.js"></script>
+<script data-main="task/configs/entity.main" src="/${ ui.contextPath() }/moduleResources/uicommons/scripts/require/require.js"></script>
 
-<div id="visitTasksApp">
+<div id="taskApp">
     <div ui-view></div>
 </div>
