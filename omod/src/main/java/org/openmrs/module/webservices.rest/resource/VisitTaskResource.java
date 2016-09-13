@@ -15,9 +15,9 @@ package org.openmrs.module.webservices.rest.resource;
 
 import org.openmrs.annotation.Handler;
 import org.openmrs.module.openhmis.commons.api.entity.IEntityDataService;
-import org.openmrs.module.visit_tasks.api.IVisitTaskDataService;
-import org.openmrs.module.visit_tasks.api.model.VisitTask;
-import org.openmrs.module.visit_tasks.web.ModuleRestConstants;
+import org.openmrs.module.visittasks.api.IVisitTaskDataService;
+import org.openmrs.module.visittasks.api.model.VisitTask;
+import org.openmrs.module.visittasks.web.ModuleRestConstants;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
 import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.Representation;

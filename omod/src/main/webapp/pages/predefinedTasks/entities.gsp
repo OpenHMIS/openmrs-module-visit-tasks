@@ -1,5 +1,5 @@
 <%
-    ui.decorateWith("appui", "standardEmrPage", [ title: ui.message("visit_tasks.admin.predefinedTasks") ])
+    ui.decorateWith("appui", "standardEmrPage", [ title: ui.message("visittasks.admin.predefinedTasks") ])
 
     /* load stylesheets */
     ui.includeCss("openhmis.commons", "bootstrap.css")
@@ -17,10 +17,10 @@
     ui.includeFragment("openhmis.commons", "load.reusable.modules")
 
     /* load predefinedTasks modules */
-    ui.includeJavascript("visit-tasks", "predefinedTasks/models/entity.model.js")
-    ui.includeJavascript("visit-tasks", "predefinedTasks/controllers/entity.controller.js")
-    ui.includeJavascript("visit-tasks", "predefinedTasks/controllers/manage-entity.controller.js")
-    ui.includeJavascript("visit-tasks", "constants.js")
+    ui.includeJavascript("visittasks", "predefinedTasks/models/entity.model.js")
+    ui.includeJavascript("visittasks", "predefinedTasks/controllers/entity.controller.js")
+    ui.includeJavascript("visittasks", "predefinedTasks/controllers/manage-entity.controller.js")
+    ui.includeJavascript("visittasks", "constants.js")
 %>
 
 <script data-main="predefinedTasks/configs/entity.main" src="/${ ui.contextPath() }/moduleResources/uicommons/scripts/require/require.js"></script>

@@ -28,13 +28,13 @@
 	</require_modules>
 
 	<!-- Module Activator -->
-	<activator>org.openmrs.module.visit_tasks.VisitTaskModuleActivator</activator>
+	<activator>org.openmrs.module.visittasks.VisitTaskModuleActivator</activator>
 
 
 	<!-- Adds link to admin page -->
 	<extension>
 		<point>org.openmrs.admin.list</point>
-		<class>org.openmrs.module.visit_tasks.extension.html.AdminList</class>
+		<class>org.openmrs.module.visittasks.extension.html.AdminList</class>
 	</extension>
 
 	<!-- Maps hibernate file's, if present -->
