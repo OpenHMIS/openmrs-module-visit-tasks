@@ -13,21 +13,14 @@
  *
  */
 
-(function() {
-	'use strict';
+/* initialize and bootstrap application */
+requirejs(['task/configs/entity.module'], function() {
+	angular.bootstrap(document, ['taskApp']);
+});
 
-	var app = angular.module('app.visitTaskFunctionsFactory', []);
-	app.service('VisitTaskFunctions', VisitTaskFunctions);
-
-	VisitTaskFunctions.$inject = ['EntityFunctions', '$filter'];
-
-	function VisitTaskFunctions(EntityFunctions, $filter) {
-		var service;
-
-		service = {
-		};
-
-		return service;
-
-	}
-})();
+/* load UI messages */
+emr.loadMessages([
+	"visittasks.page",
+	"general.name", "general.description", "general.cancel",
+	"general.save"
+]);

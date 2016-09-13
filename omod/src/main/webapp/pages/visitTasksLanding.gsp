@@ -16,7 +16,7 @@
 <div id="home-container">
 	
 	<h1>${ui.message("visittasks.task.page")}</h1>
-	
+
 	<div id="apps">
 		<% extensions.each { ext -> %>
 		<a id="${ htmlSafeId(ext) }" href="/${ contextPath }/${ ext.url }" class="button app big">

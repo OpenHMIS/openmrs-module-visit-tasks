@@ -14,14 +14,18 @@
 package org.openmrs.module.webservices.rest.resource;
 
 import org.openmrs.annotation.Handler;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.openhmis.commons.api.entity.IEntityDataService;
 import org.openmrs.module.visittasks.api.IVisitTaskDataService;
 import org.openmrs.module.visittasks.api.model.VisitTask;
+import org.openmrs.module.visittasks.api.model.VisitTaskStatus;
 import org.openmrs.module.visittasks.web.ModuleRestConstants;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
 import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.Representation;
 import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceDescription;
+
+import java.util.Date;
 
 /**
  * REST resource representing a {@link VisitTask}
@@ -65,4 +69,13 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 		return getRepresentationDescription(new DefaultRepresentation());
 	}
 
+	@Override
+	public VisitTask save(VisitTask visitTask) {
+		if(visitTask.getStatus() == VisitTaskStatus.CLOSED){
+			visitTask.setClosedBy(Context.getAuthenticatedUser());
+			visitTask.setClosedOn(new Date());
+		}
+
+		return super.save(visitTask);
+	}
 }

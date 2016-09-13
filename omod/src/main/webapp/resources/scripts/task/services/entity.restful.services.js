@@ -32,14 +32,14 @@
 
 		function getMyVisitTasks(onLoadMyVisitTasksSuccessful) {
 			var requestParams = [];
-			requestParams['rest_entity_name'] = 'visitTask';
+			requestParams['rest_entity_name'] = 'task';
 			EntityRestFactory.loadEntities(requestParams,
 				onLoadMyVisitTasksSuccessful, errorCallback);
 		}
 
 		function getPredefinedVisitTasks(onLoadPredefinedVisitTasksSuccessful) {
 			var requestParams = [];
-			requestParams['rest_entity_name'] = 'visitPredefinedTask';
+			requestParams['rest_entity_name'] = 'predefinedTasks';
 			EntityRestFactory.loadEntities(requestParams,
 				onLoadPredefinedVisitTasksSuccessful, errorCallback);
 		}
