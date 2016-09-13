@@ -15,7 +15,7 @@
 			},
 			{
 				"id": "${project.parent.artifactId}.manageVisitTasksModuleLink",
-				"extensionPointId": "org.openmrs.module.visit-tasks.landing",
+				"extensionPointId": "org.openmrs.module.visit_tasks.landing",
 				"label": "Manage Visit Tasks Module",
 				"url": "${project.parent.artifactId}/visitTasksManage/manageModule.page",
 				"icon": "icon-cogs",
@@ -23,7 +23,7 @@
 			},
 			{
 				"id": "${project.parent.artifactId}.managePredefinedTasksLink",
-				"extensionPointId": "org.openmrs.module.visit-tasks.manage.module",
+				"extensionPointId": "org.openmrs.module.visit_tasks.manage.module",
 				"type": "link",
 				"label": "Manage Visit Predefined Tasks",
 				"url": "#",

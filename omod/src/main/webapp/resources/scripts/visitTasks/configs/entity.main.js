@@ -20,5 +20,7 @@ requirejs(['visitTasks/configs/entity.module'], function() {
 
 /* load UI messages */
 emr.loadMessages([
-	"visit_tasks.page",
+	"visit-tasks.page",
+	"general.name", "general.description", "general.cancel",
+	"general.save"
 ]);

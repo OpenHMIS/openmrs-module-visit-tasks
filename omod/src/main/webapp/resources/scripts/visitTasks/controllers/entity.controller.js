@@ -13,22 +13,22 @@
  *
  */
 
-(function () {
+(function() {
 	'use strict';
 
 	var base = angular.module('app.genericEntityController');
 	base.controller("VisitTasksController", VisitTasksController);
 	VisitTasksController.$inject = ['$stateParams', '$injector', '$scope', '$filter',
-		'EntityRestFactory', 'VisitTaskRestfulService', 'VisitTaskModel'];
+		'EntityRestFactory', 'VisitTaskRestfulService', 'VisitTaskModel', 'VisitTaskFunctions', '$location'];
 
 	function VisitTasksController($stateParams, $injector, $scope, $filter, EntityRestFactory,
-	                              VisitTaskRestfulService, VisitTaskModel) {
+	                              VisitTaskRestfulService, VisitTaskModel, VisitTaskFunctions, $location) {
 		var self = this;
 		var entity_name_message_key = emr.message("visit_tasks.page");
 		var REST_ENTITY_NAME = "visitTask";
 
 		// @Override
-		self.setRequiredInitParameters = self.setRequiredInitParameters || function () {
+		self.setRequiredInitParameters = self.setRequiredInitParameters || function() {
 				self.bindBaseParameters(VISIT_TASKS_MODULE_NAME, REST_ENTITY_NAME,
 					entity_name_message_key, '');
 				//self.checkPrivileges(TASK_ACCESS_CREATE_OPERATION_PAGE);
@@ -39,16 +39,24 @@
 		 */
 		// @Override
 		self.bindExtraVariablesToScope = self.bindExtraVariablesToScope
-			|| function () {
-				console.log('bind extra');
+			|| function() {
 				$scope.loading = false;
-				console.log($stateParams['patientId']);
+				$scope.urlArgs = VisitTaskFunctions.extractUrlArgs(window.location.search);
+				$scope.visitUuid = $scope.urlArgs['visitUuid'];
+				$scope.patientUuid = $scope.urlArgs['patientUuid'];
+
+				console.log($scope.visitUuid)
+				console.log($scope.patientUuid)
+
+				$scope.addVisitTask = self.addVisitTask;
+				$scope.closeVisitTaskOperation = self.closeVisitTaskOperation;
+				$scope.addOrRemovePredefinedTask = false;
+				$scope.closeVisitTask = false;
 
 				//load my visit tasks
 				VisitTaskRestfulService.getMyVisitTasks(self.onLoadMyVisitTasksSuccessful);
 
-				//load predefined visit tasks
-				VisitTaskRestfulService.getPredefinedVisitTasks(self.onLoadPredefinedVisitTasksSuccessful);
+
 			}
 
 		/**
@@ -56,25 +64,75 @@
 		 * @return boolean
 		 */
 		// @Override
-		self.validateBeforeSaveOrUpdate = self.validateBeforeSaveOrUpdate || function () {
-				var requestPayload = {};
-				requestPayload.name = $scope.entity.name;
-				requestPayload.description = $scope.entity.description;
-				requestPayload.status = 'OPEN';
-				requestPayload.visit = '24f3c0e0-495a-4d33-b961-ca83a6d7d904';
-				requestPayload.patient = '96d596cb-37a9-11e2-862a-b4b52f5b1c99';
-				$scope.entity = requestPayload;
+		self.validateBeforeSaveOrUpdate = self.validateBeforeSaveOrUpdate || function() {
+				if($scope.closeVisitTask !== undefined) {
+					$scope.entity = $scope.closeVisitTask;
+					$scope.entity.visit = $scope.entity.visit.uuid;
+					$scope.entity.patient = $scope.entity.patient.uuid;
+					$scope.entity.creator = $scope.entity.creator.uuid;
+					delete $scope.entity['$$hashKey'];
+					return true;
+				} else {
+					if($scope.visitUuid === undefined) {
+						emr.errorAlert('Visit uuid is required');
+						return false;
+					}
+
+					if($scope.patientUuid === undefined) {
+						emr.errorAlert('Patient uuid is required');
+						return false;
+					}
+
+					if($scope.addOrRemovePredefinedTask === true) {
+						$scope.entity.name = $scope.predefinedVisitTask.name;
+						$scope.entity.description = $scope.predefinedVisitTask.description;
+						$scope.entity.voided = $scope.predefinedVisitTask.voided;
+					}
+
+					var requestPayload = {};
+					requestPayload.name = $scope.entity.name;
+					requestPayload.description = $scope.entity.description;
+					requestPayload.voided = $scope.entity.voided;
+					requestPayload.status = 'OPEN';
+					requestPayload.visit = $scope.visitUuid;
+					requestPayload.patient = $scope.patientUuid;
+					$scope.entity = requestPayload;
+				}
+
+				console.log($scope.entity);
 				return true;
 			}
 
-		self.onLoadMyVisitTasksSuccessful = self.onLoadMyVisitTasksSuccessful || function (data) {
-				console.log(data.results);
-				$scope.myVisitTasks = data.results;
+		self.addVisitTask = self.addVisitTask || function(predefinedVisitTask) {
+				$scope.addOrRemovePredefinedTask = false;
+				$scope.predefinedVisitTask = predefinedVisitTask;
+				VisitTaskFunctions.confirmAddTaskDialog($scope, predefinedVisitTask);
 			}
 
-		self.onLoadPredefinedVisitTasksSuccessful = self.onLoadPredefinedVisitTasksSuccessful || function (data) {
-				console.log(data.results);
-				$scope.predefinedVisitTasks = data.results;
+		self.closeVisitTaskOperation = self.closeVisitTaskOperation || function(closeVisitTask) {
+			VisitTaskFunctions.confirmCloseTaskDialog($scope, closeVisitTask);
+		}
+
+		self.onLoadMyVisitTasksSuccessful = self.onLoadMyVisitTasksSuccessful || function(data) {
+				$scope.myVisitTasks = data.results;
+
+				//load predefined visit tasks
+				VisitTaskRestfulService.getPredefinedVisitTasks(self.onLoadPredefinedVisitTasksSuccessful);
+			}
+
+		self.onLoadPredefinedVisitTasksSuccessful = self.onLoadPredefinedVisitTasksSuccessful || function(data) {
+				$scope.predefinedVisitTasks = $scope.predefinedVisitTasks || [];
+				$scope.selectedTasks = {};
+				for(var i = 0; i < data.results.length; i++) {
+					var predefinedVisitTask = data.results[i];
+					// only display if doesn't appear under My Visit Tasks.
+					if(!VisitTaskFunctions.searchVisitTask(
+							predefinedVisitTask, $scope.myVisitTasks)) {
+						$scope.selectedTasks[predefinedVisitTask.uuid] = predefinedVisitTask;
+						$scope.selectedTasks[predefinedVisitTask.uuid].default = false;
+						$scope.predefinedVisitTasks.push(predefinedVisitTask);
+					}
+				}
 			}
 
 		/* ENTRY POINT: Instantiate the base controller which loads the page */
