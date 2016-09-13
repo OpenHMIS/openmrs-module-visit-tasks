@@ -1,11 +1,9 @@
 <script type="text/javascript">
 	var breadcrumbs = [
 		{icon: "icon-home", link: '/' + OPENMRS_CONTEXT_PATH + '/index.htm'},
-		{ label: "${ ui.message("visit_tasks.page")}",
-			link: '${ui.pageLink("visit-tasks", "visitTasksLanding")}'},
-		{ label: "${ ui.message("visit_tasks.manage.module")}",
-			link: '/' + OPENMRS_CONTEXT_PATH + '/visit-tasks/visitTasksManage/visitTasksManageModule.page' },
-		{label: "${ ui.message("visit_tasks.admin.predefinedTasks")}",}
+		{ label: "${ ui.message("visittasks.page")}",
+			link: '${ui.pageLink("visittasks", "visitTasksLanding")}'},
+		{label: "${ ui.message("visittasks.admin.predefinedTasks")}",}
 	];
 
 	jQuery('#breadcrumbs').html(emr.generateBreadcrumbHtml(breadcrumbs));
@@ -16,7 +14,7 @@
 
 	<div id="manage-entities-header">
 		<span class="h1-substitue-left" style="float:left;">
-			${ui.message('visit_tasks.admin.predefinedTasks')}
+			${ui.message('visittasks.admin.predefinedTasks')}
 		</span>
 		<span style="float:right;">
 			<a class="button confirm" ui-sref="new">

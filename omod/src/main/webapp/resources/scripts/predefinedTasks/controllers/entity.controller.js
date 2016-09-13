@@ -19,12 +19,12 @@
     base.controller("EntityController", EntityController);
     EntityController.$inject = ['$stateParams', '$injector', '$scope', '$filter', 'EntityRestFactory', 'PredefinedTasksModel'];
 
-    var ENTITY_NAME = "visitPredefinedTask";
+    var ENTITY_NAME = "predefinedTasks";
 
     function EntityController($stateParams, $injector, $scope, $filter, EntityRestFactory, PredefinedTasksModel) {
         var self = this;
 
-        var entity_name_message_key = "visit-tasks." + ENTITY_NAME + ".name";
+        var entity_name_message_key = "visittasks." + ENTITY_NAME + ".name";
 
         // @Override
         self.setRequiredInitParameters = self.setRequiredInitParameters || function() {

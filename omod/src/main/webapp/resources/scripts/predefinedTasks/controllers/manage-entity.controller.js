@@ -21,13 +21,13 @@
     ManageEntityController.$inject = ['$injector', '$scope', '$filter', 'EntityRestFactory', 'CssStylesFactory',
         'PaginationService', 'PredefinedTasksModel', 'CookiesService'];
     
-    var ENTITY_NAME = "visitPredefinedTask";
+    var ENTITY_NAME = "predefinedTasks";
 
     function ManageEntityController($injector, $scope, $filter, EntityRestFactory, CssStylesFactory, PaginationService,
                                          PredefinedTasksModel, CookiesService) {
         var self = this;
 
-        var entity_name = emr.message("visit-tasks." + ENTITY_NAME + ".name");
+        var entity_name = emr.message("visittasks." + ENTITY_NAME + ".name");
 
         // @Override
         self.getModelAndEntityName = self.getModelAndEntityName || function() {
