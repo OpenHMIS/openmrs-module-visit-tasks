@@ -12,59 +12,65 @@
  * Copyright (C) OpenHMIS.  All Rights Reserved.
  *
  */
-(function() {
-    'use strict';
-
-    var base = angular.module('app.genericEntityController');
-    base.controller("EntityController", EntityController);
-    EntityController.$inject = ['$stateParams', '$injector', '$scope', '$filter', 'EntityRestFactory', 'PredefinedTasksModel'];
-
-    var ENTITY_NAME = "predefinedTasks";
-
-    function EntityController($stateParams, $injector, $scope, $filter, EntityRestFactory, PredefinedTasksModel) {
-        var self = this;
-
-        var entity_name_message_key = "visittasks." + ENTITY_NAME + ".name";
-
-        // @Override
-        self.setRequiredInitParameters = self.setRequiredInitParameters || function() {
-                self.bindBaseParameters(VISIT_TASKS_MODULE_NAME, ENTITY_NAME, entity_name_message_key, RELATIVE_CANCEL_PAGE_URL);
-                self.checkPrivileges(TASK_MANAGE_METADATA);
-            };
-
-        /**
-         * Initializes and binds any required variable and/or function specific to entity.page
-         * @type {Function}
-         */
-        // @Override
-        self.bindExtraVariablesToScope = self.bindExtraVariablesToScope
-            || function(uuid) {
-                /* bind variables.. */
-                $scope.uuid = uuid;
-            };
-
-        /**
-         * All post-submit validations are done here.
-         * @return boolean
-         */
-        // @Override
-        self.validateBeforeSaveOrUpdate = self.validateBeforeSaveOrUpdate || function() {
-                if (!angular.isDefined($scope.entity.name) || $scope.entity.name === '') {
-                    $scope.submitted = true;
-                    return false;
-                }
-
-                $scope.loading = true;
-                return true;
-            };
-
-        /* ENTRY POINT: Instantiate the base controller which loads the page */
-        $injector.invoke(base.GenericEntityController, self, {
-            $scope: $scope,
-            $filter: $filter,
-            $stateParams: $stateParams,
-            EntityRestFactory: EntityRestFactory,
-            GenericMetadataModel: PredefinedTasksModel
-        });
-    }
+(function () {
+	'use strict';
+	
+	var base = angular.module('app.genericEntityController');
+	base.controller("EntityController", EntityController);
+	EntityController.$inject = ['$stateParams', '$injector', '$scope', '$filter', 'EntityRestFactory', 'PredefinedTasksModel', 'PredefinedTasksRestfulService'];
+	
+	var ENTITY_NAME = "predefinedTasks";
+	
+	function EntityController($stateParams, $injector, $scope, $filter, EntityRestFactory, PredefinedTasksModel, PredefinedTasksRestfulService) {
+		var self = this;
+		
+		var entity_name_message_key = "visittasks." + ENTITY_NAME + ".name";
+		
+		// @Override
+		self.setRequiredInitParameters = self.setRequiredInitParameters || function () {
+				self.bindBaseParameters(VISIT_TASKS_MODULE_NAME, ENTITY_NAME, entity_name_message_key, RELATIVE_CANCEL_PAGE_URL);
+				self.checkPrivileges(TASK_MANAGE_METADATA);
+			};
+		
+		/**
+		 * Initializes and binds any required variable and/or function specific to entity.page
+		 * @type {Function}
+		 */
+		// @Override
+		self.bindExtraVariablesToScope = self.bindExtraVariablesToScope
+			|| function (uuid) {
+				/* bind variables.. */
+				var rolesLimit = null;
+				$scope.uuid = uuid;
+				PredefinedTasksRestfulService.loadRoles(VISIT_TASK_LANDING_PAGE_URL, rolesLimit, self.onLoadRolesSuccessful);
+			};
+		
+		self.onLoadRolesSuccessful = self.onLoadRolesSuccessful || function (data) {
+				$scope.roles = data.results;
+			}
+		
+		/**
+		 * All post-submit validations are done here.
+		 * @return boolean
+		 */
+		// @Override
+		self.validateBeforeSaveOrUpdate = self.validateBeforeSaveOrUpdate || function () {
+				if (!angular.isDefined($scope.entity.name) || $scope.entity.name === '') {
+					$scope.submitted = true;
+					return false;
+				}
+				
+				$scope.loading = true;
+				return true;
+			};
+		
+		/* ENTRY POINT: Instantiate the base controller which loads the page */
+		$injector.invoke(base.GenericEntityController, self, {
+			$scope: $scope,
+			$filter: $filter,
+			$stateParams: $stateParams,
+			EntityRestFactory: EntityRestFactory,
+			GenericMetadataModel: PredefinedTasksModel
+		});
+	}
 })();
