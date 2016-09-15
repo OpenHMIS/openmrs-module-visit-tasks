@@ -13,29 +13,29 @@
  *
  */
 
-(function() {
+(function () {
 	'use strict'
-
+	
 	angular.module('app.restfulServices').service(
-			'PredefinedTasksRestfulService', PredefinedTasksRestfulService);
-
+		'PredefinedTasksRestfulService', PredefinedTasksRestfulService);
+	
 	PredefinedTasksRestfulService.$inject = ['EntityRestFactory'];
-
+	
 	function PredefinedTasksRestfulService(EntityRestFactory) {
 		var service;
 		service = {
-			loadRoles : loadRoles
+			getPrivilege: getPrivilege
 		};
-
+		
 		return service;
-
-		function loadRoles(module_name, limit, onLoadRolesSuccessful) {
+		
+		function getPrivilege(module_name,onLoadPrivilegeSuccessful) {
 			var requestParams = [];
-			requestParams['rest_entity_name'] = '';
-			requestParams['limit'] = limit;
-			EntityRestFactory.setBaseUrl('role', 'v1');
-			EntityRestFactory.loadEntities(requestParams,
-					onLoadRolesSuccessful,errorCallback);
+			requestParams['resource'] = MODULE_PRIVILEGE_SETTINGS_URL;
+			requestParams['privileges'] = TASK_MANAGE_METADATA;
+			EntityRestFactory.setCustomBaseUrl(ROOT_URL);
+			EntityRestFactory.loadResults(requestParams,
+				onLoadPrivilegeSuccessful, errorCallback);
 			//reset base url..
 			EntityRestFactory.setBaseUrl(module_name);
 		}
@@ -44,5 +44,5 @@
 			emr.errorAlert(error);
 		}
 	}
-
+	
 })();

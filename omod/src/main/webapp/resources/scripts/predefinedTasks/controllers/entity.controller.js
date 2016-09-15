@@ -19,7 +19,7 @@
 	base.controller("EntityController", EntityController);
 	EntityController.$inject = ['$stateParams', '$injector', '$scope', '$filter', 'EntityRestFactory', 'PredefinedTasksModel', 'PredefinedTasksRestfulService'];
 	
-	var ENTITY_NAME = "predefinedTasks";
+	var ENTITY_NAME = "predefinedTask";
 	
 	function EntityController($stateParams, $injector, $scope, $filter, EntityRestFactory, PredefinedTasksModel, PredefinedTasksRestfulService) {
 		var self = this;
@@ -40,13 +40,13 @@
 		self.bindExtraVariablesToScope = self.bindExtraVariablesToScope
 			|| function (uuid) {
 				/* bind variables.. */
-				var rolesLimit = null;
 				$scope.uuid = uuid;
-				PredefinedTasksRestfulService.loadRoles(VISIT_TASK_LANDING_PAGE_URL, rolesLimit, self.onLoadRolesSuccessful);
-			};
+				$scope.showMakeGlobal = false;
+				PredefinedTasksRestfulService.getPrivilege(VISIT_TASKS_MODULE_NAME,self.onLoadPrivilegeSuccessful);
+			}
 		
-		self.onLoadRolesSuccessful = self.onLoadRolesSuccessful || function (data) {
-				$scope.roles = data.results;
+		self.onLoadPrivilegeSuccessful = self.onLoadPrivilegeSuccessful || function (data) {
+				$scope.showMakeGlobal = data.hasPrivileges && data.hasPrivileges == true;
 			}
 		
 		/**
@@ -62,8 +62,8 @@
 				
 				$scope.loading = true;
 				return true;
-			};
-		
+			}
+			
 		/* ENTRY POINT: Instantiate the base controller which loads the page */
 		$injector.invoke(base.GenericEntityController, self, {
 			$scope: $scope,

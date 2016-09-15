@@ -9,6 +9,15 @@ public class VisitPredefinedTask extends BaseOpenmrsMetadata {
 	public static final long serialVersionUID = 0L;
 
 	private Integer visitPredefinedTaskId;
+	private Boolean global;
+
+	public Boolean getGlobal() {
+		return global;
+	}
+
+	public void setGlobal(Boolean global) {
+		this.global = global;
+	}
 
 	@Override
 	public Integer getId() {

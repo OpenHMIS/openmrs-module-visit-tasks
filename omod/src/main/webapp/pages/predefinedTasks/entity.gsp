@@ -44,14 +44,12 @@
 				</textarea>
 			</li>
 		</ul>
-		<ul class="table-layout">
+		<ul class="table-layout" ng-show="showMakeGlobal == true">
 			<li style="vertical-align: top" class="not-required">
-				<span>${ui.message('visittasks.predefined.task.type.roleLabel')}</span>
+				<span>${ui.message('visittasks.predefined.task.makeGlobal.label')}</span>
 			</li>
 			<li>
-				<select class="form-control" ng-model="entity.role"
-				        ng-options='role.display for role in roles track by role.uuid'>
-				</select>
+				<input type="checkbox" ng-model="entity.global" name="global">
 			</li>
 		</ul>
 	</fieldset>

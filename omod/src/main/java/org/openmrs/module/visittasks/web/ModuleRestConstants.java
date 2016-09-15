@@ -21,6 +21,6 @@ import org.openmrs.module.webservices.rest.web.RestConstants;
  */
 public class ModuleRestConstants extends WebConstants {
 	public static final String MODULE_REST_ROOT = RestConstants.VERSION_2 + "/visittasks/";
-	public static final String VISIT_PREDEFINED_TASK_RESOURCE = MODULE_REST_ROOT + "predefinedTasks";
+	public static final String VISIT_PREDEFINED_TASK_RESOURCE = MODULE_REST_ROOT + "predefinedTask";
 	public static final String VISIT_TASKS_RESOURCE = MODULE_REST_ROOT + "visitTask";
 }
