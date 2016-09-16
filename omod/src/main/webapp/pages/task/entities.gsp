@@ -1,11 +1,11 @@
 <%
-    ui.decorateWith("appui", "standardEmrPage", [ title: ui.message("visit_tasks.admin.create") ])
+    ui.decorateWith("appui", "standardEmrPage", [ title: ui.message("visittasks.page") ])
 
     /* load stylesheets */
     ui.includeCss("openhmis.commons", "bootstrap.css")
     ui.includeCss("openhmis.commons", "entities2x.css")
     ui.includeCss("uicommons", "ngDialog/ngDialog.min.css")
-    ui.includeCss("visit-tasks", "entity.css")
+    ui.includeCss("visittasks", "entity.css")
 
     /* load angular libraries */
     ui.includeJavascript("uicommons", "angular.min.js")
@@ -30,5 +30,21 @@
 <script data-main="task/configs/entity.main" src="/${ ui.contextPath() }/moduleResources/uicommons/scripts/require/require.js"></script>
 
 <div id="taskApp">
-    <div ui-view></div>
+    <div ui-view>
+        <script type="text/javascript">
+            var breadcrumbs = [
+                {
+                    icon: "icon-home", link: '/' + OPENMRS_CONTEXT_PATH + '/index.htm' },
+                {
+                    label: "${ ui.message(patient)}",
+                    link: "${ ui.message(returnUrl)}"
+                },
+                {
+                    label: "${ ui.message("visittasks.page")}",
+                },
+            ];
+
+            jQuery('#breadcrumbs').html(emr.generateBreadcrumbHtml(breadcrumbs));
+        </script>
+    </div>
 </div>

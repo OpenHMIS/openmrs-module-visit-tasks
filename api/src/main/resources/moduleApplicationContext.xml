@@ -25,7 +25,7 @@
 		<property name="moduleService">
 			<list merge="true">
 				<value>org.openmrs.module.visittasks.api.IVisitTaskDataService</value>
-				<ref bean="visitTaskService" />
+				<ref bean="visitTaskDataService" />
 			</list>
 		</property>
 	</bean>
@@ -40,7 +40,7 @@
 	</bean>
 
 	<!-- Service bean definitions -->
-	<bean id="visitTaskService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+	<bean id="visitTaskDataService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager" ref="transactionManager" />
 		<property name="target">
 			<bean class="org.openmrs.module.visittasks.api.impl.VisitTaskDataServiceImpl">

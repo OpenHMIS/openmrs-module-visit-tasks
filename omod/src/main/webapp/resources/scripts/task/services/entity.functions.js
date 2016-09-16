@@ -28,7 +28,7 @@
 			extractUrlArgs: extractUrlArgs,
 			confirmAddTaskDialog: confirmAddTaskDialog,
 			searchVisitTask: searchVisitTask,
-			confirmCloseTaskDialog: confirmCloseTaskDialog,
+			confirmChangeVisitTaskDialog: confirmChangeVisitTaskDialog,
 		};
 
 		function extractUrlArgs(urlArgs) {
@@ -59,6 +59,7 @@
 				selector: '#task-confirm-dialog',
 				actions: {
 					confirm: function() {
+						$scope.loading = true;
 						$scope.addOrRemovePredefinedTask = true;
 						if(predefinedVisitTask.checked === true) {
 							predefinedVisitTask.default = true;
@@ -86,18 +87,34 @@
 			EntityFunctions.disableBackground();
 		}
 
-		function confirmCloseTaskDialog($scope, visitTask) {
+		function confirmChangeVisitTaskDialog($scope, visitTask) {
+			var tempStatus = visitTask.status;
+			var tempChecked = visitTask.checked;
+			if(visitTask.status === 'OPEN'){
+				$scope.changeVisitTaskTitle = "Close Task";
+				$scope.changeVisitTaskBody = "Are you sure you want to close this task?";
+				visitTask.status = 'CLOSED';
+			} else {
+				$scope.changeVisitTaskTitle = "Re-open Task";
+				$scope.changeVisitTaskBody = "Are you sure you want to re-open this task?";
+				visitTask.status = 'OPEN';
+			}
+
 			var dialog = emr.setupConfirmationDialog({
-				selector: '#close-task-confirm-dialog',
+				selector: '#change-task-confirm-dialog',
 				actions: {
 					confirm: function() {
-						$scope.closeVisitTask = visitTask;
-						$scope.closeVisitTask.status = 'CLOSED';
+						$scope.loading = true;
+						$scope.changeVisitTask = visitTask;
 						$scope.saveOrUpdate();
 						$scope.$apply();
 						dialog.close();
 					},
 					cancel: function() {
+						visitTask.status = tempStatus;
+						visitTask.checked = !tempChecked;
+
+						$scope.$apply();
 						dialog.close();
 					}
 				}
@@ -112,15 +129,13 @@
 			for(var i = 0; i < myVisitTasks.length; i++) {
 				var myVisitTask = myVisitTasks[i];
 				if(predefinedVisitTask.name === myVisitTask.name &&
-					predefinedVisitTask.description === myVisitTask.description) {
+					myVisitTask.status === 'OPEN') {
 					return true;
 				}
 			}
-
 			return false;
 		}
 
 		return service;
-
 	}
 })();

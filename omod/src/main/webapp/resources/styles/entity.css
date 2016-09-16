@@ -1,3 +1,69 @@
 table.manage-entities-table th:first-child, td:first-child{
-    width: 30%;
+    width: 3%;
+}
+table.predefined-table th:first-child, td:first-child{
+	width: 6%;
+}
+.visitlist{
+    color: #222;
+}
+.visitlist select{
+    min-width:0px;
+    display:inline-block;
+    padding: 0px;
+}
+.visitlist .pagination-options{
+    margin: -20px 0px 0px 10px;
+    line-height: 20px;
+}
+fieldset.visitTask{
+    min-width: 100%;
+    margin: 0 0px;
+    border: 0px;
+    padding: 0px;
+}
+#patientTasksTab{
+    border: 0px;
+}
+#predefinedTaskTab{
+    border: 0px;
+}
+.col-sm-1-margin{
+    margin: 5px;
+}
+.col-sm-2-margin{
+    margin-left: -11%;
+}
+.col-sm-4-margin{
+	margin: 0 0 0 -36px;
+}
+.col-dd-margin{
+	margin-left: -4%;
+}
+.col-creator-margin{
+	margin-left: -14%;
+}
+.col-note-margin{
+	margin-left: -11%;
+}
+.col-note-desc-margin{
+	margin: 0 0 0 -60px;
+}
+.col-include-closed-tasks-margin{
+	margin-left: -4%;
+}
+.col-save-margin{
+	margin-left: 12%;
+}
+.no-tasks{
+    margin: 150px;
+}
+.plus-on{
+	position:relative;
+	left: 726px;
+	top: -33px;
+	cursor: pointer;
+}
+.row{
+	font-size: 12px;
 }

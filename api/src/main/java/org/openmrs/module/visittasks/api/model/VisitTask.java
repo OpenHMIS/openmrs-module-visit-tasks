@@ -17,8 +17,11 @@ import org.openmrs.Patient;
 import org.openmrs.User;
 import org.openmrs.BaseOpenmrsData;
 import org.openmrs.Visit;
+import org.openmrs.api.context.Context;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Model class that represents a task to be performed during a Patient's visit.
@@ -32,6 +35,8 @@ public class VisitTask extends BaseOpenmrsData {
 	private Date closedOn;
 	private Visit visit;
 	private Patient patient;
+
+	private List<VisitTask> visitTaskSummaryList;
 
 	@Override
 	public Integer getId() {
@@ -97,5 +102,20 @@ public class VisitTask extends BaseOpenmrsData {
 
 	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+
+	public List<VisitTask> getVisitTaskSummaryList() {
+		return visitTaskSummaryList;
+	}
+
+	public void setVisitTaskSummaryList(List<VisitTask> visitTaskSummaryList) {
+		this.visitTaskSummaryList = visitTaskSummaryList;
+	}
+
+	public String getFormatDateCreated() {
+		SimpleDateFormat simpleDateFormat = Context.getDateTimeFormat();
+		String createdStr = (this.getDateCreated() != null) ? simpleDateFormat.format(this.getDateCreated()) : "";
+
+		return createdStr;
 	}
 }
