@@ -104,6 +104,7 @@
 			<artifactId>providermanagement-api</artifactId>
 			<type>jar</type>
 		</dependency>
+
 	</dependencies>
 
 	<build>

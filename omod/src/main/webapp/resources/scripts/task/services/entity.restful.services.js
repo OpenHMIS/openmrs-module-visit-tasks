@@ -18,28 +18,36 @@
 
 	angular.module('app.restfulServices').service('VisitTaskRestfulService', VisitTaskRestfulService);
 
-	VisitTaskRestfulService.$inject = ['EntityRestFactory'];
+	VisitTaskRestfulService.$inject = ['EntityRestFactory', 'PaginationService'];
 
-	function VisitTaskRestfulService(EntityRestFactory) {
+	function VisitTaskRestfulService(EntityRestFactory, PaginationService) {
 		var service;
 
 		service = {
-			getMyVisitTasks: getMyVisitTasks,
+			getPatientVisitTasks: getPatientVisitTasks,
 			getPredefinedVisitTasks: getPredefinedVisitTasks,
 		};
 
 		return service;
 
-		function getMyVisitTasks(onLoadMyVisitTasksSuccessful) {
-			var requestParams = [];
+		function getPatientVisitTasks(currentPage, limit, visitUuid,
+		                         patientUuid, includeClosedTasks, onLoadMyVisitTasksSuccessful) {
+			var requestParams = PaginationService.paginateParams(currentPage, limit, false, '');
 			requestParams['rest_entity_name'] = 'task';
+			requestParams['visit_uuid'] = visitUuid;
+			requestParams['patient_uuid'] = patientUuid;
+			if(includeClosedTasks !== true) {
+				requestParams['status'] = 'OPEN';
+			}
+
 			EntityRestFactory.loadEntities(requestParams,
 				onLoadMyVisitTasksSuccessful, errorCallback);
 		}
 
-		function getPredefinedVisitTasks(onLoadPredefinedVisitTasksSuccessful) {
-			var requestParams = [];
+		function getPredefinedVisitTasks(currentPage, limit, onLoadPredefinedVisitTasksSuccessful) {
+			var requestParams = PaginationService.paginateParams(currentPage, limit, false, '');
 			requestParams['rest_entity_name'] = 'predefinedTasks';
+
 			EntityRestFactory.loadEntities(requestParams,
 				onLoadPredefinedVisitTasksSuccessful, errorCallback);
 		}

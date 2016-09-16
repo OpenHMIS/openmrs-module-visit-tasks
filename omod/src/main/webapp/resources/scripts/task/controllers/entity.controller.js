@@ -19,10 +19,12 @@
 	var base = angular.module('app.genericEntityController');
 	base.controller("VisitTasksController", VisitTasksController);
 	VisitTasksController.$inject = ['$stateParams', '$injector', '$scope', '$filter',
-		'EntityRestFactory', 'VisitTaskRestfulService', 'VisitTaskModel', 'VisitTaskFunctions', '$location'];
+		'EntityRestFactory', 'VisitTaskRestfulService', 'VisitTaskModel', 'VisitTaskFunctions',
+		'$window', 'PaginationService'];
 
 	function VisitTasksController($stateParams, $injector, $scope, $filter, EntityRestFactory,
-	                              VisitTaskRestfulService, VisitTaskModel, VisitTaskFunctions, $location) {
+	                              VisitTaskRestfulService, VisitTaskModel, VisitTaskFunctions,
+	                              $window, PaginationService) {
 		var self = this;
 		var entity_name_message_key = emr.message("visit_tasks.page");
 		var REST_ENTITY_NAME = "task";
@@ -45,18 +47,35 @@
 				$scope.visitUuid = $scope.urlArgs['visitUuid'];
 				$scope.patientUuid = $scope.urlArgs['patientUuid'];
 
-				console.log($scope.visitUuid)
-				console.log($scope.patientUuid)
-
+				$scope.selectedVisitTasks = [];
 				$scope.addVisitTask = self.addVisitTask;
-				$scope.closeVisitTaskOperation = self.closeVisitTaskOperation;
+
+				$scope.changeVisitTaskOperation = self.changeVisitTaskOperation;
+				$scope.searchPatientTasks = self.searchPatientTasks;
+				$scope.searchPredefinedTasks = self.searchPredefinedTasks;
 				$scope.addOrRemovePredefinedTask = false;
-				$scope.closeVisitTask = false;
+				$scope.changeVisitTask;
+
+				//pagination variables
+				$scope.patientTasksCurrentPage = $scope.patientTasksCurrentPage || 1;
+				$scope.predefinedTasksCurrentPage = $scope.predefinedTasksCurrentPage || 1;
+
+				$scope.patientTasksLimit = 5;
+				$scope.predefinedTasksLimit = 5;
+
+				$scope.patientTasksPagingFrom = PaginationService.pagingFrom;
+				$scope.predefinedTasksPagingFrom = PaginationService.pagingFrom;
+				$scope.patientTasksPagingTo = PaginationService.pagingTo;
+				$scope.predefinedTasksPagingTo = PaginationService.pagingTo;
+
+				$scope.includeClosedTasks = false;
 
 				//load my visit tasks
-				VisitTaskRestfulService.getMyVisitTasks(self.onLoadMyVisitTasksSuccessful);
+				self.searchPatientTasks($scope.patientTasksCurrentPage);
 
-
+				$scope.showDetailsSection = false;
+				$scope.toggleDetailsSection = self.toggleDetailsSection;
+				$scope.updateVisitTask = self.updateVisitTask;
 			}
 
 		/**
@@ -65,12 +84,11 @@
 		 */
 		// @Override
 		self.validateBeforeSaveOrUpdate = self.validateBeforeSaveOrUpdate || function() {
-				if($scope.closeVisitTask !== undefined) {
-					$scope.entity = $scope.closeVisitTask;
-					$scope.entity.visit = $scope.entity.visit.uuid;
-					$scope.entity.patient = $scope.entity.patient.uuid;
-					$scope.entity.creator = $scope.entity.creator.uuid;
-					delete $scope.entity['$$hashKey'];
+				if($scope.changeVisitTask !== undefined) {
+					$scope.entity = self.updateVisitTaskEntity($scope.changeVisitTask);
+					return true;
+				} else if($scope.entity.patient !== undefined && $scope.entity.patient.uuid !== undefined && $scope.entity.visit.uuid !== undefined) {
+					$scope.entity = self.updateVisitTaskEntity($scope.entity);
 					return true;
 				} else {
 					if($scope.visitUuid === undefined) {
@@ -83,56 +101,153 @@
 						return false;
 					}
 
-					if($scope.addOrRemovePredefinedTask === true) {
-						$scope.entity.name = $scope.predefinedVisitTask.name;
-						$scope.entity.description = $scope.predefinedVisitTask.description;
-						$scope.entity.voided = $scope.predefinedVisitTask.voided;
+					if(($scope.entity.name === undefined || $scope.entity.name === "") &&
+						$scope.selectedVisitTasks.length === 0) {
+						emr.errorAlert('Visit Task required');
+						return false;
 					}
 
-					var requestPayload = {};
-					requestPayload.name = $scope.entity.name;
-					requestPayload.description = $scope.entity.description;
-					requestPayload.voided = $scope.entity.voided;
-					requestPayload.status = 'OPEN';
-					requestPayload.visit = $scope.visitUuid;
-					requestPayload.patient = $scope.patientUuid;
-					$scope.entity = requestPayload;
+					if($scope.selectedVisitTasks.length > 0) {
+						var visitTaskSummaryList = [];
+
+						if($scope.entity.name !== undefined && $scope.entity.name !== "") {
+							$scope.entity = self.createVisitTaskEntity($scope.entity);
+						}
+
+						for(var i = 0; i < $scope.selectedVisitTasks.length; i++) {
+							var visitTask = self.createVisitTaskEntity($scope.selectedVisitTasks[i]);
+							if($scope.entity.name === undefined || $scope.entity.name === "") {
+								$scope.entity = visitTask;
+							} else {
+								visitTaskSummaryList.push(visitTask);
+							}
+						}
+
+						$scope.entity.visitTaskSummaryList = visitTaskSummaryList;
+					} else {
+						$scope.entity = self.createVisitTaskEntity($scope.entity);
+					}
 				}
 
-				console.log($scope.entity);
+				$scope.loading = true;
 				return true;
 			}
 
-		self.addVisitTask = self.addVisitTask || function(predefinedVisitTask) {
-				$scope.addOrRemovePredefinedTask = false;
-				$scope.predefinedVisitTask = predefinedVisitTask;
-				VisitTaskFunctions.confirmAddTaskDialog($scope, predefinedVisitTask);
+		self.toggleDetailsSection = self.toggleDetailsSection || function(entity) {
+				if(entity.showDetailsSection) {
+					entity.showDetailsSection = false;
+				} else {
+					entity.showDetailsSection = true;
+				}
 			}
 
-		self.closeVisitTaskOperation = self.closeVisitTaskOperation || function(closeVisitTask) {
-			VisitTaskFunctions.confirmCloseTaskDialog($scope, closeVisitTask);
-		}
+		self.updateVisitTaskEntity = self.updateVisitTaskEntity || function(entity) {
+				var visitTask = entity;
+				visitTask.visit = entity.visit.uuid;
+				visitTask.patient = entity.patient.uuid;
+				visitTask.creator = entity.creator.uuid;
 
-		self.onLoadMyVisitTasksSuccessful = self.onLoadMyVisitTasksSuccessful || function(data) {
-				$scope.myVisitTasks = data.results;
+				delete visitTask['$$hashKey'];
+				delete visitTask['showDetailsSection'];
+				delete visitTask['checked'];
+				delete visitTask['closedBy'];
+				delete visitTask['closedOn'];
+				return visitTask;
+			}
+
+		self.updateVisitTask = self.updateVisitTask || function(entity) {
+				$scope.loading = true;
+				$scope.entity = entity;
+				$scope.saveOrUpdate();
+			}
+
+		self.createVisitTaskEntity = self.createVisitTaskEntity || function(entity) {
+				var visitTask = {};
+				visitTask.name = entity.name;
+				visitTask.description = entity.description;
+				visitTask.status = 'OPEN';
+				visitTask.visit = $scope.visitUuid;
+				visitTask.patient = $scope.patientUuid;
+				return visitTask;
+			}
+
+		self.searchPatientTasks = self.searchPatientTasks || function(currentPage) {
+				VisitTaskRestfulService.getPatientVisitTasks(currentPage,
+					$scope.patientTasksLimit, $scope.visitUuid,
+					$scope.patientUuid, $scope.includeClosedTasks,
+					self.onLoadPatientVisitTasksSuccessful);
+			}
+
+		self.searchPredefinedTasks = self.searchPredefinedTasks || function(currentPage) {
+				VisitTaskRestfulService.getPredefinedVisitTasks(
+					currentPage,
+					$scope.predefinedTasksLimit,
+					self.onLoadPredefinedVisitTasksSuccessful);
+			}
+
+		self.addVisitTask = self.addVisitTask || function(predefinedVisitTask) {
+				if(predefinedVisitTask.checked === true) {
+					$scope.selectedVisitTasks.push(predefinedVisitTask);
+				} else {
+					self.removeVisitTask(predefinedVisitTask);
+				}
+
+				$scope.saveOrUpdate();
+			}
+
+		self.removeVisitTask = self.removeVisitTask || function(predefinedVisitTask) {
+				var index = $scope.selectedVisitTasks.indexOf(predefinedVisitTask);
+				if(index !== -1) {
+					$scope.selectedVisitTasks.splice(index, 1);
+				}
+			}
+
+		self.changeVisitTaskOperation = self.changeVisitTaskOperation || function(visitTask) {
+				VisitTaskFunctions.confirmChangeVisitTaskDialog($scope, visitTask);
+			}
+
+		self.onLoadPatientVisitTasksSuccessful = self.onLoadPatientVisitTasksSuccessful || function(data) {
+				$scope.patientTasks = data.results;
+				for(var i = 0; i < $scope.patientTasks.length; i++){
+					if($scope.patientTasks[i].status === 'CLOSED'){
+						$scope.patientTasks[i].checked = true;
+					} else{
+						$scope.patientTasks[i].checked = false;
+					}
+				}
+
+				$scope.patientTasksTotalResults = data.length;
 
 				//load predefined visit tasks
-				VisitTaskRestfulService.getPredefinedVisitTasks(self.onLoadPredefinedVisitTasksSuccessful);
+				if($scope.predefinedVisitTasks === undefined) {
+					self.searchPredefinedTasks(1);
+				}
 			}
 
 		self.onLoadPredefinedVisitTasksSuccessful = self.onLoadPredefinedVisitTasksSuccessful || function(data) {
-				$scope.predefinedVisitTasks = $scope.predefinedVisitTasks || [];
+				$scope.predefinedVisitTasks = [];
 				$scope.selectedTasks = {};
+				$scope.predefinedTasksTotalResults = data.length;
 				for(var i = 0; i < data.results.length; i++) {
 					var predefinedVisitTask = data.results[i];
 					// only display if doesn't appear under My Visit Tasks.
 					if(!VisitTaskFunctions.searchVisitTask(
-							predefinedVisitTask, $scope.myVisitTasks)) {
+							predefinedVisitTask, $scope.patientTasks)) {
 						$scope.selectedTasks[predefinedVisitTask.uuid] = predefinedVisitTask;
 						$scope.selectedTasks[predefinedVisitTask.uuid].default = false;
 						$scope.predefinedVisitTasks.push(predefinedVisitTask);
 					}
 				}
+			}
+
+		// @Override
+		self.cancel = self.cancel || function() {
+				$window.location = decodeURIComponent($scope.urlArgs['returnUrl']);
+			}
+
+		// @Override
+		self.onChangeEntitySuccessful = self.onChangeEntitySuccessful || function() {
+				$window.location.reload();
 			}
 
 		/* ENTRY POINT: Instantiate the base controller which loads the page */

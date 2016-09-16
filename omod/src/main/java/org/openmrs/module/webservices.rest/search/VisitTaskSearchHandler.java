@@ -81,7 +81,7 @@ public class VisitTaskSearchHandler implements SearchHandler {
 		String patientText = context.getParameter("patient_uuid");
 
 		VisitTaskStatus status = null;
-		if (!StringUtils.isEmpty(statusText) && StringUtils.equalsIgnoreCase(statusText, "*")) {
+		if (!StringUtils.isEmpty(statusText)) {
 			status = VisitTaskStatus.valueOf(statusText);
 			if (status == null) {
 				LOG.warn("Could not parse Visit Task Status '" + statusText + "'");
