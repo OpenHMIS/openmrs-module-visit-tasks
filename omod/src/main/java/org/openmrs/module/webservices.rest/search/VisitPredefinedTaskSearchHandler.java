@@ -14,8 +14,8 @@
 
 package org.openmrs.module.webservices.rest.search;
 
-import org.apache.commons.lang3.StringUtils;
 import org.openmrs.api.context.Context;
+import org.openmrs.api.context.UserContext;
 import org.openmrs.module.openhmis.commons.api.PagingInfo;
 import org.openmrs.module.visittasks.api.IVisitPredefinedTaskDataService;
 import org.openmrs.module.visittasks.api.model.VisitPredefinedTask;
@@ -42,7 +42,7 @@ public class VisitPredefinedTaskSearchHandler implements SearchHandler {
 			new SearchConfig("default", ModuleRestConstants.VISIT_PREDEFINED_TASK_RESOURCE,
 					Arrays.asList("*"),
 					Arrays.asList(
-							new SearchQuery.Builder("Find a visitPredefinedTask by its name")
+							new SearchQuery.Builder("Find a visitPredefinedTask by its name, optionally filtering by user")
 									.withRequiredParameters("q")
 									.build()
 					)
@@ -59,14 +59,25 @@ public class VisitPredefinedTaskSearchHandler implements SearchHandler {
 		IVisitPredefinedTaskDataService service = Context.getService(IVisitPredefinedTaskDataService.class);
 		PagingInfo pagingInfo = PagingUtil.getPagingInfoFromContext(context);
 
-		List<VisitPredefinedTask> visitPredefinedTasks;
-		if (StringUtils.isBlank(query)) {
-			visitPredefinedTasks = service.getAll(context.getIncludeAll(), pagingInfo);
-		} else {
+		UserContext userContext = Context.getUserContext();
+		Integer userId = userContext.getAuthenticatedUser().getUserId();
+
+		List<VisitPredefinedTask> visitPredefinedTasks = null;
+		PageableResult results = null;
+
+		if (userId == null) {
+			// Do a name search
 			visitPredefinedTasks = service.getByNameFragment(query, context.getIncludeAll(), pagingInfo);
+		} else if (query == null) {
+			//performs the user search
+			visitPredefinedTasks = service.getPredefinedTasksByUser(userId, context.getIncludeAll(), pagingInfo);
+		} else {
+			// Do a name & user search
+			visitPredefinedTasks =
+					service.getPredefinedTasksByUserAndName(userId, query, context.getIncludeAll(), pagingInfo);
 		}
 
-		AlreadyPagedWithLength<VisitPredefinedTask> results =
+		results =
 				new AlreadyPagedWithLength<VisitPredefinedTask>(context, visitPredefinedTasks, pagingInfo.hasMoreResults(),
 						pagingInfo.getTotalRecordCount());
 		return results;

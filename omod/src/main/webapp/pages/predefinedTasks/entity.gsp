@@ -49,7 +49,7 @@
 				<span>${ui.message('visittasks.predefined.task.makeGlobal.label')}</span>
 			</li>
 			<li>
-				<input type="checkbox" ng-model="entity.global" name="global">
+				<input type="checkbox" ng-model="entity.global" name="global" ng-checked="entity.global"/>
 			</li>
 		</ul>
 	</fieldset>
