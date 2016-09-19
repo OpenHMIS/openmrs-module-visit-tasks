@@ -21,7 +21,7 @@
     ManageEntityController.$inject = ['$injector', '$scope', '$filter', 'EntityRestFactory', 'CssStylesFactory',
         'PaginationService', 'PredefinedTasksModel', 'CookiesService'];
     
-    var ENTITY_NAME = "predefinedTasks";
+    var ENTITY_NAME = "predefinedTask";
 
     function ManageEntityController($injector, $scope, $filter, EntityRestFactory, CssStylesFactory, PaginationService,
                                          PredefinedTasksModel, CookiesService) {
