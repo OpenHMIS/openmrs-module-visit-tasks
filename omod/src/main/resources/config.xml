@@ -86,5 +86,10 @@
 		<description>Able to purge visit task module metadata</description>
 	</privilege>
 
+	<privilege>
+		<name>Task: Make Visit Task Predefined Task Global</name>
+		<description>Able to make predefined tasks global</description>
+	</privilege>
+
 </module>
 
