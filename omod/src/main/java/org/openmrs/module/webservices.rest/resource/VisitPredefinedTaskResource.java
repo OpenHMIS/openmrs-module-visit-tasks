@@ -34,7 +34,7 @@ public class VisitPredefinedTaskResource extends BaseRestMetadataResource<VisitP
 	public DelegatingResourceDescription getRepresentationDescription(Representation rep) {
 		DelegatingResourceDescription description = super.getRepresentationDescription(rep);
 		description.addProperty("description", Representation.REF);
-
+		description.addProperty("global", Representation.DEFAULT);
 		return description;
 	}
 
