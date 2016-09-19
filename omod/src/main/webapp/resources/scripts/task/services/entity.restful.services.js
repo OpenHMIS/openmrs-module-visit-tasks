@@ -46,7 +46,7 @@
 
 		function getPredefinedVisitTasks(currentPage, limit, onLoadPredefinedVisitTasksSuccessful) {
 			var requestParams = PaginationService.paginateParams(currentPage, limit, false, '');
-			requestParams['rest_entity_name'] = 'predefinedTasks';
+			requestParams['rest_entity_name'] = 'predefinedTask';
 
 			EntityRestFactory.loadEntities(requestParams,
 				onLoadPredefinedVisitTasksSuccessful, errorCallback);
