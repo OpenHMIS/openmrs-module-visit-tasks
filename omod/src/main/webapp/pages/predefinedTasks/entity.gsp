@@ -2,6 +2,10 @@
 	var breadcrumbs = [
 		{icon: "icon-home", link: '/' + OPENMRS_CONTEXT_PATH + '/index.htm'},
 		{
+			label: "${ ui.message("coreapps.app.systemAdministration.label")}",
+			link: '${ui.pageLink("coreapps", "systemadministration/systemAdministration")}'
+		},
+		{
 			label: "${ ui.message("visittasks.page")}",
 			link: '${ui.pageLink("visittasks", "visitTasksLanding")}'
 		},
@@ -35,7 +39,7 @@
 		</ul>
 		<ul class="table-layout" ng-show="showMakeGlobal == true">
 			<li style="vertical-align: top" class="not-required">
-				<span>${ui.message('visittasks.predefined.task.makeGlobal.label')}</span>
+				<span>${ui.message('visittasks.predefinedTask.makeGlobal.label')}</span>
 			</li>
 			<li>
 				<input type="checkbox" ng-model="entity.global" name="global" ng-checked="entity.global"/>

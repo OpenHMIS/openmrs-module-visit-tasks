@@ -15,7 +15,7 @@
 
 <div id="home-container">
 	
-	<h1>${ui.message("visittasks.task.page")}</h1>
+	<h1>${ui.message("visittasks.admin.predefinedTasks")}</h1>
 
 	<div id="apps">
 		<% extensions.each { ext -> %>

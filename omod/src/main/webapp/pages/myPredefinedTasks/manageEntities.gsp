@@ -9,7 +9,7 @@
 			label: "${ ui.message("visittasks.page")}",
 			link: '${ui.pageLink("visittasks", "visitTasksLanding")}'
 		},
-		{label: "${ ui.message("visittasks.predefinedTask.global.task.label")}",}
+		{label: "${ ui.message("visittasks.predefinedTask.user.task.label")}",}
 	];
 	
 	jQuery('#breadcrumbs').html(emr.generateBreadcrumbHtml(breadcrumbs));
@@ -20,7 +20,7 @@
 	
 	<div id="manage-entities-header">
 		<span class="h1-substitue-left" style="float:left;">
-			${ui.message('visittasks.predefinedTask.global.task.label')}
+			${ui.message('visittasks.predefinedTask.user.task.label')}
 		</span>
 		<span style="float:right;">
 			<a class="button confirm" ui-sref="new">

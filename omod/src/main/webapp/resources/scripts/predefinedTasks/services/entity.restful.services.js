@@ -32,7 +32,7 @@
 		function getPrivilege(module_name,onLoadPrivilegeSuccessful) {
 			var requestParams = [];
 			requestParams['resource'] = MODULE_PRIVILEGE_SETTINGS_URL;
-			requestParams['privileges'] = TASK_MAKE_PREDEFINED_TASKS_GLOBAL;
+			requestParams['privileges'] = TASK_MANAGE_METADATA;
 			EntityRestFactory.setCustomBaseUrl(ROOT_URL);
 			EntityRestFactory.loadResults(requestParams,
 				onLoadPrivilegeSuccessful, errorCallback);

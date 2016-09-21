@@ -2,25 +2,37 @@
 	{
 		"id": "${project.parent.artifactId}",
 		"description": "Provides tasks to be performed during a patient's visit",
-		"order": 20,
+		"order": 30,
 		"extensions": [
 			{
-				"id": "${project.parent.artifactId}.visitTasksLandingPageLink",
-				"extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+				"id": "${project.parent.groupId}.${project.parent.artifactId}.visitTasksLandingPageLink",
+				"extensionPointId": "systemAdministration.apps",
 				"type": "link",
-				"label": "Visit Tasks",
+				"label": "Manage Predefined Tasks",
 				"url": "${project.parent.artifactId}/visitTasksLanding.page",
 				"icon": "icon-list-ul",
-				"requiredPrivilege": "App: View Visit Task App"
+				"requiredPrivilege": "App: View Visit Task App",
+				"order": 30
 			},
 			{
 				"id": "${project.parent.artifactId}.managePredefinedTasksLink",
 				"extensionPointId": "org.openmrs.module.visittasks.landing",
 				"type": "link",
-				"label": "Manage Visit Predefined Tasks",
+				"label": "Global Predefined Tasks",
 				"url": "${project.parent.artifactId}/predefinedTasks/entities.page#/",
+				"icon": "icon-pencil",
+				"requiredPrivilege": "Task: View Visit Task Metadata",
+				"order": 2
+			},
+			{
+				"id": "${project.parent.artifactId}.managePredefinedTasksLink",
+				"extensionPointId": "org.openmrs.module.visittasks.landing",
+				"type": "link",
+				"label": "My Predefined Tasks",
+				"url": "${project.parent.artifactId}/myPredefinedTasks/entities.page#/",
 				"icon": "icon-edit",
-				"requiredPrivilege": "Task: View Visit Task Metadata"
+				"requiredPrivilege": "Task: View My Predefined Tasks",
+				"order": 1
 			},
 			{
 				"id": "${project.parent.artifactId}.VisitTasksLink",

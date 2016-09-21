@@ -72,24 +72,15 @@
 	</privilege>
 
 	<privilege>
-		<name>Task: View Visit Task Metadata</name>
-		<description>Able to view visit task module metadata</description>
-	</privilege>
-
-	<privilege>
 		<name>Task: Manage Visit Task Metadata</name>
 		<description>Able to add/edit/retire visit task module metadata</description>
 	</privilege>
 
 	<privilege>
-		<name>Task: Purge Visit Task Metadata</name>
-		<description>Able to purge visit task module metadata</description>
+		<name>Task: View My Predefined Tasks</name>
+		<description>Able to access and create user defined tasks</description>
 	</privilege>
 
-	<privilege>
-		<name>Task: Make Visit Task Predefined Task Global</name>
-		<description>Able to make predefined tasks global</description>
-	</privilege>
 
 </module>
 

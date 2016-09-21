@@ -27,11 +27,11 @@ public class BasicObjectAuthorizationPrivileges implements IObjectAuthorizationP
 
 	@Override
 	public String getPurgePrivilege() {
-		return PrivilegeConstants.TASK_PURGE_VISIT_TASK_METADATA;
+		return PrivilegeConstants.TASK_MANAGE_VISIT_TASK_METADATA;
 	}
 
 	@Override
 	public String getGetPrivilege() {
-		return PrivilegeConstants.TASK_VIEW_VISIT_TASK_METADATA;
+		return PrivilegeConstants.TASK_MANAGE_VISIT_TASK_METADATA;
 	}
 }
