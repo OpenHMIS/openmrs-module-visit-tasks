@@ -43,6 +43,7 @@ public class IVisitPredefinedTaskDataServiceTest
 		}
 
 		visitPredefinedTask.setDescription("new Visit PredefinedTask description");
+		visitPredefinedTask.setGlobal(true);
 
 		return visitPredefinedTask;
 	}
@@ -51,6 +52,7 @@ public class IVisitPredefinedTaskDataServiceTest
 	protected void updateEntityFields(VisitPredefinedTask visitPredefinedTask) {
 		visitPredefinedTask.setName(visitPredefinedTask.getName() + " updated");
 		visitPredefinedTask.setDescription(visitPredefinedTask.getDescription() + " updated");
+		visitPredefinedTask.setGlobal(visitPredefinedTask.getGlobal());
 	}
 
 	@Override
