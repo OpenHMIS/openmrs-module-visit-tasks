@@ -32,7 +32,7 @@ fieldset.visitTask{
     margin: 5px;
 }
 .col-sm-2-margin{
-    margin-left: -11%;
+    margin-left: -8%;
 }
 .col-sm-4-margin{
 	margin: 0 0 0 -36px;
@@ -41,13 +41,13 @@ fieldset.visitTask{
 	margin-left: -4%;
 }
 .col-creator-margin{
-	margin-left: -14%;
+	margin-left: -9%;
 }
-.col-note-margin{
-	margin-left: -11%;
+.col-closed-margin{
+	margin-left: -10%;
 }
-.col-note-desc-margin{
-	margin: 0 0 0 -60px;
+.col-removed-margin{
+	margin-left: -12%;
 }
 .col-include-closed-tasks-margin{
 	margin-left: -4%;
@@ -66,4 +66,10 @@ fieldset.visitTask{
 }
 .row{
 	font-size: 12px;
+}
+.btn-align{
+	margin: 5px 13px 0px 0px;
+}
+.dropdown-width{
+	width: 288px;
 }

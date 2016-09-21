@@ -16,9 +16,9 @@
 </script>
 
 <form name="entityForm" class="entity-form" ng-class="{'submitted': submitted}" style="font-size:inherit">
-	${ui.includeFragment("openhmis.commons", "editEntityHeaderFragment")}
-	
-	<input type="hidden" ng-model="entity.uuid"/>
+	<span class="h1-substitue-left">
+		${ui.message('visittasks.predefinedTask.new')}
+	</span>
 	
 	<fieldset class="format">
 		<ul class="table-layout">
@@ -31,17 +31,6 @@
 				
 				<p class="checkRequired"
 				   ng-hide="nameIsRequiredMsg == '' || nameIsRequiredMsg == undefined">{{nameIsRequiredMsg}}</p>
-			</li>
-		</ul>
-		<ul class="table-layout">
-			<li style="vertical-align: top" class="not-required">
-				<span>${ui.message('general.description')}</span>
-			</li>
-			<li>
-				<textarea class="form-control" ng-model="entity.description"
-				          placeholder="${ui.message('general.description')}" rows="3"
-				          cols="40">
-				</textarea>
 			</li>
 		</ul>
 		<ul class="table-layout" ng-show="showMakeGlobal == true">

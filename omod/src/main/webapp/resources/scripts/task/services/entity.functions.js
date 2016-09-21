@@ -26,9 +26,8 @@
 
 		service = {
 			extractUrlArgs: extractUrlArgs,
-			confirmAddTaskDialog: confirmAddTaskDialog,
+			confirmRemoveTaskDialog: confirmRemoveTaskDialog,
 			searchVisitTask: searchVisitTask,
-			confirmChangeVisitTaskDialog: confirmChangeVisitTaskDialog,
 		};
 
 		function extractUrlArgs(urlArgs) {
@@ -46,28 +45,13 @@
 			return urlParams;
 		}
 
-		function confirmAddTaskDialog($scope, predefinedVisitTask) {
-			if(predefinedVisitTask.checked === true) {
-				$scope.taskConfirmTitle = 'Add Visit Task';
-				$scope.taskConfirmMessage = 'Are you sure you want to add Task: ' + predefinedVisitTask.name + '?';
-			} else {
-				$scope.taskConfirmTitle = 'Remove Visit Task';
-				$scope.taskConfirmMessage = 'Are you sure you want to remove Task: ' + predefinedVisitTask.name + '?';
-			}
-
+		function confirmRemoveTaskDialog($scope, task) {
 			var dialog = emr.setupConfirmationDialog({
-				selector: '#task-confirm-dialog',
+				selector: '#remove-task-confirm-dialog',
 				actions: {
 					confirm: function() {
-						$scope.loading = true;
-						$scope.addOrRemovePredefinedTask = true;
-						if(predefinedVisitTask.checked === true) {
-							predefinedVisitTask.default = true;
-							predefinedVisitTask.voided = false;
-						} else {
-							predefinedVisitTask.default = false;
-							predefinedVisitTask.voided = true;
-						}
+						task.voided = true;
+						$scope.entity = task;
 
 						$scope.saveOrUpdate();
 
@@ -75,8 +59,6 @@
 						dialog.close();
 					},
 					cancel: function() {
-						predefinedVisitTask.checked = predefinedVisitTask.default;
-						$scope.$apply();
 						dialog.close();
 					}
 				}
@@ -87,49 +69,11 @@
 			EntityFunctions.disableBackground();
 		}
 
-		function confirmChangeVisitTaskDialog($scope, visitTask) {
-			var tempStatus = visitTask.status;
-			var tempChecked = visitTask.checked;
-			if(visitTask.status === 'OPEN'){
-				$scope.changeVisitTaskTitle = "Close Task";
-				$scope.changeVisitTaskBody = "Are you sure you want to close this task?";
-				visitTask.status = 'CLOSED';
-			} else {
-				$scope.changeVisitTaskTitle = "Re-open Task";
-				$scope.changeVisitTaskBody = "Are you sure you want to re-open this task?";
-				visitTask.status = 'OPEN';
-			}
-
-			var dialog = emr.setupConfirmationDialog({
-				selector: '#change-task-confirm-dialog',
-				actions: {
-					confirm: function() {
-						$scope.loading = true;
-						$scope.changeVisitTask = visitTask;
-						$scope.saveOrUpdate();
-						$scope.$apply();
-						dialog.close();
-					},
-					cancel: function() {
-						visitTask.status = tempStatus;
-						visitTask.checked = !tempChecked;
-
-						$scope.$apply();
-						dialog.close();
-					}
-				}
-			});
-
-			dialog.show();
-
-			EntityFunctions.disableBackground();
-		}
-
-		function searchVisitTask(predefinedVisitTask, myVisitTasks) {
-			for(var i = 0; i < myVisitTasks.length; i++) {
-				var myVisitTask = myVisitTasks[i];
-				if(predefinedVisitTask.name === myVisitTask.name &&
-					myVisitTask.status === 'OPEN') {
+		function searchVisitTask(predefinedVisitTask, visitTasks) {
+			for(var i = 0; i < visitTasks.length; i++) {
+				var visitTask = visitTasks[i];
+				if(predefinedVisitTask.name === visitTask.name &&
+					visitTask.status === 'OPEN') {
 					return true;
 				}
 			}

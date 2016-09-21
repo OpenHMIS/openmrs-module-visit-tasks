@@ -50,7 +50,6 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 		description.addProperty("voided", Representation.DEFAULT);
 		description.addProperty("patient", Representation.REF);
 		description.addProperty("visit", Representation.REF);
-		description.addProperty("visitTaskSummaryList", Representation.DEFAULT);
 
 		return description;
 	}
@@ -72,13 +71,12 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 
 	@Override
 	public VisitTask save(VisitTask delegate) {
-		if(delegate.getVisitTaskSummaryList() != null){
-			for(VisitTask visitTask : delegate.getVisitTaskSummaryList()){
-				getService().save(visitTask);
-			}
-		} else if(delegate.getStatus() == VisitTaskStatus.CLOSED){
+		if(delegate.getStatus() == VisitTaskStatus.CLOSED){
 			delegate.setClosedBy(Context.getAuthenticatedUser());
 			delegate.setClosedOn(new Date());
+		} else if (delegate.getVoided()){
+			delegate.setVoidedBy(Context.getAuthenticatedUser());
+			delegate.setDateVoided(new Date());
 		}
 
 		return super.save(delegate);

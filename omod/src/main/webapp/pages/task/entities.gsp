@@ -5,6 +5,7 @@
     ui.includeCss("openhmis.commons", "bootstrap.css")
     ui.includeCss("openhmis.commons", "entities2x.css")
     ui.includeCss("uicommons", "ngDialog/ngDialog.min.css")
+    ui.includeCss("uicommons", "datetimepicker.css")
     ui.includeCss("visittasks", "entity.css")
 
     /* load angular libraries */
@@ -14,7 +15,7 @@
     ui.includeJavascript("uicommons", "angular-common.js")
     ui.includeJavascript("uicommons", "ngDialog/ngDialog.js")
     ui.includeJavascript("uicommons", "datetimepicker/bootstrap-datetimepicker.min.js")
-    ui.includeCss("uicommons", "datetimepicker.css")
+    ui.includeJavascript("openhmis.commons", "reusable-components/lib/bootstrap.min.js")
 
     /* load re-usables/common modules */
     ui.includeFragment("openhmis.commons", "load.reusable.modules")

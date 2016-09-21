@@ -22,5 +22,8 @@ requirejs(['task/configs/entity.module'], function() {
 emr.loadMessages([
 	"visittasks.page",
 	"general.name", "general.description", "general.cancel",
-	"general.save"
+	"general.save",
+	"visittasks.task.visit.required",
+	"visittasks.task.patient.required",
+	"visittasks.task.required",
 ]);

@@ -5,6 +5,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.openmrs.User;
 import org.openmrs.module.openhmis.commons.api.PagingInfo;
 import org.openmrs.module.openhmis.commons.api.entity.impl.BaseMetadataDataServiceImpl;
 import org.openmrs.module.openhmis.commons.api.entity.security.IMetadataAuthorizationPrivileges;
@@ -34,62 +35,30 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 	protected void validate(VisitPredefinedTask entity) {}
 
 	@Override
-	public List<VisitPredefinedTask> getPredefinedTasksByUser(Integer userId, boolean includeRetired) {
-		return getPredefinedTasksByUser(userId, includeRetired, null);
-	}
-
-	@Override
-	public List<VisitPredefinedTask> getPredefinedTasksByUser(final Integer userId, final boolean includeRetired,
-	        PagingInfo pagingInfo) {
-		if (userId == null) {
+	public List<VisitPredefinedTask> getPredefinedTasks(final User user, final String name,
+	        final boolean includeRetired, PagingInfo pagingInfo) {
+		if (user == null) {
 			throw new IllegalArgumentException("User must be logged in");
 		}
-
-		return executeCriteria(VisitPredefinedTask.class, pagingInfo, new Action1<Criteria>() {
-			@Override
-			public void apply(Criteria criteria) {
-				/*criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.USER, userId));
-				if (!includeRetired) {
-					criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.RETIRED, false));
-				}
-				criteria.add(Restrictions.or(VisitTasksHibernateCriteriaConstants.GLOBAL,true));*/
-
-				Criterion userCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.USER, userId);
-				Criterion globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, true);
-
-				criteria.add(Restrictions.or(userCriterion, globalCriterion));
-			}
-		});
-	}
-
-	@Override
-	public List<VisitPredefinedTask> getPredefinedTasksByUserAndName(Integer userId, String name, boolean includeRetired) {
-		return getPredefinedTasksByUserAndName(userId, name, includeRetired, null);
-	}
-
-	@Override
-	public List<VisitPredefinedTask> getPredefinedTasksByUserAndName(final Integer userId, final String name,
-	        final boolean includeRetired,
-	        PagingInfo pagingInfo) {
-		if (userId == null) {
-			throw new IllegalArgumentException("User must be logged in");
-		}
-		if (StringUtils.isEmpty(name)) {
-			throw new IllegalArgumentException("The Predefined task name must be defined.");
-		}
-		if (name.length() > MAX_PREDEFINED_TASK_NAME_CHARACTERS) {
+		if (StringUtils.isNotEmpty(name) && name.length() > MAX_PREDEFINED_TASK_NAME_CHARACTERS) {
 			throw new IllegalArgumentException("The Predefined task name must be less than 256 characters.");
 		}
 
 		return executeCriteria(VisitPredefinedTask.class, pagingInfo, new Action1<Criteria>() {
 			@Override
 			public void apply(Criteria criteria) {
-				criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.USER, userId)).add(
-				    Restrictions.ilike(VisitTasksHibernateCriteriaConstants.NAME, name, MatchMode.START));
+				if (StringUtils.isNotEmpty(name)) {
+					criteria.add(Restrictions.ilike(
+					    VisitTasksHibernateCriteriaConstants.NAME, name, MatchMode.START));
+				}
 
 				if (!includeRetired) {
 					criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.RETIRED, false));
 				}
+
+				Criterion userCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.USER, user);
+				Criterion globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, true);
+				criteria.add(Restrictions.or(userCriterion, globalCriterion));
 			}
 		});
 	}
