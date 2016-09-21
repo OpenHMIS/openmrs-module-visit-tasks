@@ -17,11 +17,13 @@
 	
 	var base = angular.module('app.genericEntityController');
 	base.controller("EntityController", EntityController);
-	EntityController.$inject = ['$stateParams', '$injector', '$scope', '$filter', 'EntityRestFactory', 'PredefinedTasksModel', 'PredefinedTasksRestfulService'];
+	EntityController.$inject = ['$stateParams', '$injector', '$scope', '$filter',
+		'EntityRestFactory', 'PredefinedTasksModel', 'PredefinedTasksRestfulService'];
 	
 	var ENTITY_NAME = "predefinedTask";
 	
-	function EntityController($stateParams, $injector, $scope, $filter, EntityRestFactory, PredefinedTasksModel, PredefinedTasksRestfulService) {
+	function EntityController($stateParams, $injector, $scope, $filter, EntityRestFactory,
+	                          PredefinedTasksModel, PredefinedTasksRestfulService) {
 		var self = this;
 		
 		var entity_name_message_key = "visittasks." + ENTITY_NAME + ".name";
@@ -58,6 +60,10 @@
 				if (!angular.isDefined($scope.entity.name) || $scope.entity.name === '') {
 					$scope.submitted = true;
 					return false;
+				}
+
+				if($scope.entity.global === ""){
+					$scope.entity.global = false;
 				}
 				
 				$scope.loading = true;

@@ -12,6 +12,7 @@ package org.openmrs.module.visittasks.api.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.Patient;
 import org.openmrs.Visit;
@@ -68,8 +69,11 @@ public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTas
 				if (patient != null) {
 					criteria.add(Restrictions.eq("patient", patient));
 				}
+
+				criteria.add(Restrictions.eq("voided", false));
+				criteria.addOrder(Order.desc("dateCreated"));
 			}
-		}, getDefaultSort());
+		});
 	}
 
 	@Override

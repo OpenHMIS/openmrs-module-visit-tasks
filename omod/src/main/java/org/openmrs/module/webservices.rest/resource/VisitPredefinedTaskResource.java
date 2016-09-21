@@ -14,13 +14,21 @@
 package org.openmrs.module.webservices.rest.resource;
 
 import org.openmrs.annotation.Handler;
+import org.openmrs.api.context.Context;
+import org.openmrs.api.context.UserContext;
+import org.openmrs.module.openhmis.commons.api.PagingInfo;
 import org.openmrs.module.openhmis.commons.api.entity.IMetadataDataService;
 import org.openmrs.module.visittasks.api.IVisitPredefinedTaskDataService;
 import org.openmrs.module.visittasks.api.model.VisitPredefinedTask;
 import org.openmrs.module.visittasks.web.ModuleRestConstants;
+import org.openmrs.module.webservices.rest.web.RequestContext;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
 import org.openmrs.module.webservices.rest.web.representation.Representation;
+import org.openmrs.module.webservices.rest.web.resource.api.PageableResult;
 import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceDescription;
+import org.openmrs.module.webservices.rest.web.resource.impl.EmptySearchResult;
+
+import java.util.List;
 
 /**
  * REST resource representing a {@link VisitPredefinedTask}.
@@ -48,4 +56,27 @@ public class VisitPredefinedTaskResource extends BaseRestMetadataResource<VisitP
 		return IVisitPredefinedTaskDataService.class;
 	}
 
+	@Override
+	protected PageableResult doGetAll(RequestContext context) {
+		return doSearch(context);
+	}
+
+	@Override
+	protected PageableResult doSearch(RequestContext context) {
+		String query = context.getParameter("q");
+		IVisitPredefinedTaskDataService service = Context.getService(IVisitPredefinedTaskDataService.class);
+		PagingInfo pagingInfo = PagingUtil.getPagingInfoFromContext(context);
+
+		List<VisitPredefinedTask> visitPredefinedTasks =
+				service.getPredefinedTasks(Context.getAuthenticatedUser(), query, context.getIncludeAll(), pagingInfo);
+
+		if (visitPredefinedTasks.size() == 0) {
+			return new EmptySearchResult();
+		} else {
+			return
+					new AlreadyPagedWithLength<VisitPredefinedTask>(context, visitPredefinedTasks,
+							pagingInfo.hasMoreResults(),
+							pagingInfo.getTotalRecordCount());
+		}
+	}
 }

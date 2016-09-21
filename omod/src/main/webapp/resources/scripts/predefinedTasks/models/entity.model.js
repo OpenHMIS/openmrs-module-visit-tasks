@@ -27,7 +27,8 @@
 
         // @Override
         extended.getModelFields = function() {
-            return defaultFields;
+            var fields = ["global"];
+            return fields.concat(defaultFields);
         };
 
         return extended;

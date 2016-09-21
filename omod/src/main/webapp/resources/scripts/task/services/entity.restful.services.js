@@ -26,13 +26,26 @@
 		service = {
 			getPatientVisitTasks: getPatientVisitTasks,
 			getPredefinedVisitTasks: getPredefinedVisitTasks,
+			getAllPatientVisitTasks: getAllPatientVisitTasks,
 		};
 
 		return service;
 
 		function getPatientVisitTasks(currentPage, limit, visitUuid,
-		                         patientUuid, includeClosedTasks, onLoadMyVisitTasksSuccessful) {
-			var requestParams = PaginationService.paginateParams(currentPage, limit, false, '');
+		                         patientUuid, includeClosedTasks, onLoadVisitTasksSuccessful) {
+			getWSVisitTasks(PaginationService.paginateParams(currentPage, limit, false, ''),
+				visitUuid, patientUuid, includeClosedTasks,
+				onLoadVisitTasksSuccessful);
+		}
+
+		function getAllPatientVisitTasks(visitUuid, patientUuid, includeClosedTasks,
+		                                 onLoadVisitTasksSuccessful){
+			getWSVisitTasks([], visitUuid, patientUuid, includeClosedTasks,
+				onLoadVisitTasksSuccessful);
+		}
+
+		function getWSVisitTasks(requestParams, visitUuid, patientUuid, includeClosedTasks,
+		                         onLoadVisitTasksSuccessful){
 			requestParams['rest_entity_name'] = 'task';
 			requestParams['visit_uuid'] = visitUuid;
 			requestParams['patient_uuid'] = patientUuid;
@@ -41,11 +54,11 @@
 			}
 
 			EntityRestFactory.loadEntities(requestParams,
-				onLoadMyVisitTasksSuccessful, errorCallback);
+				onLoadVisitTasksSuccessful, errorCallback);
 		}
 
-		function getPredefinedVisitTasks(currentPage, limit, onLoadPredefinedVisitTasksSuccessful) {
-			var requestParams = PaginationService.paginateParams(currentPage, limit, false, '');
+		function getPredefinedVisitTasks(onLoadPredefinedVisitTasksSuccessful) {
+			var requestParams = [];
 			requestParams['rest_entity_name'] = 'predefinedTask';
 
 			EntityRestFactory.loadEntities(requestParams,

@@ -19,7 +19,7 @@
 		<span style="float:right;">
 			<a class="button confirm" ui-sref="new">
 				<i class="icon-plus"></i>
-				{{newEntityLabel}}
+				${ui.message('visittasks.predefinedTask.new')}
 			</a>
 		</span>
 	</div>
@@ -38,15 +38,13 @@
 			<table style="margin-bottom:5px;" class="manage-entities-table">
 				<thead>
 				<tr>
-					<th style="width: 40%">${ui.message('general.name')}</th>
-					<th>${ui.message('general.description')}</th>
+					<th style="width: 40%">${ui.message('visittasks.predefinedTask.name')}</th>
 				</tr>
 				</thead>
 				<tbody>
 				<tr class="clickable-tr" dir-paginate="entity in fetchedEntities | itemsPerPage: limit"
 				    total-items="totalNumOfResults" current-page="currentPage" ui-sref="edit({uuid: entity.uuid})">
 					<td ng-style="strikeThrough(entity.retired)">{{entity.name}}</td>
-					<td ng-style="strikeThrough(entity.retired)">{{entity.description}}</td>
 				</tr>
 				</tbody>
 			</table>
