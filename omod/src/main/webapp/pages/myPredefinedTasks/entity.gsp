@@ -11,7 +11,7 @@
 		},
 		{
 			label: "${ ui.message("visittasks.admin.predefinedTasks")}",
-			link: '/' + OPENMRS_CONTEXT_PATH + '/visittasks/predefinedTasks/entities.page##/'
+			link: '/' + OPENMRS_CONTEXT_PATH + '/visittasks/myPredefinedTasks/entities.page##/'
 		},
 		{label: "${ui.message("visittasks.predefinedTask.name")}"}
 	];
