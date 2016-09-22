@@ -73,3 +73,12 @@ fieldset.visitTask{
 .dropdown-width{
 	width: 288px;
 }
+
+div.required:before{
+    content:"*";
+    color:red;
+}
+div.not-required:before{
+    content:"  ";
+    padding: 5px;
+}

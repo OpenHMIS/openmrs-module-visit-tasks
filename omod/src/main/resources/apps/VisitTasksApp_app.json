@@ -2,7 +2,7 @@
 	{
 		"id": "${project.parent.artifactId}",
 		"description": "Provides tasks to be performed during a patient's visit",
-		"order": 30,
+		"order": 25,
 		"extensions": [
 			{
 				"id": "${project.parent.groupId}.${project.parent.artifactId}.visitTasksLandingPageLink",
@@ -12,10 +12,10 @@
 				"url": "${project.parent.artifactId}/visitTasksLanding.page",
 				"icon": "icon-list-ul",
 				"requiredPrivilege": "App: View Visit Task App",
-				"order": 30
+				"order": 25
 			},
 			{
-				"id": "${project.parent.artifactId}.managePredefinedTasksLink",
+				"id": "${project.parent.groupId}.${project.parent.artifactId}.managePredefinedTasksLink",
 				"extensionPointId": "org.openmrs.module.visittasks.landing",
 				"type": "link",
 				"label": "Global Predefined Tasks",
@@ -25,7 +25,7 @@
 				"order": 2
 			},
 			{
-				"id": "${project.parent.artifactId}.managePredefinedTasksLink",
+				"id": "${project.parent.groupId}.${project.parent.artifactId}.managePredefinedTasksLink",
 				"extensionPointId": "org.openmrs.module.visittasks.landing",
 				"type": "link",
 				"label": "My Predefined Tasks",
@@ -35,7 +35,7 @@
 				"order": 1
 			},
 			{
-				"id": "${project.parent.artifactId}.VisitTasksLink",
+				"id": "${project.parent.groupId}.${project.parent.artifactId}.VisitTasksLink",
 				"extensionPointId": "patientDashboard.visitActions",
 				"type": "link",
 				"label": "Visit Tasks",

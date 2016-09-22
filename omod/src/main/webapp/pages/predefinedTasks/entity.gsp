@@ -25,26 +25,27 @@
 	</span>
 	
 	<fieldset class="format">
-		<ul class="table-layout">
-			<li class="required">
-				<span>${ui.message('general.name')}</span>
-			</li>
-			<li>
+		<div class="row">
+			<div class="col-md-2">
+				<span style="color: red">*</span><span>&nbsp;${ui.message('general.name')}</span>
+			</div>
+			<div class="col-md-10">
 				<input name="entityName" class="form-control" type="text" ng-model="entity.name" class="maximized"
 				       placeholder="${ui.message('general.name')}" required/>
 				
 				<p class="checkRequired"
 				   ng-hide="nameIsRequiredMsg == '' || nameIsRequiredMsg == undefined">{{nameIsRequiredMsg}}</p>
-			</li>
-		</ul>
-		<ul class="table-layout" ng-show="showMakeGlobal == true">
-			<li style="vertical-align: top" class="not-required">
-				<span>${ui.message('visittasks.predefinedTask.makeGlobal.label')}</span>
-			</li>
-			<li>
+			</div>
+		</div>
+		<br/>
+		<div class="row" ng-show="showMakeGlobal == true">
+			<div class="col-md-2">
+				<span>&nbsp;&nbsp;&nbsp;${ui.message('visittasks.predefinedTask.makeGlobal.label')}</span>
+			</div>
+			<div class="col-md-10">
 				<input type="checkbox" ng-model="entity.global" name="global" ng-checked="entity.global"/>
-			</li>
-		</ul>
+			</div>
+		</div>
 	</fieldset>
 	<fieldset class="format">
 		<span>
