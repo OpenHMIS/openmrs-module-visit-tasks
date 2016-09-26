@@ -10,7 +10,7 @@
 			link: '${ui.pageLink("visittasks", "visitTasksLanding")}'
 		},
 		{
-			label: "${ ui.message("visittasks.admin.predefinedTasks")}",
+			label: "${ ui.message("visittasks.admin.my.predefinedTasks")}",
 			link: '/' + OPENMRS_CONTEXT_PATH + '/visittasks/myPredefinedTasks/entities.page##/'
 		},
 		{label: "${ui.message("visittasks.predefinedTask.name")}"}

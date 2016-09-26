@@ -20,6 +20,7 @@
     ui.includeJavascript("visittasks", "predefinedTasks/models/entity.model.js")
     ui.includeJavascript("visittasks", "predefinedTasks/services/entity.restful.services.js")
     ui.includeJavascript("visittasks", "myPredefinedTasks/controllers/manage-entity.controller.js")
+    ui.includeJavascript("visittasks", "myPredefinedTasks/controllers/entity.controller.js")
     ui.includeJavascript("visittasks", "constants.js")
 %>
 
