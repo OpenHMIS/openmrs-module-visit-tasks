@@ -14,7 +14,7 @@
  */
 
 /* initialize and bootstrap application */
-requirejs(['predefinedTasks/configs/entity.module'], function() {
+requirejs(['globalPredefinedTasks/configs/entity.module'], function() {
     angular.bootstrap(document, ['entitiesApp']);
 });
 
