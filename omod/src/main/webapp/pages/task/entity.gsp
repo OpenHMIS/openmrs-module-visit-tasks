@@ -87,16 +87,13 @@
                                title="${ui.message('visittasks.task.markOpen')}"/>
                     </td>
                     <td ng-style="strikeThrough(entity.status === 'CLOSED')">
-
                         <span id="animation-{{\$index}}" style="display: block;">
-
                             <i class="toggle-icon icon-caret-right small caret-color"
                                ng-click="toggleDetailsSection(entity)"
                                ng-hide="entity.showDetailsSection"></i>
                             <i class="toggle-icon icon-caret-down small caret-color"
                                ng-click="toggleDetailsSection(entity)"
                                ng-show="entity.showDetailsSection"></i>
-
                             {{entity.name}}
                         </span>
 
