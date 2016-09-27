@@ -35,7 +35,7 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 	protected void validate(VisitPredefinedTask entity) {}
 
 	@Override
-	public List<VisitPredefinedTask> getPredefinedTasks(final User user, final String name,
+	public List<VisitPredefinedTask> getPredefinedTasks(final User user, final String name, final String showGlobal,
 	        final boolean includeRetired, PagingInfo pagingInfo) {
 		if (user == null) {
 			throw new IllegalArgumentException("User must be logged in");

@@ -19,7 +19,7 @@ requirejs(['predefinedTasks/configs/entity.module'], function() {
 });
 
 emr.loadMessages([
-    "visittasks.visitPredefinedTask.name",
+    "visittasks.predefinedTask.name",
     "general.edit",
     "general.new",
     "general.name",

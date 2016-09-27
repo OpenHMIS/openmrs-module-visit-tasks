@@ -15,7 +15,6 @@ package org.openmrs.module.webservices.rest.resource;
 
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.context.Context;
-import org.openmrs.api.context.UserContext;
 import org.openmrs.module.openhmis.commons.api.PagingInfo;
 import org.openmrs.module.openhmis.commons.api.entity.IMetadataDataService;
 import org.openmrs.module.visittasks.api.IVisitPredefinedTaskDataService;
@@ -64,11 +63,12 @@ public class VisitPredefinedTaskResource extends BaseRestMetadataResource<VisitP
 	@Override
 	protected PageableResult doSearch(RequestContext context) {
 		String query = context.getParameter("q");
+		String global = context.getParameter("global");
 		IVisitPredefinedTaskDataService service = Context.getService(IVisitPredefinedTaskDataService.class);
 		PagingInfo pagingInfo = PagingUtil.getPagingInfoFromContext(context);
 
 		List<VisitPredefinedTask> visitPredefinedTasks =
-				service.getPredefinedTasks(Context.getAuthenticatedUser(), query, context.getIncludeAll(), pagingInfo);
+				service.getPredefinedTasks(Context.getAuthenticatedUser(), query,global, context.getIncludeAll(), pagingInfo);
 
 		if (visitPredefinedTasks.size() == 0) {
 			return new EmptySearchResult();

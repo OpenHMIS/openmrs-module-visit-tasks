@@ -23,6 +23,6 @@ public interface IVisitPredefinedTaskDataService extends IMetadataDataService<Vi
 	 * @return All predefined tasks in the specified {@link org.openmrs.User} that start with the specified name.
 	 */
 	@Transactional(readOnly = true)
-	List<VisitPredefinedTask> getPredefinedTasks(User user, String name, boolean includeRetired,
+	List<VisitPredefinedTask> getPredefinedTasks(User user, String name, String showGlobal, boolean includeRetired,
 	        PagingInfo pagingInfo);
 }
