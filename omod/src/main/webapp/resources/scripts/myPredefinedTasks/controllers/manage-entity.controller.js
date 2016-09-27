@@ -19,12 +19,12 @@
     var base = angular.module('app.genericManageController');
     base.controller("ManageEntityController", ManageEntityController);
     ManageEntityController.$inject = ['$injector', '$scope', '$filter', 'EntityRestFactory', 'CssStylesFactory',
-        'PaginationService', 'PredefinedTasksModel', 'CookiesService'];
+        'PaginationService', 'PredefinedTasksModel', 'CookiesService','PredefinedTasksRestfulService'];
     
     var ENTITY_NAME = "predefinedTask";
 
     function ManageEntityController($injector, $scope, $filter, EntityRestFactory, CssStylesFactory, PaginationService,
-                                         PredefinedTasksModel, CookiesService) {
+                                         PredefinedTasksModel, CookiesService,PredefinedTasksRestfulService) {
         var self = this;
 
         var entity_name = emr.message("visittasks." + ENTITY_NAME + ".name");
@@ -32,14 +32,19 @@
         // @Override
         self.getModelAndEntityName = self.getModelAndEntityName || function() {
                 self.bindBaseParameters(VISIT_TASKS_MODULE_NAME, ENTITY_NAME, entity_name);
-                self.checkPrivileges(TASK_MANAGE_METADATA);
+                self.checkPrivileges(TASK_VIEW_MY_PREDEFINED_TASKS);
             };
 
         // @Override
         self.bindExtraVariablesToScope = self.bindExtraVariablesToScope || function() {
                 $scope.postSearchMessage = $filter('EmrFormat')(emr.message("openhmis.commons.general.postSearchMessage"),
                     [self.entity_name]);
-            }
+		        PredefinedTasksRestfulService.getUserPredefinedTasks(self.onLoadPredefinedVisitTasksSuccessful);
+            };
+    
+        self.onLoadPredefinedVisitTasksSuccessful = self.onLoadPredefinedVisitTasksSuccessful || function(data) {
+                $scope.myPredefinedVisitTasks = data.results;
+            };
 
         /* ENTRY POINT: Instantiate the base controller which loads the page */
         $injector.invoke(base.GenericManageController, self, {

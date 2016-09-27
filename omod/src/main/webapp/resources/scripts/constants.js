@@ -5,3 +5,4 @@ var INVENTORY_TASK_DASHBOARD_PAGE_URL = ROOT_URL + 'openhmis.inventory/inventory
 
 /*Defining the privileges to be used in the angular files*/
 var TASK_MANAGE_METADATA = "Task: Manage Visit Task Metadata";
+var TASK_VIEW_MY_PREDEFINED_TASKS = "Task: View My Predefined Tasks";

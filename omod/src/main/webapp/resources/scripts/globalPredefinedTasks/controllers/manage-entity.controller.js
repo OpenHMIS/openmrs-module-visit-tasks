@@ -39,7 +39,7 @@
         self.bindExtraVariablesToScope = self.bindExtraVariablesToScope || function() {
                 $scope.postSearchMessage = $filter('EmrFormat')(emr.message("openhmis.commons.general.postSearchMessage"),
                     [self.entity_name]);
-            }
+            };
 
         /* ENTRY POINT: Instantiate the base controller which loads the page */
         $injector.invoke(base.GenericManageController, self, {

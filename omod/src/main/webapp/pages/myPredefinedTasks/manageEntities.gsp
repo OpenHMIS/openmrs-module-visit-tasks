@@ -48,7 +48,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr class="clickable-tr" dir-paginate="entity in fetchedEntities | itemsPerPage: limit"
+				<tr class="clickable-tr" dir-paginate="entity in myPredefinedVisitTasks | itemsPerPage: limit"
 				    total-items="totalNumOfResults" current-page="currentPage" ui-sref="edit({uuid: entity.uuid})">
 					<td ng-style="strikeThrough(entity.retired)">{{entity.name}}</td>
 				</tr>

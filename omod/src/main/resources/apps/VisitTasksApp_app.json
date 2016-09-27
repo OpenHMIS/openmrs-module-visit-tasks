@@ -19,7 +19,7 @@
 				"extensionPointId": "org.openmrs.module.visittasks.landing",
 				"type": "link",
 				"label": "Global Predefined Tasks",
-				"url": "${project.parent.artifactId}/predefinedTasks/entities.page#/",
+				"url": "${project.parent.artifactId}/globalPredefinedTasks/entities.page#/",
 				"icon": "icon-pencil",
 				"requiredPrivilege": "Task: View Visit Task Metadata",
 				"order": 2

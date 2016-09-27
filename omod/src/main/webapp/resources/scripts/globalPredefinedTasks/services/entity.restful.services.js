@@ -24,7 +24,8 @@
 	function PredefinedTasksRestfulService(EntityRestFactory) {
 		var service;
 		service = {
-			getPrivilege: getPrivilege
+			getPrivilege: getPrivilege,
+			getUserPredefinedTasks: getUserPredefinedTasks
 		};
 		
 		return service;
@@ -38,6 +39,14 @@
 				onLoadPrivilegeSuccessful, errorCallback);
 			//reset base url..
 			EntityRestFactory.setBaseUrl(module_name);
+		}
+		
+		function getUserPredefinedTasks(onLoadUserPredefinedTasksSuccessful) {
+			var requestParams = [];
+			requestParams['rest_entity_name'] = 'predefinedTask';
+			requestParams['global'] = false;
+			EntityRestFactory.loadEntities(requestParams,
+				onLoadUserPredefinedTasksSuccessful, errorCallback);
 		}
 		
 		function errorCallback(error) {

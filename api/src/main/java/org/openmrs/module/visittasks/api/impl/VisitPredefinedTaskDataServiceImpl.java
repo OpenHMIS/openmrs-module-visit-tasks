@@ -57,14 +57,12 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 				}
 
 				Criterion userCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.USER, user);
-				Criterion globalCriterion;
 
 				if (!showGlobal) {
-					globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, false);
+					Criterion globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, false);
 					criteria.add(Restrictions.and(userCriterion, globalCriterion));
 				} else {
-					globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, true);
-					criteria.add(Restrictions.or(userCriterion, globalCriterion));
+					criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, true));
 				}
 
 			}
