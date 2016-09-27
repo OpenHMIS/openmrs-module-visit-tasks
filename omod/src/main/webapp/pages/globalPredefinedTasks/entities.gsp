@@ -1,5 +1,5 @@
 <%
-    ui.decorateWith("appui", "standardEmrPage", [ title: ui.message("visittasks.admin.predefinedTasks") ])
+    ui.decorateWith("appui", "standardEmrPage", [ title: ui.message("visittasks.admin.globalPredefinedTasks") ])
 
     /* load stylesheets */
     ui.includeCss("openhmis.commons", "bootstrap.css")
@@ -16,15 +16,15 @@
     /* load re-usables/common modules */
     ui.includeFragment("openhmis.commons", "load.reusable.modules")
 
-    /* load predefinedTasks modules */
-    ui.includeJavascript("visittasks", "predefinedTasks/models/entity.model.js")
-    ui.includeJavascript("visittasks", "predefinedTasks/services/entity.restful.services.js")
-    ui.includeJavascript("visittasks", "predefinedTasks/controllers/entity.controller.js")
-    ui.includeJavascript("visittasks", "predefinedTasks/controllers/manage-entity.controller.js")
+    /* load globalPredefinedTasks modules */
+    ui.includeJavascript("visittasks", "globalPredefinedTasks/models/entity.model.js")
+    ui.includeJavascript("visittasks", "globalPredefinedTasks/services/entity.restful.services.js")
+    ui.includeJavascript("visittasks", "globalPredefinedTasks/controllers/entity.controller.js")
+    ui.includeJavascript("visittasks", "globalPredefinedTasks/controllers/manage-entity.controller.js")
     ui.includeJavascript("visittasks", "constants.js")
 %>
 
-<script data-main="predefinedTasks/configs/entity.main" src="/${ ui.contextPath() }/moduleResources/uicommons/scripts/require/require.js"></script>
+<script data-main="globalPredefinedTasks/configs/entity.main" src="/${ ui.contextPath() }/moduleResources/uicommons/scripts/require/require.js"></script>
 
 <div id="entitiesApp">
     <div ui-view></div>
