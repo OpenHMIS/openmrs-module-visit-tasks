@@ -25,6 +25,7 @@
 	<require_modules>
 		<require_module version="2.9">org.openmrs.module.webservices.rest</require_module>
 		<require_module version="3.0">org.openmrs.module.openhmis.commons</require_module>
+		<require_module version="1.11.1">org.openmrs.module.emrapi</require_module>
 	</require_modules>
 
 	<!-- Module Activator -->
