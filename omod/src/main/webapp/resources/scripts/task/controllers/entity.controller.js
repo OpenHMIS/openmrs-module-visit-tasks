@@ -20,11 +20,11 @@
 	base.controller("VisitTasksController", VisitTasksController);
 	VisitTasksController.$inject = ['$stateParams', '$injector', '$scope', '$filter',
 		'EntityRestFactory', 'VisitTaskRestfulService', 'VisitTaskModel', 'VisitTaskFunctions',
-		'$window', 'PaginationService', 'CookiesService'];
+		'$window', 'PaginationService', 'CookiesService', '$timeout'];
 
 	function VisitTasksController($stateParams, $injector, $scope, $filter, EntityRestFactory,
 	                              VisitTaskRestfulService, VisitTaskModel, VisitTaskFunctions,
-	                              $window, PaginationService, CookiesService) {
+	                              $window, PaginationService, CookiesService, $timeout) {
 		var self = this;
 		var entity_name_message_key = emr.message("visit_tasks.page");
 		var REST_ENTITY_NAME = "task";
@@ -54,7 +54,7 @@
 				$scope.changeVisitTask;
 
 				//pagination variables
-				$scope.patientTasksCurrentPage = CookiesService.get('patientTasksCurrentPage') || 1;
+				$scope.patientTasksCurrentPage = 1;
 
 				$scope.patientTasksLimit = CookiesService.get('patientTasksLimit') || 5;
 
@@ -173,15 +173,21 @@
 				$scope.saveOrUpdate();
 			}
 
-		self.changeVisitTaskOperation = self.changeVisitTaskOperation || function(visitTask) {
-				if(visitTask.status === 'OPEN') {
-					visitTask.status = 'CLOSED';
-				} else {
-					visitTask.status = 'OPEN';
-				}
-
+		self.changeVisitTaskOperation = self.changeVisitTaskOperation || function(visitTask, id) {
 				$scope.changeVisitTask = visitTask;
-				$scope.saveOrUpdate();
+				if(visitTask.status === 'OPEN') {
+					$timeout(function() {
+						animate('animation-' + id, 'zoomOut');
+						visitTask.status = 'CLOSED';
+						$scope.saveOrUpdate();
+					}, 500);
+				} else {
+					$timeout(function() {
+						animate('animation-' + id, 'zoomIn');
+						visitTask.status = 'OPEN';
+						$scope.saveOrUpdate();
+					}, 500);
+				}
 			}
 
 		self.onLoadPatientVisitTasksSuccessful = self.onLoadPatientVisitTasksSuccessful || function(data) {
@@ -227,11 +233,19 @@
 
 		// @Override
 		self.onChangeEntitySuccessful = self.onChangeEntitySuccessful || function() {
+				if($scope.entity.voided !== true){
+					if($scope.changeVisitTask === undefined) {
+						$timeout(function() {
+							animate('animation-0', 'swing');
+						}, 300);
+					}
+				}
+
 				$scope.entity = {};
 				$scope.predefinedTaskName = "";
 				$scope.taskName = "";
 				$scope.changeVisitTask = undefined;
-				self.searchPatientTasks(CookiesService.get("patientTasksCurrentPage"));
+				self.searchPatientTasks(1);
 				self.searchPredefinedTasks();
 			}
 

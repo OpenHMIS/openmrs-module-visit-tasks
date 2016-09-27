@@ -101,8 +101,7 @@
 
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
-			<artifactId>providermanagement-api</artifactId>
-			<type>jar</type>
+			<artifactId>emrapi-api</artifactId>
 		</dependency>
 
 	</dependencies>

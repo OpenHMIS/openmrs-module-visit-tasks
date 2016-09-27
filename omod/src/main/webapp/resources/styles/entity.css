@@ -1,3 +1,10 @@
+.container {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+span.show{
+	display: inline !important;
+}
 table.manage-entities-table th:first-child, td:first-child{
     width: 3%;
 }
@@ -72,4 +79,24 @@ fieldset.visitTask{
 }
 .dropdown-width{
 	width: 288px;
+}
+p.wrap{
+	word-wrap: break-word;
+	white-space: initial;
+}
+ul.overflow{
+	overflow: auto;
+}
+ul.overflow-height{
+	height: 1000%;
+}
+li.no-height{
+	height: initial;
+}
+.trash{
+	width:200px;
+	height: 200px;
+}
+.caret-color{
+	color: #337ab7;
 }

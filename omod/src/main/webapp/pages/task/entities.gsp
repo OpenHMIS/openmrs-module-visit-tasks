@@ -7,6 +7,7 @@
     ui.includeCss("uicommons", "ngDialog/ngDialog.min.css")
     ui.includeCss("uicommons", "datetimepicker.css")
     ui.includeCss("visittasks", "entity.css")
+    ui.includeCss("visittasks", "animate.css")
 
     /* load angular libraries */
     ui.includeJavascript("uicommons", "angular.min.js")
@@ -30,14 +31,17 @@
 
 <script data-main="task/configs/entity.main" src="/${ ui.contextPath() }/moduleResources/uicommons/scripts/require/require.js"></script>
 
+${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
+
 <div id="taskApp">
+
     <div ui-view>
         <script type="text/javascript">
             var breadcrumbs = [
                 {
                     icon: "icon-home", link: '/' + OPENMRS_CONTEXT_PATH + '/index.htm' },
                 {
-                    label: "${ ui.message(patient)}",
+                    label: "${ ui.message(patient.getFormattedName())}",
                     link: "${ ui.message(returnUrl)}"
                 },
                 {
@@ -47,5 +51,6 @@
 
             jQuery('#breadcrumbs').html(emr.generateBreadcrumbHtml(breadcrumbs));
         </script>
+
     </div>
 </div>
