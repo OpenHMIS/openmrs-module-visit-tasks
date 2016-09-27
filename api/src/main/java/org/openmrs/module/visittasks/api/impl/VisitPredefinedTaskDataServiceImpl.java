@@ -35,7 +35,7 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 	protected void validate(VisitPredefinedTask entity) {}
 
 	@Override
-	public List<VisitPredefinedTask> getPredefinedTasks(final User user, final String name, final String showGlobal,
+	public List<VisitPredefinedTask> getPredefinedTasks(final User user, final String name, final Boolean showGlobal,
 	        final boolean includeRetired, PagingInfo pagingInfo) {
 		if (user == null) {
 			throw new IllegalArgumentException("User must be logged in");
@@ -57,8 +57,16 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 				}
 
 				Criterion userCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.USER, user);
-				Criterion globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, true);
-				criteria.add(Restrictions.or(userCriterion, globalCriterion));
+				Criterion globalCriterion;
+
+				if (!showGlobal) {
+					globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, false);
+					criteria.add(Restrictions.and(userCriterion, globalCriterion));
+				} else {
+					globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, true);
+					criteria.add(Restrictions.or(userCriterion, globalCriterion));
+				}
+
 			}
 		});
 	}
