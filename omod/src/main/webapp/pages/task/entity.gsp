@@ -3,11 +3,24 @@
     jQuery.fn.modal.noConflict();
 </script>
 
+<script>
+    function animate(id, className) {
+        jQuery('#' + id)
+                .removeClass()
+                .addClass(className + ' animated')
+                .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+                        function() {
+                            jQuery(this).removeClass();
+                        });
+    };
+</script>
+
+<br />
 <span class="h1-substitue-left">
     ${ui.message('visittasks.page')}
 </span>
-
 <form name="taskForm" class="entity-form" ng-class="{'submitted': submitted}" style="font-size:inherit">
+
     <div class="row">
         <div class="col-xs-9">
             <div class="input-group">
@@ -23,17 +36,26 @@
                             data-toggle="dropdown">
                         <span class="caret" ></span>
                     </button>
-                    <ul id="color-dropdown-menu" class="dropdown-menu dropdown-menu-right dropdown-width">
-                        <li ng-repeat="task in predefinedVisitTasks" class="input-lg">
+                    <ul id="color-dropdown-menu" class="dropdown-menu dropdown-menu-right dropdown-width overflow overflow-height">
+                        <li ng-repeat="task in predefinedVisitTasks" class="input-lg no-height">
                             <div class="detail-section-border-bottom">
-                                <a ng-click="addVisitTask(task)">{{task.name}}</a>
+                                <p class="wrap">
+                                    <a ng-click="addVisitTask(task)">{{task.name}}</a>
+                                </p>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div> <br />
+        <div class="col-sm-2">
+            <input type="button" class="confirm right btn gray-button"
+                   value="${ui.message('visittasks.admin.create')}"
+                   ng-click="saveOrUpdate()" />
+        </div>
+    </div>
+
+    <br />
 
     <div class="detail-section-border-top">
         <br />
@@ -53,27 +75,31 @@
                         <input type="checkbox"
                                ng-model="entity.checked"
                                ng-checked="entity.checked"
-                               ng-click="changeVisitTaskOperation(entity)"
+                               ng-click="changeVisitTaskOperation(entity, \$index)"
                                ng-show="entity.status === 'OPEN'"
                                title="${ui.message('visittasks.task.markClosed')}"/>
 
                         <input type="checkbox"
                                ng-model="entity.checked"
                                ng-checked="entity.checked"
-                               ng-click="changeVisitTaskOperation(entity)"
+                               ng-click="changeVisitTaskOperation(entity, \$index)"
                                ng-show="entity.status === 'CLOSED'"
                                title="${ui.message('visittasks.task.markOpen')}"/>
                     </td>
                     <td ng-style="strikeThrough(entity.status === 'CLOSED')">
-                        {{entity.name}}
-                        <a href="">
-                            <i class="toggle-icon icon-arrow-right small"
+
+                        <span id="animation-{{\$index}}" style="display: block;">
+
+                            <i class="toggle-icon icon-caret-right small caret-color"
                                ng-click="toggleDetailsSection(entity)"
                                ng-hide="entity.showDetailsSection"></i>
-                            <i class="toggle-icon icon-arrow-up small"
+                            <i class="toggle-icon icon-caret-down small caret-color"
                                ng-click="toggleDetailsSection(entity)"
                                ng-show="entity.showDetailsSection"></i>
-                        </a>
+
+                            {{entity.name}}
+                        </span>
+
                         <div class="row" ng-show="entity.showDetailsSection">
                             <span class="col-sm-2">
                                 <em><b>${ui.message('visittasks.task.dateCreated')}</b></em>
@@ -100,7 +126,9 @@
                                 {{entity.closedBy.person.display}}
                             </span>
                             <span class="col-sm-1 col-removed-margin">
-                                <i class="icon-remove" ng-click="confirmRemoveTaskDialog(entity)"></i>
+                                <i class="icon-trash trash"
+                                   ng-click="confirmRemoveTaskDialog(entity)"
+                                   title="${ui.message('visittasks.task.voidTask')}"></i>
                             </span>
                         </div>
                     </td>
@@ -134,7 +162,7 @@
             <br />
             <div class="detail-section-border-top">
                 <br />
-                <input type="button" class="cancel" value="${ui.message('general.cancel')}" ng-click="cancel()" />
+                <input type="button" class="cancel" value="${ui.message('general.back')}" ng-click="cancel()" />
             </div>
         </div>
     </div>
@@ -142,7 +170,7 @@
     <div id="remove-task-confirm-dialog" class="dialog" style="display:none;">
         <div class="dialog-header">
             <span>
-                <i class="icon-remove"></i>
+                <i class="icon-trash trash"></i>
                 <h3>${ui.message('visittasks.task.voidTask')}</h3>
             </span>
             <i class="icon-remove cancel show-cursor"  style="float:right;" ng-click="closeThisDialog()"></i>
