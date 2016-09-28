@@ -1,15 +1,7 @@
 <script type="text/javascript">
 	var breadcrumbs = [
 		{icon: "icon-home", link: '/' + OPENMRS_CONTEXT_PATH + '/index.htm'},
-		{
-			label: "${ ui.message("coreapps.app.systemAdministration.label")}",
-			link: '${ui.pageLink("coreapps", "systemadministration/systemAdministration")}'
-		},
-		{
-			label: "${ ui.message("visittasks.page")}",
-			link: '${ui.pageLink("visittasks", "visitTasksLanding")}'
-		},
-		{label: "${ ui.message("visittasks.predefinedTask.user.task.label")}",}
+		{label: "${ ui.message("visittasks.predefinedTask.user.task.label")}"}
 	];
 	
 	jQuery('#breadcrumbs').html(emr.generateBreadcrumbHtml(breadcrumbs));
@@ -49,13 +41,13 @@
 				</thead>
 				<tbody>
 				<tr class="clickable-tr" dir-paginate="entity in myPredefinedVisitTasks | itemsPerPage: limit"
-				    total-items="totalNumOfResults" current-page="currentPage" ui-sref="edit({uuid: entity.uuid})">
+				    total-items="totalNumOfMyPredefinedVisitTasks" current-page="currentPage" ui-sref="edit({uuid: entity.uuid})">
 					<td ng-style="strikeThrough(entity.retired)">{{entity.name}}</td>
 				</tr>
 				</tbody>
 			</table>
 			
-			<div ng-show="fetchedEntities.length == 0">
+			<div ng-show="myPredefinedVisitTasks.length == 0">
 				<br/>
 				${ui.message('openhmis.commons.general.preSearchMessage')} - <b>{{searchField}}</b> - {{postSearchMessage}}
 				<br/><br/>

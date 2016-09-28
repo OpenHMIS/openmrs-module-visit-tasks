@@ -15,6 +15,15 @@
 				"order": 25
 			},
 			{
+				"id": "${project.parent.groupId}.${project.parent.artifactId}.managePredefinedTasksLink.menuItem",
+				"extensionPointId": "org.openmrs.module.appui.header.userAccount.menuItems",
+				"type": "link",
+				"label": "My Predefined Tasks",
+				"url": "${project.parent.artifactId}/myPredefinedTasks/entities.page#/",
+				"requiredPrivilege": "Task: View My Predefined Tasks",
+				"order": 2
+			},
+			{
 				"id": "${project.parent.groupId}.${project.parent.artifactId}.managePredefinedTasksLink",
 				"extensionPointId": "org.openmrs.module.visittasks.landing",
 				"type": "link",
@@ -23,16 +32,6 @@
 				"icon": "icon-pencil",
 				"requiredPrivilege": "Task: View Visit Task Metadata",
 				"order": 2
-			},
-			{
-				"id": "${project.parent.groupId}.${project.parent.artifactId}.managePredefinedTasksLink",
-				"extensionPointId": "org.openmrs.module.visittasks.landing",
-				"type": "link",
-				"label": "My Predefined Tasks",
-				"url": "${project.parent.artifactId}/myPredefinedTasks/entities.page#/",
-				"icon": "icon-edit",
-				"requiredPrivilege": "Task: View My Predefined Tasks",
-				"order": 1
 			},
 			{
 				"id": "${project.parent.groupId}.${project.parent.artifactId}.VisitTasksLink",

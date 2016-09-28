@@ -44,6 +44,7 @@
     
         self.onLoadPredefinedVisitTasksSuccessful = self.onLoadPredefinedVisitTasksSuccessful || function(data) {
                 $scope.myPredefinedVisitTasks = data.results;
+		        $scope.totalNumOfMyPredefinedVisitTasks = data.length;
             };
 
         /* ENTRY POINT: Instantiate the base controller which loads the page */

@@ -1,5 +1,5 @@
 <%
-    ui.decorateWith("appui", "standardEmrPage", [ title: ui.message("visittasks.admin.predefinedTasks") ])
+    ui.decorateWith("appui", "standardEmrPage", [ title: ui.message("visittasks.predefinedTask.user.task.label") ])
 
     /* load stylesheets */
     ui.includeCss("openhmis.commons", "bootstrap.css")
