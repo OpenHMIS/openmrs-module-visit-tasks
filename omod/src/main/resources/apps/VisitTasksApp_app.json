@@ -27,9 +27,9 @@
 				"extensionPointId": "patientDashboard.visitActions",
 				"type": "link",
 				"label": "Visit Tasks",
-				"url": "${project.parent.artifactId}/task/entities.page?patientUuid={{patient.uuid}}&visitUuid={{visit.uuid}}",
+				"url": "${project.parent.artifactId}/task/entities.page?patientUuid={{patient.uuid}}&visitUuid={{visit.uuid}}&active={{visit.active}}",
 				"icon": "icon-plus",
-				"require": "visit.active"
+				"requiredPrivilege": "Task: View Visit Task Metadata"
 			}
 		]
 	}

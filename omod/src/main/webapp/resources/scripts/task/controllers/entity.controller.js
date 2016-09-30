@@ -20,11 +20,11 @@
 	base.controller("VisitTasksController", VisitTasksController);
 	VisitTasksController.$inject = ['$stateParams', '$injector', '$scope', '$filter',
 		'EntityRestFactory', 'VisitTaskRestfulService', 'VisitTaskModel', 'VisitTaskFunctions',
-		'$window', 'PaginationService', 'CookiesService', '$timeout'];
+		'$window', 'PaginationService', 'CookiesService'];
 
 	function VisitTasksController($stateParams, $injector, $scope, $filter, EntityRestFactory,
 	                              VisitTaskRestfulService, VisitTaskModel, VisitTaskFunctions,
-	                              $window, PaginationService, CookiesService, $timeout) {
+	                              $window, PaginationService, CookiesService) {
 		var self = this;
 		var entity_name_message_key = emr.message("visit_tasks.page");
 		var REST_ENTITY_NAME = "task";
@@ -33,7 +33,7 @@
 		self.setRequiredInitParameters = self.setRequiredInitParameters || function() {
 				self.bindBaseParameters(VISIT_TASKS_MODULE_NAME, REST_ENTITY_NAME,
 					entity_name_message_key, '');
-				//self.checkPrivileges(TASK_ACCESS_CREATE_OPERATION_PAGE);
+				self.checkPrivileges(TASK_VIEW_VISIT_TASK_METADATA);
 			}
 		/**
 		 * Initializes and binds any required variable and/or function specific to entity.page
@@ -45,27 +45,33 @@
 				$scope.urlArgs = VisitTaskFunctions.extractUrlArgs(window.location.search);
 				$scope.visitUuid = $scope.urlArgs['visitUuid'];
 				$scope.patientUuid = $scope.urlArgs['patientUuid'];
+				$scope.visitActive = $scope.urlArgs['active'];
 
 				$scope.addVisitTask = self.addVisitTask;
 
 				$scope.changeVisitTaskOperation = self.changeVisitTaskOperation;
-				$scope.searchPatientTasks = self.searchPatientTasks;
+				$scope.searchOpenPatientTasks = self.searchOpenPatientTasks;
+				$scope.searchClosedPatientTasks = self.searchClosedPatientTasks;
 				$scope.searchPredefinedTasks = self.searchPredefinedTasks;
+				$scope.getPredefinedTasks = self.getPredefinedTasks;
 				$scope.changeVisitTask;
 
 				//pagination variables
-				$scope.patientTasksCurrentPage = 1;
+				$scope.openPatientTasksCurrentPage = 1;
+				$scope.closedPatientTasksCurrentPage = 1;
 
-				$scope.patientTasksLimit = CookiesService.get('patientTasksLimit') || 5;
+				$scope.openPatientTasksLimit = CookiesService.get('openPatientTasksLimit') || 5;
+				$scope.closedPatientTasksLimit = CookiesService.get('closedPatientTasksLimit') || 5;
 
-				$scope.patientTasksPagingFrom = PaginationService.pagingFrom;
-				$scope.patientTasksPagingTo = PaginationService.pagingTo;
-
-				$scope.includeClosedTasks = CookiesService.get('includeClosedTasks') === 'true';
+				$scope.openPatientTasksPagingFrom = PaginationService.pagingFrom;
+				$scope.closedPatientTasksPagingFrom = PaginationService.pagingFrom;
+				$scope.openPatientTasksPagingTo = PaginationService.pagingTo;
+				$scope.closedPatientTasksPagingTo = PaginationService.pagingTo;
 
 				//load patient visit tasks
-				self.searchPatientTasks($scope.patientTasksCurrentPage);
-				self.searchPredefinedTasks();
+				self.searchOpenPatientTasks($scope.openPatientTasksCurrentPage);
+				self.searchClosedPatientTasks($scope.closedPatientTasksCurrentPage);
+				self.getPredefinedTasks();
 
 				$scope.showDetailsSection = false;
 				$scope.toggleDetailsSection = self.toggleDetailsSection;
@@ -73,6 +79,8 @@
 				$scope.predefinedTaskName;
 
 				$scope.confirmRemoveTaskDialog = self.confirmRemoveTaskDialog;
+				$scope.expandTasks = self.expandTasks;
+				$scope.expandedTasks = false;
 			}
 
 		/**
@@ -150,21 +158,36 @@
 				return visitTask;
 			}
 
-		self.searchPatientTasks = self.searchPatientTasks || function(currentPage) {
-				CookiesService.set("patientTasksCurrentPage", currentPage);
-				CookiesService.set("patientTasksLimit", $scope.patientTasksLimit);
-				CookiesService.set("includeClosedTasks", $scope.includeClosedTasks);
+		self.searchOpenPatientTasks = self.searchOpenPatientTasks || function(currentPage) {
+				CookiesService.set("openPatientTasksCurrentPage", currentPage);
+				CookiesService.set("openPatientTasksLimit", $scope.openPatientTasksLimit);
 
 				VisitTaskRestfulService.getPatientVisitTasks(
-					CookiesService.get("patientTasksCurrentPage"),
-					CookiesService.get("patientTasksLimit"),
-					$scope.visitUuid, $scope.patientUuid,
-					CookiesService.get("includeClosedTasks"),
-					self.onLoadPatientVisitTasksSuccessful);
+					CookiesService.get("openPatientTasksCurrentPage"),
+					CookiesService.get("openPatientTasksLimit"),
+					$scope.visitUuid, $scope.patientUuid, "OPEN",
+					self.onLoadOpenPatientVisitTasksSuccessful);
 			}
 
-		self.searchPredefinedTasks = self.searchPredefinedTasks || function() {
-				VisitTaskRestfulService.getPredefinedVisitTasks(self.onLoadPredefinedVisitTasksSuccessful);
+		self.searchClosedPatientTasks = self.searchClosedPatientTasks || function(currentPage) {
+				CookiesService.set("closedPatientTasksCurrentPage", currentPage);
+				CookiesService.set("closedPatientTasksLimit", $scope.closedPatientTasksLimit);
+
+				VisitTaskRestfulService.getPatientVisitTasks(
+					CookiesService.get("closedPatientTasksCurrentPage"),
+					CookiesService.get("closedPatientTasksLimit"),
+					$scope.visitUuid, $scope.patientUuid, "CLOSED",
+					self.onLoadClosedPatientVisitTasksSuccessful);
+			}
+
+		// search a predefined task
+		self.searchPredefinedTasks = self.searchPredefinedTasks || function(search) {
+				return VisitTaskRestfulService.searchPredefinedVisitTasks(search, $scope.predefinedVisitTaskNames);
+			}
+
+		// retrieves all predefined tasks.
+		self.getPredefinedTasks = self.getPredefinedTasks || function() {
+				return VisitTaskRestfulService.getPredefinedVisitTasks(self.onLoadPredefinedVisitTasksSuccessful);
 			}
 
 		self.addVisitTask = self.addVisitTask || function(task) {
@@ -173,49 +196,71 @@
 				$scope.saveOrUpdate();
 			}
 
-		self.changeVisitTaskOperation = self.changeVisitTaskOperation || function(visitTask, id) {
+		self.changeVisitTaskOperation = self.changeVisitTaskOperation || function(visitTask) {
 				$scope.changeVisitTask = visitTask;
-				if(visitTask.status === 'OPEN') {
-					$timeout(function() {
-						animate('animation-' + id, 'zoomOut');
-						visitTask.status = 'CLOSED';
-						$scope.saveOrUpdate();
-					}, 500);
+				$scope.changeVisitTask.animate = true;
+				if($scope.changeVisitTask.status === 'OPEN') {
+					$scope.changeVisitTask.status = 'CLOSED';
 				} else {
-					$timeout(function() {
-						animate('animation-' + id, 'zoomIn');
-						visitTask.status = 'OPEN';
-						$scope.saveOrUpdate();
-					}, 500);
+					$scope.changeVisitTask.status = 'OPEN';
+				}
+
+				$scope.saveOrUpdate();
+			}
+
+		self.expandTasks = self.expandTasks || function(expandAction) {
+				$scope.expandedTasks = expandAction;
+				for(var i = 0; i < $scope.openPatientTasks.length; i++) {
+					$scope.openPatientTasks[i].showDetailsSection = expandAction;
+				}
+
+				for(var i = 0; i < $scope.closedPatientTasks.length; i++) {
+					$scope.closedPatientTasks[i].showDetailsSection = expandAction;
 				}
 			}
 
-		self.onLoadPatientVisitTasksSuccessful = self.onLoadPatientVisitTasksSuccessful || function(data) {
-				$scope.patientTasks = data.results;
-				for(var i = 0; i < $scope.patientTasks.length; i++) {
-					if($scope.patientTasks[i].status === 'CLOSED') {
-						$scope.patientTasks[i].checked = true;
-					} else {
-						$scope.patientTasks[i].checked = false;
-					}
+		self.onLoadOpenPatientVisitTasksSuccessful = self.onLoadOpenPatientVisitTasksSuccessful || function(data) {
+				$scope.openPatientTasks = data.results;
+				$scope.openPatientTasksTotalResults = data.length;
+				if($scope.animate) {
+					$scope.openPatientTasks[0].animate = true;
 				}
 
-				$scope.patientTasksTotalResults = data.length;
+				if($scope.expandedTasks === true) {
+					self.expandTasks(true);
+				}
+
+				$scope.animate = false;
+			}
+
+		self.onLoadClosedPatientVisitTasksSuccessful = self.onLoadClosedPatientVisitTasksSuccessful || function(data) {
+				$scope.closedPatientTasks = data.results;
+				for(var i = 0; i < $scope.closedPatientTasks.length; i++) {
+					$scope.closedPatientTasks[i].checked = true;
+				}
+
+				$scope.closedPatientTasksTotalResults = data.length;
+
+				if($scope.expandedTasks === true) {
+					self.expandTasks(true);
+				}
 			}
 
 		self.onLoadPredefinedVisitTasksSuccessful = self.onLoadPredefinedVisitTasksSuccessful || function(data) {
 				$scope.predefinedVisitTasks = [];
+				$scope.predefinedVisitTaskNames = [];
 				if(data.results.length > 0) {
 					VisitTaskRestfulService.getAllPatientVisitTasks(
-						$scope.visitUuid, $scope.patientUuid, $scope.includeClosedTasks,
+						$scope.visitUuid, $scope.patientUuid, "",
 						function(patientTasks) {
 							if(patientTasks.results.length > 0) {
 								for(var i = 0; i < data.results.length; i++) {
 									var predefinedVisitTask = data.results[i];
-									// only display if doesn't appear under Patient Visit Tasks.
+									// only show a predefined task that is not being used.
 									if(!VisitTaskFunctions.searchVisitTask(
 											predefinedVisitTask, patientTasks.results)) {
 										$scope.predefinedVisitTasks.push(predefinedVisitTask);
+										$scope.predefinedVisitTaskNames.push(predefinedVisitTask.name);
 									}
 								}
 							} else {
@@ -233,11 +278,9 @@
 
 		// @Override
 		self.onChangeEntitySuccessful = self.onChangeEntitySuccessful || function() {
-				if($scope.entity.voided !== true){
+				if($scope.entity.voided !== true) {
 					if($scope.changeVisitTask === undefined) {
-						$timeout(function() {
-							animate('animation-0', 'swing');
-						}, 300);
+						$scope.animate = true;
 					}
 				}
 
@@ -245,8 +288,9 @@
 				$scope.predefinedTaskName = "";
 				$scope.taskName = "";
 				$scope.changeVisitTask = undefined;
-				self.searchPatientTasks(1);
-				self.searchPredefinedTasks();
+				self.searchOpenPatientTasks(1);
+				self.searchClosedPatientTasks(1);
+				self.getPredefinedTasks();
 			}
 
 		/* ENTRY POINT: Instantiate the base controller which loads the page */
