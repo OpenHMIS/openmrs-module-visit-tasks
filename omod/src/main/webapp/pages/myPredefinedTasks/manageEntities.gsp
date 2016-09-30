@@ -36,11 +36,11 @@
 			<table style="margin-bottom:5px;" class="manage-entities-table">
 				<thead>
 				<tr>
-					<th style="width: 40%">${ui.message('visittasks.predefinedTask.name')}</th>
+					<th style="width: 40%">${ui.message('visittasks.predefinedTask.user.task.label')}</th>
 				</tr>
 				</thead>
 				<tbody>
-				<tr class="clickable-tr" dir-paginate="entity in myPredefinedVisitTasks | itemsPerPage: limit"
+				<tr class="clickable-tr" pagination-id="__MyPredefinedTasks" dir-paginate="entity in myPredefinedVisitTasks | itemsPerPage: limit"
 				    total-items="totalNumOfMyPredefinedVisitTasks" current-page="currentPage" ui-sref="edit({uuid: entity.uuid})">
 					<td ng-style="strikeThrough(entity.retired)">{{entity.name}}</td>
 				</tr>
@@ -55,7 +55,16 @@
 				             ng-change="updateContent()"></span>
 				<span>${ui.message('openhmis.commons.general.includeRetired')}</span>
 			</div>
-			${ui.includeFragment("openhmis.commons", "paginationFragment")}
+			${ui.includeFragment("openhmis.commons", "paginationFragment", [
+					hide                : "myPredefinedVisitTasks.length == 0",
+					paginationId        : "__MyPredefinedTasks",
+					onPageChange        : "searchItemStock(entity.uuid, itemCurrentPage)",
+					model               : "myPredefinedTasksLimit",
+					onChange            : "searchItemStock(entity.uuid)",
+					pagingFrom          : "myPredefinedTasksPagingFrom(myPredefinedTasksCurrentPage, myPredefinedTasksLimit)",
+					pagingTo            : "myPredefinedTasksPagingTo(myPredefinedTasksCurrentPage, myPredefinedTasksLimit, totalNumOfMyPredefinedVisitTasks)",
+					totalNumberOfResults: "totalNumOfMyPredefinedVisitTasks"
+			])}
 		</div>
 	</div>
 </div>

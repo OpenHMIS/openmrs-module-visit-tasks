@@ -40,6 +40,10 @@
                 $scope.postSearchMessage = $filter('EmrFormat')(emr.message("openhmis.commons.general.postSearchMessage"),
                     [self.entity_name]);
 		        PredefinedTasksRestfulService.getUserPredefinedTasks(self.onLoadPredefinedVisitTasksSuccessful);
+                $scope.myPredefinedTasksPagingFrom = PaginationService.pagingFrom;
+                $scope.myPredefinedTasksPagingTo = PaginationService.pagingTo;
+                $scope.myPredefinedTasksLimit = CookiesService.get(uuid + 'itemLimit') || 5;
+                $scope.myPredefinedTasksCurrentPage = CookiesService.get(uuid + 'itemCurrentPage') || 1;
             };
     
         self.onLoadPredefinedVisitTasksSuccessful = self.onLoadPredefinedVisitTasksSuccessful || function(data) {

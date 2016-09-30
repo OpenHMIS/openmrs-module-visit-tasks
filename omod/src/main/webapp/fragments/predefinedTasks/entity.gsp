@@ -23,15 +23,6 @@
 				   ng-hide="nameIsRequiredMsg == '' || nameIsRequiredMsg == undefined">{{nameIsRequiredMsg}}</p>
 			</div>
 		</div>
-		<br/>
-		<div class="row" ng-show="showMakeGlobal == true">
-			<div class="col-md-2">
-				<span>&nbsp;&nbsp;&nbsp;${ui.message('visittasks.predefinedTask.makeGlobal.label')}</span>
-			</div>
-			<div class="col-md-10">
-				<input type="checkbox" ng-model="entity.global" name="global" ng-checked="entity.global"/>
-			</div>
-		</div>
 	</fieldset>
 	<fieldset class="format">
 		<span>
