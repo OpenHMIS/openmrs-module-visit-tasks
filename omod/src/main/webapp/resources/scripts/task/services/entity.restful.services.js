@@ -18,51 +18,60 @@
 
 	angular.module('app.restfulServices').service('VisitTaskRestfulService', VisitTaskRestfulService);
 
-	VisitTaskRestfulService.$inject = ['EntityRestFactory', 'PaginationService'];
+	VisitTaskRestfulService.$inject = ['EntityRestFactory', 'PaginationService', 'Restangular'];
 
-	function VisitTaskRestfulService(EntityRestFactory, PaginationService) {
+	function VisitTaskRestfulService(EntityRestFactory, PaginationService, Restangular) {
 		var service;
 
 		service = {
 			getPatientVisitTasks: getPatientVisitTasks,
 			getPredefinedVisitTasks: getPredefinedVisitTasks,
+			searchPredefinedVisitTasks: searchPredefinedTasks,
 			getAllPatientVisitTasks: getAllPatientVisitTasks,
 		};
 
 		return service;
 
 		function getPatientVisitTasks(currentPage, limit, visitUuid,
-		                         patientUuid, includeClosedTasks, onLoadVisitTasksSuccessful) {
+		                              patientUuid, status, onLoadVisitTasksSuccessful) {
 			getWSVisitTasks(PaginationService.paginateParams(currentPage, limit, false, ''),
-				visitUuid, patientUuid, includeClosedTasks,
-				onLoadVisitTasksSuccessful);
+				visitUuid, patientUuid, status, onLoadVisitTasksSuccessful);
 		}
 
-		function getAllPatientVisitTasks(visitUuid, patientUuid, includeClosedTasks,
-		                                 onLoadVisitTasksSuccessful){
-			getWSVisitTasks([], visitUuid, patientUuid, includeClosedTasks,
-				onLoadVisitTasksSuccessful);
+		function getAllPatientVisitTasks(visitUuid, patientUuid, status, onLoadVisitTasksSuccessful) {
+			getWSVisitTasks([], visitUuid, patientUuid, status, onLoadVisitTasksSuccessful);
 		}
 
-		function getWSVisitTasks(requestParams, visitUuid, patientUuid, includeClosedTasks,
-		                         onLoadVisitTasksSuccessful){
+		function getWSVisitTasks(requestParams, visitUuid, patientUuid, status, onLoadVisitTasksSuccessful) {
 			requestParams['rest_entity_name'] = 'task';
 			requestParams['visit_uuid'] = visitUuid;
 			requestParams['patient_uuid'] = patientUuid;
-			if(includeClosedTasks !== true) {
-				requestParams['status'] = 'OPEN';
-			}
+			requestParams['status'] = status;
 
-			EntityRestFactory.loadEntities(requestParams,
-				onLoadVisitTasksSuccessful, errorCallback);
+			EntityRestFactory.loadEntities(requestParams, onLoadVisitTasksSuccessful, errorCallback);
+		}
+
+		function searchPredefinedTasks(search, predefinedTasks) {
+			var results = [];
+			var requestParams = [];
+			if(search !== undefined && search !== '') {
+				requestParams['q'] = search;
+				return Restangular.all('predefinedTask').customGET('', requestParams).then(function(data) {
+					for(var i = 0; i < data.results.length; i++) {
+						var predefinedTask = data.results[i];
+						if(predefinedTasks.indexOf(predefinedTask.name) >= 0) {
+							results.push(predefinedTask);
+						}
+					}
+					return results;
+				}, errorCallback);
+			}
 		}
 
 		function getPredefinedVisitTasks(onLoadPredefinedVisitTasksSuccessful) {
 			var requestParams = [];
 			requestParams['rest_entity_name'] = 'predefinedTask';
-
-			EntityRestFactory.loadEntities(requestParams,
-				onLoadPredefinedVisitTasksSuccessful, errorCallback);
+			EntityRestFactory.loadEntities(requestParams, onLoadPredefinedVisitTasksSuccessful, errorCallback);
 		}
 
 		function errorCallback(error) {
