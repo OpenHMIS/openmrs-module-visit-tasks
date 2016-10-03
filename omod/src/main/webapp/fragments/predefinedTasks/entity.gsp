@@ -23,12 +23,15 @@
 				   ng-hide="nameIsRequiredMsg == '' || nameIsRequiredMsg == undefined">{{nameIsRequiredMsg}}</p>
 			</div>
 		</div>
-	</fieldset>
-	<fieldset class="format">
-		<span>
-			<input type="button" class="cancel" value="${ui.message('general.cancel')}" ng-click="cancel()"/>
-			<input type="button" class="confirm right" value="${ui.message('general.save')}" ng-click="saveOrUpdate()"/>
-		</span>
+		<br/>
+		<div class="detail-section-border-top">
+			<br/>
+			<span>
+				<input type="button" class="cancel" value="${ui.message('general.cancel')}" ng-click="cancel()"/>
+				<input type="button" class="confirm right" value="${ui.message('general.save')}" ng-click="saveOrUpdate()"/>
+			</span>
+		</div>
+		
 	</fieldset>
 </form>
 ${ ui.includeFragment("openhmis.commons", "retireUnretireDeleteFragment") }
