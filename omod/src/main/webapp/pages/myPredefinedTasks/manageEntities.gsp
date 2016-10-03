@@ -26,8 +26,8 @@
 	<div>
 		<div id="entities">
 			${ui.includeFragment("openhmis.commons", "searchFragment", [
-					model        : "searchField",
-					onChangeEvent: "updateContent()",
+					model        : "myPredefinedTasksName",
+					onChangeEvent: "searchMyPredefinedVisitTasks()",
 					class        : ["field-display ui-autocomplete-input form-control searchinput"],
 					placeholder  : [ui.message("openhmis.commons.general.enterSearchPhrase")]
 			])}
@@ -40,8 +40,8 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr class="clickable-tr" pagination-id="__MyPredefinedTasks" dir-paginate="entity in myPredefinedVisitTasks | itemsPerPage: limit"
-				    total-items="totalNumOfMyPredefinedVisitTasks" current-page="currentPage" ui-sref="edit({uuid: entity.uuid})">
+				<tr class="clickable-tr" pagination-id="__MyPredefinedTasks" dir-paginate="entity in myPredefinedVisitTasks | itemsPerPage: myPredefinedTasksLimit"
+				    total-items="totalNumOfMyPredefinedVisitTasks" current-page="myPredefinedTasksCurrentPage" ui-sref="edit({uuid: entity.uuid})">
 					<td ng-style="strikeThrough(entity.retired)">{{entity.name}}</td>
 				</tr>
 				</tbody>
@@ -52,15 +52,15 @@
 				${ui.message('openhmis.commons.general.preSearchMessage')} - <b>{{searchField}}</b> - {{postSearchMessage}}
 				<br/><br/>
 				<span><input type="checkbox" ng-checked="includeRetired" ng-model="includeRetired"
-				             ng-change="updateContent()"></span>
+				             ng-change="searchMyPredefinedVisitTasks(myPredefinedTasksCurrentPage)"></span>
 				<span>${ui.message('openhmis.commons.general.includeRetired')}</span>
 			</div>
 			${ui.includeFragment("openhmis.commons", "paginationFragment", [
 					hide                : "myPredefinedVisitTasks.length == 0",
 					paginationId        : "__MyPredefinedTasks",
-					onPageChange        : "searchItemStock(entity.uuid, itemCurrentPage)",
+					onPageChange        : "searchMyPredefinedVisitTasks(myPredefinedTasksCurrentPage)",
 					model               : "myPredefinedTasksLimit",
-					onChange            : "searchItemStock(entity.uuid)",
+					onChange            : "searchMyPredefinedVisitTasks(myPredefinedTasksCurrentPage)",
 					pagingFrom          : "myPredefinedTasksPagingFrom(myPredefinedTasksCurrentPage, myPredefinedTasksLimit)",
 					pagingTo            : "myPredefinedTasksPagingTo(myPredefinedTasksCurrentPage, myPredefinedTasksLimit, totalNumOfMyPredefinedVisitTasks)",
 					totalNumberOfResults: "totalNumOfMyPredefinedVisitTasks"

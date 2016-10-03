@@ -19,9 +19,9 @@
 	angular.module('app.restfulServices').service(
 		'PredefinedTasksRestfulService', PredefinedTasksRestfulService);
 	
-	PredefinedTasksRestfulService.$inject = ['EntityRestFactory'];
+	PredefinedTasksRestfulService.$inject = ['EntityRestFactory', 'PaginationService'];
 	
-	function PredefinedTasksRestfulService(EntityRestFactory) {
+	function PredefinedTasksRestfulService(EntityRestFactory, PaginationService) {
 		var service;
 		service = {
 			getPrivilege: getPrivilege,
@@ -41,8 +41,9 @@
 			EntityRestFactory.setBaseUrl(module_name);
 		}
 		
-		function getUserPredefinedTasks(onLoadUserPredefinedTasksSuccessful) {
-			var requestParams = [];
+		function getUserPredefinedTasks(currentPage, limit, q,includeRetired,onLoadUserPredefinedTasksSuccessful) {
+			currentPage = currentPage || 1;
+			var requestParams = PaginationService.paginateParams(currentPage, limit, includeRetired, q);
 			requestParams['rest_entity_name'] = 'predefinedTask';
 			requestParams['global'] = false;
 			EntityRestFactory.loadEntities(requestParams,
