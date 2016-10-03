@@ -44,7 +44,7 @@
 			<table style="margin-bottom:5px;" class="manage-entities-table">
 				<thead>
 				<tr>
-					<th style="width: 40%">${ui.message('visittasks.predefinedTask.name')}</th>
+					<th style="width: 40%">${ui.message('visittasks.predefinedTask.global.task.label')}</th>
 				</tr>
 				</thead>
 				<tbody>
