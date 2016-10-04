@@ -2,34 +2,45 @@
 	{
 		"id": "${project.parent.artifactId}",
 		"description": "Provides tasks to be performed during a patient's visit",
-		"order": 20,
+		"order": 25,
 		"extensions": [
 			{
-				"id": "${project.parent.artifactId}.visitTasksLandingPageLink",
-				"extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+				"id": "${project.parent.groupId}.${project.parent.artifactId}.visitTasksLandingPageLink",
+				"extensionPointId": "systemAdministration.apps",
 				"type": "link",
-				"label": "Visit Tasks",
+				"label": "Manage Predefined Tasks",
 				"url": "${project.parent.artifactId}/visitTasksLanding.page",
 				"icon": "icon-list-ul",
-				"requiredPrivilege": "App: View Visit Task App"
+				"requiredPrivilege": "App: View Visit Task App",
+				"order": 25
 			},
 			{
-				"id": "${project.parent.artifactId}.managePredefinedTasksLink",
+				"id": "${project.parent.groupId}.${project.parent.artifactId}.managePredefinedTasksLink.menuItem",
+				"extensionPointId": "org.openmrs.module.appui.header.userAccount.menuItems",
+				"type": "link",
+				"label": "My Predefined Tasks",
+				"url": "${project.parent.artifactId}/myPredefinedTasks/entities.page#/",
+				"requiredPrivilege": "Task: View My Predefined Tasks",
+				"order": 2
+			},
+			{
+				"id": "${project.parent.groupId}.${project.parent.artifactId}.managePredefinedTasksLink",
 				"extensionPointId": "org.openmrs.module.visittasks.landing",
 				"type": "link",
-				"label": "Manage Visit Predefined Tasks",
-				"url": "${project.parent.artifactId}/predefinedTasks/entities.page#/",
-				"icon": "icon-edit",
-				"requiredPrivilege": "Task: View Visit Task Metadata"
+				"label": "Global Predefined Tasks",
+				"url": "${project.parent.artifactId}/globalPredefinedTasks/entities.page#/",
+				"icon": "icon-pencil",
+				"requiredPrivilege": "Task: Manage Visit Task Module",
+				"order": 2
 			},
 			{
-				"id": "${project.parent.artifactId}.VisitTasksLink",
+				"id": "${project.parent.groupId}.${project.parent.artifactId}.VisitTasksLink",
 				"extensionPointId": "patientDashboard.visitActions",
 				"type": "link",
 				"label": "Visit Tasks",
 				"url": "${project.parent.artifactId}/task/entities.page?patientUuid={{patient.uuid}}&visitUuid={{visit.uuid}}&active={{visit.active}}",
 				"icon": "icon-plus",
-				"requiredPrivilege": "Task: View Visit Task Metadata"
+				"requiredPrivilege": "Task: Manage Visit Task Module"
 			}
 		]
 	}

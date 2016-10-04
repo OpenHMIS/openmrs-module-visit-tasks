@@ -43,12 +43,6 @@
 			|| function (uuid) {
 				/* bind variables.. */
 				$scope.uuid = uuid;
-				$scope.showMakeGlobal = false;
-				PredefinedTasksRestfulService.getPrivilege(VISIT_TASKS_MODULE_NAME,self.onLoadPrivilegeSuccessful);
-			}
-		
-		self.onLoadPrivilegeSuccessful = self.onLoadPrivilegeSuccessful || function (data) {
-				$scope.showMakeGlobal = data.hasPrivileges && data.hasPrivileges == true;
 			}
 		
 		/**
@@ -61,10 +55,7 @@
 					$scope.submitted = true;
 					return false;
 				}
-
-				if($scope.entity.global === ""){
-					$scope.entity.global = false;
-				}
+				$scope.entity.global = true;
 				
 				$scope.loading = true;
 				return true;

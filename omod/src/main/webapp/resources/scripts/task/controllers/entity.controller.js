@@ -33,7 +33,7 @@
 		self.setRequiredInitParameters = self.setRequiredInitParameters || function() {
 				self.bindBaseParameters(VISIT_TASKS_MODULE_NAME, REST_ENTITY_NAME,
 					entity_name_message_key, '');
-				self.checkPrivileges(TASK_VIEW_VISIT_TASK_METADATA);
+				self.checkPrivileges(TASK_MANAGE_VISIT_TASK_METADATA);
 			}
 		/**
 		 * Initializes and binds any required variable and/or function specific to entity.page

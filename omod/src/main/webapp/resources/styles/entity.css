@@ -89,6 +89,14 @@ fieldset.visitTask{
 .dropdown-margin{
 	margin: 3px -532px 0 !important;
 }
+
+div.required:before{
+    content:"*";
+    color:red;
+}
+div.not-required:before{
+    content:"  ";
+    padding: 5px;}
 p.wrap{
 	word-wrap: break-word;
 	white-space: initial;

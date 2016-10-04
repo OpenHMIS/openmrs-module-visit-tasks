@@ -14,12 +14,12 @@
  */
 
 /* initialize and bootstrap application */
-requirejs(['predefinedTasks/configs/entity.module'], function() {
+requirejs(['globalPredefinedTasks/configs/entity.module'], function() {
     angular.bootstrap(document, ['entitiesApp']);
 });
 
 emr.loadMessages([
-    "visittasks.visitPredefinedTask.name",
+    "visittasks.predefinedTask.name",
     "general.edit",
     "general.new",
     "general.name",

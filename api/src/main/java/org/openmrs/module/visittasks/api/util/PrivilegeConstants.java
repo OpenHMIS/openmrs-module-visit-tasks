@@ -29,14 +29,13 @@ import java.util.Set;
 public class PrivilegeConstants {
 	public static final String APP_VIEW_VISIT_TASK_APP = "App: View Visit Task App";
 	public static final String TASK_MANAGE_VISIT_TASK_METADATA = "Task: Manage Visit Task Metadata";
-	public static final String TASK_PURGE_VISIT_TASK_METADATA = "Task: Purge Visit Task Metadata";
-	public static final String TASK_VIEW_VISIT_TASK_METADATA = "Task: View Visit Task Metadata";
+	public static final String TASK_VIEW_MY_PREDEFINED_TASKS = "Task: View My Predefined Tasks";
 	public static final String TASK_ACCESS_MANAGE_VISIT_TASK_PAGE = "Task: Manage Visit Task Module";
 	public static final String TASK_MAKE_PREDEFINED_TASKS_GLOBAL = "Task: Make Visit Task Predefined Task Global";
 
 	public static final String[] PRIVILEGE_NAMES =
-	        new String[] { APP_VIEW_VISIT_TASK_APP, TASK_MANAGE_VISIT_TASK_METADATA, TASK_PURGE_VISIT_TASK_METADATA,
-	                TASK_VIEW_VISIT_TASK_METADATA, TASK_ACCESS_MANAGE_VISIT_TASK_PAGE, TASK_MAKE_PREDEFINED_TASKS_GLOBAL };
+	        new String[] { APP_VIEW_VISIT_TASK_APP, TASK_MANAGE_VISIT_TASK_METADATA, TASK_VIEW_MY_PREDEFINED_TASKS,
+	                TASK_ACCESS_MANAGE_VISIT_TASK_PAGE, TASK_MAKE_PREDEFINED_TASKS_GLOBAL };
 
 	protected PrivilegeConstants() {}
 
