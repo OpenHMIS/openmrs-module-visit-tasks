@@ -30,7 +30,7 @@
 				"label": "Global Predefined Tasks",
 				"url": "${project.parent.artifactId}/globalPredefinedTasks/entities.page#/",
 				"icon": "icon-pencil",
-				"requiredPrivilege": "Task: View Visit Task Metadata",
+				"requiredPrivilege": "Task: Manage Visit Task Module",
 				"order": 2
 			},
 			{
@@ -38,9 +38,9 @@
 				"extensionPointId": "patientDashboard.visitActions",
 				"type": "link",
 				"label": "Visit Tasks",
-				"url": "${project.parent.artifactId}/task/entities.page?patientUuid={{patient.uuid}}&visitUuid={{visit.uuid}}",
+				"url": "${project.parent.artifactId}/task/entities.page?patientUuid={{patient.uuid}}&visitUuid={{visit.uuid}}&active={{visit.active}}",
 				"icon": "icon-plus",
-				"require": "visit.active"
+				"requiredPrivilege": "Task: Manage Visit Task Module"
 			}
 		]
 	}

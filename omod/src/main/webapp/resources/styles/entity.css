@@ -1,3 +1,6 @@
+.taskForm{
+	font-size:inherit;
+}
 .container {
 	padding-right: 0px;
 	padding-left: 0px;
@@ -29,10 +32,10 @@ fieldset.visitTask{
     border: 0px;
     padding: 0px;
 }
-#patientTasksTab{
+#openTasksTab{
     border: 0px;
 }
-#predefinedTaskTab{
+#closedTasksTab{
     border: 0px;
 }
 .col-sm-1-margin{
@@ -57,10 +60,13 @@ fieldset.visitTask{
 	margin-left: -12%;
 }
 .col-include-closed-tasks-margin{
-	margin-left: -4%;
+	margin-left: -2%;
 }
 .col-save-margin{
 	margin-left: 12%;
+}
+.col-sm-actions-margin{
+	margin: 7px 0px 1px 10px;
 }
 .no-tasks{
     margin: 150px;
@@ -78,7 +84,10 @@ fieldset.visitTask{
 	margin: 5px 13px 0px 0px;
 }
 .dropdown-width{
-	width: 288px;
+	width: 565px;
+}
+.dropdown-margin{
+	margin: 3px -532px 0 !important;
 }
 
 div.required:before{
@@ -107,4 +116,31 @@ li.no-height{
 }
 .caret-color{
 	color: #337ab7;
+}
+.recent-lozenge {
+	display: inline-block;
+	vertical-align: text-bottom;
+	font-size: 0.7em;
+	border: 1px solid #51a351;
+	color: #51a351;
+	padding: 1px 2px;
+	border-radius: 4px;
+}
+.align-right{
+	float:right;
+}
+.trash-icon-margin{
+	margin: 0px 0px 0px 450px;
+}
+.trash-icon-closed-margin{
+	margin: 0px 0px 0px 52px;
+}
+.row{
+	margin-top: 25px;
+}
+.tabs-height{
+	height: inherit;
+}
+.show-animation{
+	display:block;
 }

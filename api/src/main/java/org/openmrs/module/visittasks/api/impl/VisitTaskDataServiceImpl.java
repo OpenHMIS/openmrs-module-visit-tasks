@@ -23,6 +23,8 @@ import org.openmrs.module.openhmis.commons.api.f.Action1;
 import org.openmrs.module.visittasks.api.IVisitTaskDataService;
 import org.openmrs.module.visittasks.api.model.VisitTask;
 import org.openmrs.module.visittasks.api.model.VisitTaskStatus;
+import org.openmrs.module.visittasks.api.util.PrivilegeConstants;
+
 import java.util.List;
 
 /**
@@ -60,6 +62,13 @@ public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTas
 			public void apply(Criteria criteria) {
 				if (status != null) {
 					criteria.add(Restrictions.eq("status", status));
+					if (status.equals(VisitTaskStatus.CLOSED)) {
+						criteria.addOrder(Order.desc("closedOn"));
+					} else {
+						criteria.addOrder(Order.desc("dateCreated"));
+					}
+				} else {
+					criteria.addOrder(Order.desc("dateCreated"));
 				}
 
 				if (visit != null) {
@@ -71,28 +80,27 @@ public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTas
 				}
 
 				criteria.add(Restrictions.eq("voided", false));
-				criteria.addOrder(Order.desc("dateCreated"));
 			}
 		});
 	}
 
 	@Override
 	public String getVoidPrivilege() {
-		return "";
+		return PrivilegeConstants.TASK_MANAGE_VISIT_TASK_METADATA;
 	}
 
 	@Override
 	public String getSavePrivilege() {
-		return "";
+		return PrivilegeConstants.TASK_MANAGE_VISIT_TASK_METADATA;
 	}
 
 	@Override
 	public String getPurgePrivilege() {
-		return "";
+		return PrivilegeConstants.TASK_MANAGE_VISIT_TASK_METADATA;
 	}
 
 	@Override
 	public String getGetPrivilege() {
-		return "";
+		return PrivilegeConstants.TASK_MANAGE_VISIT_TASK_METADATA;
 	}
 }
