@@ -61,7 +61,7 @@
 				CookiesService.set('myPredefinedTasksCurrentPage', myPredefinedTasksCurrentPage);
 				CookiesService.set('myPredefinedTasksLimit', $scope.myPredefinedTasksLimit);
 				
-				PredefinedTasksRestfulService.getUserPredefinedTasks(CookiesService.get('myPredefinedTasksCurrentPage'),
+				PredefinedTasksRestfulService.getPredefinedTasks(false,CookiesService.get('myPredefinedTasksCurrentPage'),
 					CookiesService.get('myPredefinedTasksLimit'), $scope.myPredefinedTasksName,$scope.includeRetired,
 					self.onLoadPredefinedVisitTasksSuccessful
 				);

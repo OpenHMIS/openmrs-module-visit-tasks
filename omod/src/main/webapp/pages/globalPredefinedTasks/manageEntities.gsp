@@ -34,8 +34,8 @@
 	<div>
 		<div id="entities">
 			${ui.includeFragment("openhmis.commons", "searchFragment", [
-					model        : "searchField",
-					onChangeEvent: "updateContent()",
+					model        : "globalPredefinedTasksName",
+					onChangeEvent: "searchGlobalPredefinedVisitTasks()",
 					class        : ["field-display ui-autocomplete-input form-control searchinput"],
 					placeholder  : [ui.message("openhmis.commons.general.enterSearchPhrase")]
 			])}
@@ -48,22 +48,31 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr class="clickable-tr" dir-paginate="entity in fetchedEntities | itemsPerPage: limit"
-				    total-items="totalNumOfResults" current-page="currentPage" ui-sref="edit({uuid: entity.uuid})">
+				<tr class="clickable-tr" pagination-id="__GlobalPredefinedTasks" dir-paginate="entity in globalPredefinedVisitTasks | itemsPerPage: myPredefinedTasksLimit"
+				    total-items="totalNumOfGlobalPredefinedVisitTasks" current-page="globalPredefinedTasksCurrentPage" ui-sref="edit({uuid: entity.uuid})">
 					<td ng-style="strikeThrough(entity.retired)">{{entity.name}}</td>
 				</tr>
 				</tbody>
 			</table>
 			
-			<div ng-show="fetchedEntities.length == 0">
+			<div ng-show="globalPredefinedVisitTasks.length == 0">
 				<br/>
 				${ui.message('openhmis.commons.general.preSearchMessage')} - <b>{{searchField}}</b> - {{postSearchMessage}}
 				<br/><br/>
 				<span><input type="checkbox" ng-checked="includeRetired" ng-model="includeRetired"
-				             ng-change="updateContent()"></span>
+				             ng-change="searchGlobalPredefinedVisitTasks(globalPredefinedTasksCurrentPage)"></span>
 				<span>${ui.message('openhmis.commons.general.includeRetired')}</span>
 			</div>
-			${ui.includeFragment("openhmis.commons", "paginationFragment")}
+			${ui.includeFragment("openhmis.commons", "paginationFragment", [
+					hide                : "globalPredefinedVisitTasks.length == 0",
+					paginationId        : "__GlobalPredefinedTasks",
+					onPageChange        : "searchGlobalPredefinedVisitTasks(globalPredefinedTasksCurrentPage)",
+					model               : "globalPredefinedTasksLimit",
+					onChange            : "searchGlobalPredefinedVisitTasks(globalPredefinedTasksCurrentPage)",
+					pagingFrom          : "globalPredefinedTasksPagingFrom(globalPredefinedTasksCurrentPage, globalPredefinedTasksLimit)",
+					pagingTo            : "globalPredefinedTasksPagingTo(globalPredefinedTasksCurrentPage, globalPredefinedTasksLimit, totalNumOfGlobalPredefinedVisitTasks)",
+					totalNumberOfResults: "totalNumOfGlobalPredefinedVisitTasks"
+			])}
 		</div>
 	</div>
 </div>

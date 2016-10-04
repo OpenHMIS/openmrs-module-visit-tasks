@@ -13,7 +13,6 @@
  */
 package org.openmrs.module.webservices.rest.resource;
 
-import org.apache.commons.lang.StringUtils;
 import org.openmrs.annotation.Handler;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.openhmis.commons.api.PagingInfo;
@@ -64,10 +63,7 @@ public class VisitPredefinedTaskResource extends BaseRestMetadataResource<VisitP
 	@Override
 	protected PageableResult doSearch(RequestContext context) {
 		String query = context.getParameter("q");
-		Boolean global = true;
-		if (StringUtils.isNotEmpty(context.getParameter("global"))) {
-			global = Boolean.valueOf(context.getParameter("global"));
-		}
+		String global = context.getParameter("global");
 
 		IVisitPredefinedTaskDataService service = Context.getService(IVisitPredefinedTaskDataService.class);
 		PagingInfo pagingInfo = PagingUtil.getPagingInfoFromContext(context);

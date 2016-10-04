@@ -25,7 +25,7 @@
 		var service;
 		service = {
 			getPrivilege: getPrivilege,
-			getUserPredefinedTasks: getUserPredefinedTasks
+			getPredefinedTasks: getPredefinedTasks
 		};
 		
 		return service;
@@ -41,11 +41,11 @@
 			EntityRestFactory.setBaseUrl(module_name);
 		}
 		
-		function getUserPredefinedTasks(currentPage, limit, q,includeRetired,onLoadUserPredefinedTasksSuccessful) {
+		function getPredefinedTasks(global,currentPage, limit, q,includeRetired,onLoadUserPredefinedTasksSuccessful) {
 			currentPage = currentPage || 1;
 			var requestParams = PaginationService.paginateParams(currentPage, limit, includeRetired, q);
 			requestParams['rest_entity_name'] = 'predefinedTask';
-			requestParams['global'] = false;
+			requestParams['global'] = global;
 			EntityRestFactory.loadEntities(requestParams,
 				onLoadUserPredefinedTasksSuccessful, errorCallback);
 		}
