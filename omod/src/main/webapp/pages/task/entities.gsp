@@ -27,7 +27,6 @@
     ui.includeJavascript("visittasks", "task/controllers/entity.controller.js")
     ui.includeJavascript("visittasks", "task/services/entity.functions.js")
     ui.includeJavascript("visittasks", "constants.js")
-    ui.includeJavascript("visittasks", "task/angular-animate.min.js")
 %>
 
 <script data-main="task/configs/entity.main" src="/${ ui.contextPath() }/moduleResources/uicommons/scripts/require/require.js"></script>
