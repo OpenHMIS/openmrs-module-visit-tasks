@@ -84,8 +84,12 @@
                 </ul>
 
                 <div id="openTasksTab">
-                    <span ng-hide="openPatientTasks.length > 0" class="no-tasks">
-                        ${ui.message("visittasks.task.noTasks")}
+                    <span ng-hide="openPatientTasks.length > 0">
+                        <br /><br />
+                        <span  class="no-tasks">
+                            ${ui.message("visittasks.task.noTasks")}
+                            <br />
+                        </span>
                     </span>
                     <table class="manage-entities-table"
                            ng-show="openPatientTasks.length > 0">
@@ -162,6 +166,10 @@
                             totalNumberOfResults: "openPatientTasksTotalResults",
                             showRetiredSection  : "true"
                     ])}
+
+                    <span ng-show="openPatientTasks.length < 3">
+                        <br /><br />
+                    </span>
 
                 </div>
 
@@ -272,4 +280,5 @@
             </div>
         </div>
     </div>
+    <br />
 </form>
