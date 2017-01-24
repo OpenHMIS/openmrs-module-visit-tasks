@@ -1,9 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
 /api/target/
 /omod/target/
-/omod/visit-tasks-omod.iml
-/api/visit-tasks-api.iml
-/visit-tasks.iml
-/api/visit-task-api.iml
-visit-tasks.iml
-visit-task.iml
+*.iml

@@ -5,16 +5,6 @@
 		"order": 25,
 		"extensions": [
 			{
-				"id": "${project.parent.groupId}.${project.parent.artifactId}.visitTasksLandingPageLink",
-				"extensionPointId": "systemAdministration.apps",
-				"type": "link",
-				"label": "Manage Predefined Tasks",
-				"url": "${project.parent.artifactId}/visitTasksLanding.page",
-				"icon": "icon-list-ul",
-				"requiredPrivilege": "App: View Visit Task App",
-				"order": 25
-			},
-			{
 				"id": "${project.parent.groupId}.${project.parent.artifactId}.managePredefinedTasksLink.menuItem",
 				"extensionPointId": "org.openmrs.module.appui.header.userAccount.menuItems",
 				"type": "link",
@@ -25,13 +15,13 @@
 			},
 			{
 				"id": "${project.parent.groupId}.${project.parent.artifactId}.managePredefinedTasksLink",
-				"extensionPointId": "org.openmrs.module.visittasks.landing",
+				"extensionPointId": "systemAdministration.apps",
 				"type": "link",
-				"label": "Global Predefined Tasks",
+				"label": "Manage Global Predefined Tasks",
 				"url": "${project.parent.artifactId}/globalPredefinedTasks/entities.page#/",
 				"icon": "icon-pencil",
 				"requiredPrivilege": "Task: Manage Visit Task Module",
-				"order": 2
+				"order": 25
 			},
 			{
 				"id": "${project.parent.groupId}.${project.parent.artifactId}.VisitTasksLink",

@@ -5,10 +5,6 @@
 			label: "${ ui.message("coreapps.app.systemAdministration.label")}",
 			link: '${ui.pageLink("coreapps", "systemadministration/systemAdministration")}'
 		},
-		{
-			label: "${ ui.message("visittasks.page")}",
-			link: '${ui.pageLink("visittasks", "visitTasksLanding")}'
-		},
 		{label: "${ ui.message("visittasks.predefinedTask.global.task.label")}",}
 	];
 	

@@ -6,10 +6,6 @@
 			link: '${ui.pageLink("coreapps", "systemadministration/systemAdministration")}'
 		},
 		{
-			label: "${ ui.message("visittasks.page")}",
-			link: '${ui.pageLink("visittasks", "visitTasksLanding")}'
-		},
-		{
 			label: "${ ui.message("visittasks.admin.global.predefinedTasks")}",
 			link: '/' + OPENMRS_CONTEXT_PATH + '/visittasks/globalPredefinedTasks/entities.page##/'
 		},
