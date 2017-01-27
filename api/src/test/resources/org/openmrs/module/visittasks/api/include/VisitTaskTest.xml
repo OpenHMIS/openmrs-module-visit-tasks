@@ -15,4 +15,7 @@
     <visit_task visit_task_id="4" status="OPEN" name="Test Visit Task 4" description="Vist Task 4 description"
                 creator="1" date_created="2016-09-06 00:00:00.0" visit_id="1" patient_id="20"
                 uuid="5628814B399765AA01KOP58CCF8D0009" voided="false" />
+    <visit_task visit_task_id="5" status="OPEN" name="Test Visit Task 5" description="Vist Task 5 description"
+                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="1" patient_id="20"
+                uuid="5628814B399765AA01KOP58CCF8D0010" voided="false" />
 </dataset>

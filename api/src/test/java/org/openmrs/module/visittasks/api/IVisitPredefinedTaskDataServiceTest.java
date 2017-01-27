@@ -31,7 +31,7 @@ public class IVisitPredefinedTaskDataServiceTest
 
 	@Override
 	protected int getTestEntityCount() {
-		return 4;
+		return 5;
 	}
 
 	@Override
