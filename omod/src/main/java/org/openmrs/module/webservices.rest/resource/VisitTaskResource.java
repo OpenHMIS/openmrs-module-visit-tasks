@@ -38,16 +38,16 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 	@Override
 	public DelegatingResourceDescription getRepresentationDescription(Representation rep) {
 		DelegatingResourceDescription description = super.getRepresentationDescription(rep);
-		description.addProperty("name", Representation.DEFAULT);
-		description.addProperty("description", Representation.DEFAULT);
-		description.addProperty("status", Representation.DEFAULT);
-		description.addProperty("creator", Representation.DEFAULT);
-		description.addProperty("dateCreated", Representation.DEFAULT);
-		description.addProperty("voidedBy", Representation.DEFAULT);
-		description.addProperty("dateVoided", Representation.DEFAULT);
-		description.addProperty("closedBy", Representation.DEFAULT);
-		description.addProperty("closedOn", Representation.DEFAULT);
-		description.addProperty("voided", Representation.DEFAULT);
+		description.addProperty("name");
+		description.addProperty("description");
+		description.addProperty("status");
+		description.addProperty("creator");
+		description.addProperty("dateCreated");
+		description.addProperty("voidedBy");
+		description.addProperty("dateVoided");
+		description.addProperty("closedBy");
+		description.addProperty("closedOn");
+		description.addProperty("voided");
 		description.addProperty("patient", Representation.REF);
 		description.addProperty("visit", Representation.REF);
 

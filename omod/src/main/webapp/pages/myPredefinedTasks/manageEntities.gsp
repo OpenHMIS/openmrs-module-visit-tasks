@@ -40,8 +40,10 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr class="clickable-tr" pagination-id="__MyPredefinedTasks" dir-paginate="entity in myPredefinedVisitTasks | itemsPerPage: myPredefinedTasksLimit"
-				    total-items="totalNumOfMyPredefinedVisitTasks" current-page="myPredefinedTasksCurrentPage" ui-sref="edit({uuid: entity.uuid})">
+				<tr class="clickable-tr" pagination-id="__myPredefinedTasks"
+					dir-paginate="entity in myPredefinedVisitTasks | itemsPerPage: myPredefinedTasksLimit"
+				    total-items="totalNumOfMyPredefinedVisitTasks" current-page="myPredefinedTasksCurrentPage"
+					ui-sref="edit({uuid: entity.uuid})">
 					<td ng-style="strikeThrough(entity.retired)">{{entity.name}}</td>
 				</tr>
 				</tbody>
@@ -57,7 +59,7 @@
 			</div>
 			${ui.includeFragment("openhmis.commons", "paginationFragment", [
 					hide                : "myPredefinedVisitTasks.length == 0",
-					paginationId        : "__MyPredefinedTasks",
+					paginationId        : "__myPredefinedTasks",
 					onPageChange        : "searchMyPredefinedVisitTasks(myPredefinedTasksCurrentPage)",
 					model               : "myPredefinedTasksLimit",
 					onChange            : "searchMyPredefinedVisitTasks(myPredefinedTasksCurrentPage)",

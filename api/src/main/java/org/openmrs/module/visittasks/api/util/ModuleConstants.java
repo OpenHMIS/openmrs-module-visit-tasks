@@ -17,6 +17,7 @@ package org.openmrs.module.visittasks.api.util;
  * Constants class for module constants.
  */
 public class ModuleConstants {
+	// define module name
 	public static final String MODULE_NAME = "visittasks";
 
 	protected ModuleConstants() {}

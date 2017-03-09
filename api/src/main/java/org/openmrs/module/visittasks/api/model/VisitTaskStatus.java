@@ -30,7 +30,7 @@ public enum VisitTaskStatus {
 
 	private int value;
 
-	private VisitTaskStatus(int value) {
+	VisitTaskStatus(int value) {
 		this.value = value;
 	}
 }

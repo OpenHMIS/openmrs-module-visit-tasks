@@ -54,7 +54,6 @@
     <div class="detail-section-border">
         <br />
         <div class="visitlist">
-
             <div class="tabs">
                 <ul>
                     <li>
@@ -170,7 +169,6 @@
                     <span ng-show="openPatientTasks.length < 3">
                         <br /><br />
                     </span>
-
                 </div>
 
                 <div id="closedTasksTab">
@@ -265,7 +263,8 @@
                 <i class="icon-trash trash"></i>
                 <h3>${ui.message('visittasks.task.voidTask')}</h3>
             </span>
-            <i class="icon-remove cancel show-cursor"  class="align-right" ng-click="closeThisDialog()"></i>
+            <i class="icon-remove cancel show-cursor"  class="align-right"
+               ng-click="closeThisDialog()"></i>
         </div>
         <div class="dialog-content form">
             <span>

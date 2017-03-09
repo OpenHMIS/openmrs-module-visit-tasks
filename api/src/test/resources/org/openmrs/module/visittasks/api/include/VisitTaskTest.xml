@@ -1,21 +1,24 @@
 <dataset>
 
-    <visit_task visit_task_id="0" status="OPEN" name="Test Visit Task 0" description="Vist Task 0 description"
+    <visit_task visit_task_id="0" status="OPEN" name="Test Visit Task 0" description="Visit Task 0 description"
                 creator="1" date_created="2016-09-06 00:00:00.0" visit_id="1" patient_id="20"
                 uuid="5628814B399DFD5AA0139958CCF8D0005" voided="false" />
-    <visit_task visit_task_id="1" status="OPEN" name="Test Visit Task 1" description="Vist Task 1 description"
-                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="1" patient_id="20"
+    <visit_task visit_task_id="1" status="OPEN" name="Test Visit Task 1" description="Visit Task 1 description"
+                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="2" patient_id="21"
                 uuid="562881ER399765AA0139958CCF8D0006" voided="false" />
-    <visit_task visit_task_id="2" status="OPEN" name="Test Visit Task 2" description="Vist Task 2 description"
-                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="1" patient_id="20"
+    <visit_task visit_task_id="2" status="OPEN" name="Test Visit Task 2" description="Visit Task 2 description"
+                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="3" patient_id="22"
                 uuid="5628814B399765ATY139958CCF8D0007" voided="false" />
-    <visit_task visit_task_id="3" status="OPEN" name="Test Visit Task 3" description="Vist Task 3 description"
+    <visit_task visit_task_id="3" status="OPEN" name="Test Visit Task 3" description="Visit Task 3 description"
                 creator="1" date_created="2016-09-06 00:00:00.0" visit_id="1" patient_id="20"
                 uuid="5628814B399765AA0TYU958CCF8D0008" voided="false" />
-    <visit_task visit_task_id="4" status="OPEN" name="Test Visit Task 4" description="Vist Task 4 description"
-                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="1" patient_id="20"
+    <visit_task visit_task_id="4" status="OPEN" name="Test Visit Task 4" description="Visit Task 4 description"
+                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="2" patient_id="21"
                 uuid="5628814B399765AA01KOP58CCF8D0009" voided="false" />
-    <visit_task visit_task_id="5" status="OPEN" name="Test Visit Task 5" description="Vist Task 5 description"
-                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="1" patient_id="20"
+    <visit_task visit_task_id="5" status="CLOSED" name="Test Visit Task 5" description="Visit Task 5 description"
+                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="1" patient_id="23"
                 uuid="5628814B399765AA01KOP58CCF8D0010" voided="false" />
+    <visit_task visit_task_id="6" status="CLOSED" name="Test Visit Task 6" description="Visit Task 6 description"
+                creator="1" date_created="2016-09-06 00:00:00.0" visit_id="4" patient_id="20"
+                uuid="5628814B399765AA01KOP58CCF8D0011" voided="false" />
 </dataset>

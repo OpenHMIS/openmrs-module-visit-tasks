@@ -53,8 +53,13 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 		if (user == null) {
 			throw new IllegalArgumentException("User must be logged in");
 		}
+
 		if (StringUtils.isNotEmpty(name) && name.length() > MAX_PREDEFINED_TASK_NAME_CHARACTERS) {
 			throw new IllegalArgumentException("The Predefined task name must be less than 256 characters.");
+		}
+
+		if (pagingInfo == null) {
+			throw new IllegalArgumentException("PagingInfo must not be null");
 		}
 
 		return executeCriteria(VisitPredefinedTask.class, pagingInfo, new Action1<Criteria>() {
@@ -71,6 +76,12 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 
 				Criterion userCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.USER, user);
 
+				/**
+				 * If showGlobal is set to true, return only global predefined visit tasks (Usage: manage global visit tasks
+				 * page), if showGlobal is set to false, return all but global predefined visit tasks (Usage: manage my
+				 * predefined visit tasks page), if showGlobal is not set, return all predefined visit tasks (Usage: visit
+				 * tasks page).
+				 */
 				if (StringUtils.isNotEmpty(showGlobal)) {
 					if (showGlobal.equals("false")) {
 						Criterion globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, false);
@@ -82,7 +93,6 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 					Criterion globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, true);
 					criteria.add(Restrictions.or(userCriterion, globalCriterion));
 				}
-
 			}
 		});
 	}

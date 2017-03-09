@@ -13,8 +13,6 @@
  */
 package org.openmrs.module.visittasks.api.impl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -32,11 +30,10 @@ import org.openmrs.module.visittasks.api.util.PrivilegeConstants;
 import java.util.List;
 
 /**
- * provides {@VisitTask} service implementations.
+ * Data service implementation class for {@link VisitTask}s.
  */
 public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTask> implements
         IEntityAuthorizationPrivileges, IVisitTaskDataService {
-	protected final Log LOG = LogFactory.getLog(this.getClass());
 
 	@Override
 	protected IEntityAuthorizationPrivileges getPrivileges() {
@@ -61,18 +58,24 @@ public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTas
 	@Override
 	public List<VisitTask> getVisitTasksByVisitAndPatient(final VisitTaskStatus status, final Visit visit,
 	        final Patient patient, PagingInfo pagingInfo) {
+
+		if (pagingInfo == null) {
+			throw new IllegalArgumentException("pagingInfo must not be null");
+		}
+
 		return executeCriteria(VisitTask.class, pagingInfo, new Action1<Criteria>() {
 			@Override
 			public void apply(Criteria criteria) {
-				if (status != null) {
+				if (status == null) {
+					criteria.addOrder(Order.desc("dateCreated"));
+				} else {
 					criteria.add(Restrictions.eq("status", status));
+
 					if (status.equals(VisitTaskStatus.CLOSED)) {
 						criteria.addOrder(Order.desc("closedOn"));
 					} else {
 						criteria.addOrder(Order.desc("dateCreated"));
 					}
-				} else {
-					criteria.addOrder(Order.desc("dateCreated"));
 				}
 
 				if (visit != null) {
