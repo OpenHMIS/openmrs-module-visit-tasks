@@ -4,7 +4,6 @@
     jQuery(".tabs").tabs();
 </script>
 
-<br />
 <span class="h1-substitue-left">
     ${ui.message('visittasks.page')}
 </span>
@@ -28,17 +27,25 @@
                             data-toggle="dropdown">
                         <span class="caret" ></span>
                     </button>
-                    <ul id="color-dropdown-menu" class="dropdown-menu dropdown-menu-right dropdown-width dropdown-margin overflow overflow-height">
+                    <ul id="color-dropdown-menu" ng-show="predefinedVisitTasks.length > 0"
+                        ng-class="{'overflow-height': predefinedVisitTasks.length > 5}"
+                        class="dropdown-menu dropdown-menu-right dropdown-width dropdown-margin overflow ">
                         <li ng-repeat="task in predefinedVisitTasks | orderBy: 'name'" class="input-lg no-height">
                             <div class="detail-section-border-bottom">
                                 <p class="wrap">
-                                    <a ng-click="addVisitTask(task)">{{task.name}}
+                                    <a ng-click="addVisitTask(task)" class="show-cursor">{{task.name}}
                                         <span class="recent-lozenge" ng-show="task.global===true">
                                             ${ui.message('visittasks.task.global')}
                                         </span>
                                     </a>
                                 </p>
                             </div>
+                        </li>
+                    </ul>
+                    <ul id="color-dropdown-menu2" ng-show="predefinedVisitTasks.length == 0"
+                        class="dropdown-menu dropdown-menu-right dropdown-width dropdown-margin">
+                        <li class="input-lg no-height">
+                            <center>${ui.message('visittasks.task.noAvailablePredefinedTasks')}</center>
                         </li>
                     </ul>
                 </div>

@@ -11,10 +11,10 @@
 	<br/>
 	
 	<div id="manage-entities-header">
-		<span class="h1-substitue-left" style="float:left;">
+		<span class="h1-substitue-left align-left">
 			${ui.message('visittasks.predefinedTask.user.task.label')}
 		</span>
-		<span style="float:right;">
+		<span class="align-right">
 			<a class="button confirm" ui-sref="new">
 				<i class="icon-plus"></i>
 				${ui.message('visittasks.predefinedTask.new')}
