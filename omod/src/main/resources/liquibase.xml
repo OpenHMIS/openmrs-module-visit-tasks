@@ -81,10 +81,6 @@
 			<column name="global" defaultValueBoolean="false" type="boolean"/>
 		</createTable>
 
-		<createIndex tableName="visit_predefined_task" indexName="visit_predefined_name_idx" unique="false">
-			<column name="name"/>
-		</createIndex>
-
 		<addForeignKeyConstraint constraintName="visit_predefined_task_created_by_fk"
 		                         baseTableName="visit_predefined_task" baseColumnNames="creator"
 		                         referencedTableName="users" referencedColumnNames="user_id"
