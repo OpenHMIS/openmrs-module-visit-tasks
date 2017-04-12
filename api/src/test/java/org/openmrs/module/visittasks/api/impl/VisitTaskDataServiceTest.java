@@ -45,48 +45,31 @@ public class VisitTaskDataServiceTest extends BaseModuleContextSensitiveTest {
 	}
 
 	@Test
-	@Verifies(value = "should return tasks for a given visit",
-	        method = "getVisitTasksByVisit(VisitTaskStatus, Visit, PagingInfo)")
-	public void shouldGetVisitTasksByVisit() throws Exception {
+	@Verifies(value = "should return closed tasks for a given visit",
+	        method = "getVisitTasks(VisitTaskStatus, Visit, PagingInfo)")
+	public void shouldGetClosedVisitTasksByVisit() throws Exception {
 		PagingInfo pagingInfo = new PagingInfo();
 		Visit visit = new Visit();
 		visit.setId(1);
 
-		List<VisitTask> results = service.getVisitTasksByVisit(VisitTaskStatus.CLOSED, visit, pagingInfo);
+		List<VisitTask> results = service.getVisitTasks(VisitTaskStatus.CLOSED, visit, pagingInfo);
 
 		assertNotNull("Should not return null", results);
 		assertEquals("Should return one visit task", 1, results.size());
 	}
 
 	@Test
-	@Verifies(value = "should return tasks for a given patient",
-	        method = "getVisitTasksByPatient(VisitTaskStatus, Patient, PagingInfo)")
-	public void shouldGetVisitTasksByPatient() throws Exception {
+	@Verifies(value = "should return open tasks for a given visit",
+	        method = "getVisitTasks(VisitTaskStatus, Visit, PagingInfo)")
+	public void shouldGetOpenVisitTasksByVisit() throws Exception {
 		PagingInfo pagingInfo = new PagingInfo();
-		Patient patient = new Patient();
-		patient.setId(20);
-
-		List<VisitTask> results = service.getVisitTasksByPatient(VisitTaskStatus.OPEN, patient, pagingInfo);
-
-		assertNotNull("Should not return null", results);
-		assertEquals("Should return two visit tasks", 2, results.size());
-	}
-
-	@Test
-	@Verifies(value = "should return tasks for a given patient's visit",
-	        method = "getVisitTasksByVisitAndPatient(VisitTaskStatus, Visit, Patient, PagingInfo)")
-	public void shouldGetVisitTasksByVisitAndPatient() throws Exception {
-		PagingInfo pagingInfo = new PagingInfo();
-		Patient patient = new Patient();
-		patient.setId(21);
-
 		Visit visit = new Visit();
-		visit.setId(2);
+		visit.setId(1);
 
-		List<VisitTask> results =
-		        service.getVisitTasksByVisitAndPatient(VisitTaskStatus.CLOSED, visit, patient, pagingInfo);
+		List<VisitTask> results = service.getVisitTasks(VisitTaskStatus.OPEN, visit, pagingInfo);
 
 		assertNotNull("Should not return null", results);
-		assertEquals("Should return no visit task", 0, results.size());
+		assertEquals("Should return two visit task", 2, results.size());
 	}
+
 }

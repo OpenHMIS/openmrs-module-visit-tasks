@@ -26,6 +26,7 @@ import org.openmrs.module.visittasks.api.IVisitTaskDataService;
 import org.openmrs.module.visittasks.api.model.VisitTask;
 import org.openmrs.module.visittasks.api.model.VisitTaskStatus;
 import org.openmrs.module.visittasks.api.util.PrivilegeConstants;
+import org.openmrs.module.visittasks.api.util.VisitTasksHibernateCriteriaConstants;
 
 import java.util.List;
 
@@ -46,19 +47,8 @@ public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTas
 	}
 
 	@Override
-	public List<VisitTask> getVisitTasksByVisit(VisitTaskStatus status, final Visit visit, PagingInfo pagingInfo) {
-		return getVisitTasksByVisitAndPatient(status, visit, null, pagingInfo);
-	}
-
-	@Override
-	public List<VisitTask> getVisitTasksByPatient(VisitTaskStatus status, Patient patient, PagingInfo pagingInfo) {
-		return getVisitTasksByVisitAndPatient(status, null, patient, pagingInfo);
-	}
-
-	@Override
-	public List<VisitTask> getVisitTasksByVisitAndPatient(final VisitTaskStatus status, final Visit visit,
-	        final Patient patient, PagingInfo pagingInfo) {
-
+	public List<VisitTask> getVisitTasks(
+	        final VisitTaskStatus status, final Visit visit, PagingInfo pagingInfo) {
 		if (pagingInfo == null) {
 			throw new IllegalArgumentException("pagingInfo must not be null");
 		}
@@ -67,28 +57,25 @@ public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTas
 			@Override
 			public void apply(Criteria criteria) {
 				if (status == null) {
-					criteria.addOrder(Order.desc("dateCreated"));
+					criteria.addOrder(Order.desc(VisitTasksHibernateCriteriaConstants.DATE_CREATED));
 				} else {
-					criteria.add(Restrictions.eq("status", status));
+					criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.STATUS, status));
 
 					if (status.equals(VisitTaskStatus.CLOSED)) {
-						criteria.addOrder(Order.desc("closedOn"));
+						criteria.addOrder(Order.desc(VisitTasksHibernateCriteriaConstants.CLOSED_ON));
 					} else {
-						criteria.addOrder(Order.desc("dateCreated"));
+						criteria.addOrder(Order.desc(VisitTasksHibernateCriteriaConstants.DATE_CREATED));
 					}
 				}
 
 				if (visit != null) {
-					criteria.add(Restrictions.eq("visit", visit));
+					criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.VISIT, visit));
 				}
 
-				if (patient != null) {
-					criteria.add(Restrictions.eq("patient", patient));
-				}
-
-				criteria.add(Restrictions.eq("voided", false));
+				criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.VOIDED, false));
 			}
 		});
+
 	}
 
 	@Override

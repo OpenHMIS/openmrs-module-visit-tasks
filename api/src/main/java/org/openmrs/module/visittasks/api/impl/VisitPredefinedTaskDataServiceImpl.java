@@ -48,7 +48,7 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 	protected void validate(VisitPredefinedTask entity) {}
 
 	@Override
-	public List<VisitPredefinedTask> getPredefinedTasks(final User user, final String name, final String showGlobal,
+	public List<VisitPredefinedTask> getPredefinedTasks(final User user, final String name, final Boolean showGlobal,
 	        final boolean includeRetired, PagingInfo pagingInfo) {
 		if (user == null) {
 			throw new IllegalArgumentException("User must be logged in");
@@ -82,8 +82,8 @@ public class VisitPredefinedTaskDataServiceImpl extends BaseMetadataDataServiceI
 				 * predefined visit tasks page), if showGlobal is not set, return all predefined visit tasks (Usage: visit
 				 * tasks page).
 				 */
-				if (StringUtils.isNotEmpty(showGlobal)) {
-					if (showGlobal.equals("false")) {
+				if (showGlobal != null) {
+					if (!showGlobal.booleanValue()) {
 						Criterion globalCriterion = Restrictions.eq(VisitTasksHibernateCriteriaConstants.GLOBAL, false);
 						criteria.add(Restrictions.and(userCriterion, globalCriterion));
 					} else {

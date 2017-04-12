@@ -30,13 +30,5 @@ import java.util.List;
 public interface IVisitTaskDataService extends IEntityDataService<VisitTask> {
 
 	@Transactional(readOnly = true)
-	List<VisitTask> getVisitTasksByVisit(VisitTaskStatus visitTaskStatus, Visit visit, PagingInfo pagingInfo);
-
-	@Transactional(readOnly = true)
-	List<VisitTask> getVisitTasksByPatient(VisitTaskStatus visitTaskStatus, Patient patient, PagingInfo pagingInfo);
-
-	@Transactional(readOnly = true)
-	List<VisitTask> getVisitTasksByVisitAndPatient(VisitTaskStatus visitTaskStatus, Visit visit,
-	        Patient patient, PagingInfo pagingInfo);
-
+	List<VisitTask> getVisitTasks(VisitTaskStatus visitTaskStatus, Visit visit, PagingInfo pagingInfo);
 }

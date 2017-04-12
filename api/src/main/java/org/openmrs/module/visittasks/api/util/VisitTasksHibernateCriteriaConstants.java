@@ -21,4 +21,12 @@ public class VisitTasksHibernateCriteriaConstants {
 	public static final String NAME = "name";
 	public static final String RETIRED = "retired";
 	public static final String GLOBAL = "global";
+	public static final String DATE_CREATED = "dateCreated";
+	public static final String STATUS = "status";
+	public static final String CLOSED_ON = "closedOn";
+	public static final String VISIT = "visit";
+	public static final String VOIDED = "voided";
+
+	// should not be instantiated.
+	protected VisitTasksHibernateCriteriaConstants() {}
 }

@@ -48,19 +48,19 @@ public class VisitPredefinedTaskDataServiceTest extends BaseModuleContextSensiti
 		User user = new User();
 		user.setId(1);
 
-		List<VisitPredefinedTask> results = service.getPredefinedTasks(user, "", "false", false, new PagingInfo());
+		List<VisitPredefinedTask> results = service.getPredefinedTasks(user, "", false, false, new PagingInfo());
 
 		assertNotNull("Should not return null", results);
 		assertEquals("Should return two predefined visit tasks", 2, results.size());
 
 		// retrieve only global predefined tasks
-		results = service.getPredefinedTasks(user, "", "true", false, new PagingInfo());
+		results = service.getPredefinedTasks(user, "", true, false, new PagingInfo());
 
 		assertNotNull("Should not return null", results);
 		assertEquals("Should return three global predefined visit tasks", 3, results.size());
 
 		// retrieve all (including global) predefined tasks
-		results = service.getPredefinedTasks(user, "", "", false, new PagingInfo());
+		results = service.getPredefinedTasks(user, "", null, false, new PagingInfo());
 
 		assertNotNull("Should not return null", results);
 		assertEquals("Should return all predefined visit tasks", 5, results.size());
