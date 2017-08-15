@@ -24,6 +24,7 @@ import org.openmrs.module.visittasks.api.util.VisitTasksHibernateCriteriaConstan
 import org.openmrs.module.visittasks.web.ModuleRestConstants;
 import org.openmrs.module.webservices.rest.web.RequestContext;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
+import org.openmrs.module.webservices.rest.web.representation.CustomRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.Representation;
 import org.openmrs.module.webservices.rest.web.resource.api.PageableResult;
 import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceDescription;
@@ -41,6 +42,10 @@ public class VisitPredefinedTaskResource extends BaseRestMetadataResource<VisitP
 
 	@Override
 	public DelegatingResourceDescription getRepresentationDescription(Representation rep) {
+		if (rep instanceof CustomRepresentation) {
+			return null;
+		}
+
 		DelegatingResourceDescription description = super.getRepresentationDescription(rep);
 		description.addProperty(VisitTasksHibernateCriteriaConstants.GLOBAL);
 		return description;
