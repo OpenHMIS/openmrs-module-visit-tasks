@@ -55,6 +55,7 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 		description.addProperty("voided");
 		description.addProperty("patient", Representation.REF);
 		description.addProperty("visit", Representation.REF);
+		description.addProperty("dateChanged");
 
 		return description;
 	}
