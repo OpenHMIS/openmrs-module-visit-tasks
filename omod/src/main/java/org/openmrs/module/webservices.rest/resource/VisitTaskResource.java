@@ -21,6 +21,7 @@ import org.openmrs.module.visittasks.api.model.VisitTask;
 import org.openmrs.module.visittasks.api.model.VisitTaskStatus;
 import org.openmrs.module.visittasks.web.ModuleRestConstants;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
+import org.openmrs.module.webservices.rest.web.representation.CustomRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.Representation;
 import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceDescription;
@@ -37,6 +38,10 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 
 	@Override
 	public DelegatingResourceDescription getRepresentationDescription(Representation rep) {
+		if (rep instanceof CustomRepresentation) {
+			return null;
+		}
+
 		DelegatingResourceDescription description = super.getRepresentationDescription(rep);
 		description.addProperty("name");
 		description.addProperty("description");
