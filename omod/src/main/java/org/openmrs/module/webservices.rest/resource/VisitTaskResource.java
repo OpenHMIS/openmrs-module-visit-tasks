@@ -84,6 +84,8 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 			delegate.setDateVoided(new Date());
 		}
 
+		delegate.setDateChanged(new Date());
+
 		return super.save(delegate);
 	}
 }
