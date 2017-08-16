@@ -111,8 +111,7 @@
                                        ng-show="entity.status === 'OPEN' && visitActive==='true'"
                                        title="${ui.message('visittasks.task.markClosed')}"/>
                             </td>
-                            <td ng-style="strikeThrough(entity.status === 'CLOSED')"
-                                ng-click="toggleDetailsSection(entity)">
+                            <td ng-style="strikeThrough(entity.status === 'CLOSED')">
                                 <span id="animation-{{\$index}}" class="show-animation"
                                       ng-class="{'fadeIn animated': entity.animate===true}">
                                     <i class="toggle-icon icon-caret-right small caret-color"
