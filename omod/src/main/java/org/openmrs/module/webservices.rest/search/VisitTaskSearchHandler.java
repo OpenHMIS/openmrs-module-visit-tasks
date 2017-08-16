@@ -78,7 +78,6 @@ public class VisitTaskSearchHandler implements SearchHandler {
 	public PageableResult search(RequestContext context) {
 		String statusText = context.getParameter("status");
 		String visitText = context.getParameter("visit_uuid");
-		String patientText = context.getParameter("patient_uuid");
 
 		VisitTaskStatus status = null;
 		if (!StringUtils.isEmpty(statusText)) {
@@ -98,17 +97,8 @@ public class VisitTaskSearchHandler implements SearchHandler {
 			}
 		}
 
-		Patient patient = null;
-		if( !StringUtils.isEmpty(patientText)){
-			patient = patientService.getPatientByUuid(patientText);
-			if(patient == null){
-				LOG.warn("Could not find Patient '" + patientText + "'");
-				return new EmptySearchResult();
-			}
-		}
-
 		PagingInfo pagingInfo = PagingUtil.getPagingInfoFromContext(context);
-		List<VisitTask> visitTasks = visitTaskService.getVisitTasksByVisitAndPatient(status, visit, patient, pagingInfo);
+		List<VisitTask> visitTasks = visitTaskService.getVisitTasks(status, visit, pagingInfo);
 
 		if (visitTasks.size() == 0) {
 			return new EmptySearchResult();

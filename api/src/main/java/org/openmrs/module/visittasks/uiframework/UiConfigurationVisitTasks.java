@@ -14,6 +14,7 @@
 package org.openmrs.module.visittasks.uiframework;
 
 import org.openmrs.module.openhmis.commons.uiframework.UiConfigurationFactory;
+import org.openmrs.module.visittasks.api.util.ModuleConstants;
 
 /**
  * The OpenMRS UI Framework configuration settings.
@@ -22,7 +23,7 @@ public class UiConfigurationVisitTasks extends UiConfigurationFactory {
 
 	@Override
 	public String getModuleId() {
-		return "visittasks";
+		return ModuleConstants.MODULE_NAME;
 	}
 
 }

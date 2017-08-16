@@ -9,7 +9,9 @@
 			label: "${ ui.message("visittasks.admin.global.predefinedTasks")}",
 			link: '/' + OPENMRS_CONTEXT_PATH + '/visittasks/globalPredefinedTasks/entities.page##/'
 		},
-		{label: "${ui.message("visittasks.predefinedTask.name")}"}
+		{
+			label: "${ui.message("visittasks.predefinedTask.name")}"
+		}
 	];
 	
 	jQuery('#breadcrumbs').html(emr.generateBreadcrumbHtml(breadcrumbs));

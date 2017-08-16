@@ -30,11 +30,12 @@ public class IVisitTaskDataServiceTest extends IEntityDataServiceTest<IVisitTask
 		super.before();
 
 		executeDataSet(TestConstants.VISIT_TASK_DATASET);
+		executeDataSet(TestConstants.VISIT_PREDEFINED_TASK_DATASET);
 	}
 
 	@Override
 	protected int getTestEntityCount() {
-		return 5;
+		return 7;
 	}
 
 	@Override

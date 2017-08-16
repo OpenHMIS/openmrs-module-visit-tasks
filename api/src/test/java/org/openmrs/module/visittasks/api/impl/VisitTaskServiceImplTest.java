@@ -17,8 +17,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.visittasks.api.IVisitPredefinedTaskDataService;
 import org.openmrs.module.visittasks.api.IVisitTaskDataService;
 import org.openmrs.module.visittasks.api.IVisitTaskDataServiceTest;
+import org.openmrs.module.visittasks.api.model.VisitPredefinedTask;
 import org.openmrs.module.visittasks.api.model.VisitTask;
 import org.openmrs.module.visittasks.api.model.VisitTaskStatus;
 
@@ -27,6 +29,7 @@ import java.util.Date;
 
 public class VisitTaskServiceImplTest extends IVisitTaskDataServiceTest {
 	private IVisitTaskDataService visitTaskDataService;
+	private IVisitPredefinedTaskDataService visitPredefinedTaskDataService;
 	private IVisitTaskDataServiceTest visitTaskDataServiceTest;
 
 	@Before
@@ -34,6 +37,7 @@ public class VisitTaskServiceImplTest extends IVisitTaskDataServiceTest {
 		super.before();
 
 		visitTaskDataService = createService();
+		visitPredefinedTaskDataService = Context.getService(IVisitPredefinedTaskDataService.class);
 		visitTaskDataServiceTest = new IVisitTaskDataServiceTest();
 	}
 
@@ -90,5 +94,52 @@ public class VisitTaskServiceImplTest extends IVisitTaskDataServiceTest {
 		Context.flushSession();
 
 		Assert.assertEquals(true, visitTask.getVoided());
+	}
+
+	@Test
+	public void visitTask_shouldCreateTaskWithPredefinedTask() throws Exception {
+		int numberOfTasks = visitTaskDataService.getAll().size();
+		VisitTask visitTask = visitTaskDataServiceTest.createEntity(true);
+
+		VisitPredefinedTask visitPredefinedTask = visitPredefinedTaskDataService.getById(0);
+		Assert.assertEquals("Test One", visitPredefinedTask.getName());
+
+		visitTask.setName(visitPredefinedTask.getName());
+		visitTaskDataService.save(visitTask);
+		Context.flushSession();
+
+		int updatedNumberOfTasks = visitTaskDataService.getAll().size();
+
+		Assert.assertEquals(updatedNumberOfTasks, numberOfTasks + 1);
+	}
+
+	@Test
+	public void visitTask_shouldNotReuseExistingPredefinedTask() throws Exception {
+		int numberOfTasks = visitTaskDataService.getAll().size();
+
+		VisitTask visitTask = visitTaskDataService.getById(5);
+		Assert.assertEquals("Test Visit Task 5", visitTask.getName());
+
+		VisitPredefinedTask visitPredefinedTask = visitPredefinedTaskDataService.getById(5);
+		visitTask.setName(visitPredefinedTask.getName());
+
+		visitTaskDataService.save(visitTask);
+		Context.flushSession();
+
+		int updatedNumberOfTasks = visitTaskDataService.getAll().size();
+
+		Assert.assertEquals(numberOfTasks, updatedNumberOfTasks);
+	}
+
+	@Test
+	public void visitTask_shouldUpdateExistingTask() throws Exception {
+		VisitTask visitTask = visitTaskDataService.getById(1);
+
+		Assert.assertEquals("Test Visit Task 1", visitTask.getName());
+		visitTask.setName("Update Test Visit Task 1");
+		visitTaskDataService.save(visitTask);
+		Context.flushSession();
+
+		Assert.assertEquals("Update Test Visit Task 1", visitTask.getName());
 	}
 }
