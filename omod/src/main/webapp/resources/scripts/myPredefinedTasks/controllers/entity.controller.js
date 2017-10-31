@@ -18,12 +18,12 @@
 	var base = angular.module('app.genericEntityController');
 	base.controller("EntityController", EntityController);
 	EntityController.$inject = ['$stateParams', '$injector', '$scope', '$filter',
-		'EntityRestFactory', 'PredefinedTasksModel', 'PredefinedTasksRestfulService'];
+		'EntityRestFactory', 'PredefinedTasksModel'];
 	
 	var ENTITY_NAME = "predefinedTask";
 	
 	function EntityController($stateParams, $injector, $scope, $filter, EntityRestFactory,
-	                          PredefinedTasksModel, PredefinedTasksRestfulService) {
+	                          PredefinedTasksModel) {
 		var self = this;
 		
 		var entity_name_message_key = "visittasks." + ENTITY_NAME + ".name";
@@ -35,17 +35,6 @@
 			};
 		
 		/**
-		 * Initializes and binds any required variable and/or function specific to entity.page
-		 * @type {Function}
-		 */
-		// @Override
-		self.bindExtraVariablesToScope = self.bindExtraVariablesToScope
-			|| function (uuid) {
-				/* bind variables.. */
-				$scope.uuid = uuid;
-			}
-		
-		/**
 		 * All post-submit validations are done here.
 		 * @return boolean
 		 */
@@ -55,6 +44,7 @@
 					$scope.submitted = true;
 					return false;
 				}
+
 				$scope.entity.global = false;
 				$scope.loading = true;
 				return true;

@@ -35,7 +35,7 @@ public class IVisitTaskDataServiceTest extends IEntityDataServiceTest<IVisitTask
 
 	@Override
 	protected int getTestEntityCount() {
-		return 6;
+		return 7;
 	}
 
 	@Override

@@ -24,34 +24,30 @@
 		var service;
 
 		service = {
-			getPatientVisitTasks: getPatientVisitTasks,
+			getVisitTasks: getVisitTasks,
 			getPredefinedVisitTasks: getPredefinedVisitTasks,
-			searchPredefinedVisitTasks: searchPredefinedTasks,
-			getAllPatientVisitTasks: getAllPatientVisitTasks,
+			searchPredefinedVisitTasks: searchPredefinedVisitTasks,
 		};
 
 		return service;
 
-		function getPatientVisitTasks(currentPage, limit, visitUuid,
+		function getVisitTasks(currentPage, limit, visitUuid,
 		                              patientUuid, status, onLoadVisitTasksSuccessful) {
-			getWSVisitTasks(PaginationService.paginateParams(currentPage, limit, false, ''),
-				visitUuid, patientUuid, status, onLoadVisitTasksSuccessful);
+			var params = [];
+			if(currentPage !== '' && limit !== ''){
+				params = PaginationService.paginateParams(currentPage, limit, false, '');
+			}
+
+			getWSVisitTasks(params, visitUuid, patientUuid, status, onLoadVisitTasksSuccessful);
 		}
 
-		function getAllPatientVisitTasks(visitUuid, patientUuid, status, onLoadVisitTasksSuccessful) {
-			getWSVisitTasks([], visitUuid, patientUuid, status, onLoadVisitTasksSuccessful);
+		function getPredefinedVisitTasks(onLoadPredefinedVisitTasksSuccessful) {
+			var requestParams = [];
+			requestParams['rest_entity_name'] = 'predefinedTask';
+			EntityRestFactory.loadEntities(requestParams, onLoadPredefinedVisitTasksSuccessful, errorCallback);
 		}
 
-		function getWSVisitTasks(requestParams, visitUuid, patientUuid, status, onLoadVisitTasksSuccessful) {
-			requestParams['rest_entity_name'] = 'task';
-			requestParams['visit_uuid'] = visitUuid;
-			requestParams['patient_uuid'] = patientUuid;
-			requestParams['status'] = status;
-
-			EntityRestFactory.loadEntities(requestParams, onLoadVisitTasksSuccessful, errorCallback);
-		}
-
-		function searchPredefinedTasks(search, predefinedTasks) {
+		function searchPredefinedVisitTasks(search, predefinedTasks) {
 			var results = [];
 			var requestParams = [];
 			if(search !== undefined && search !== '') {
@@ -68,10 +64,13 @@
 			}
 		}
 
-		function getPredefinedVisitTasks(onLoadPredefinedVisitTasksSuccessful) {
-			var requestParams = [];
-			requestParams['rest_entity_name'] = 'predefinedTask';
-			EntityRestFactory.loadEntities(requestParams, onLoadPredefinedVisitTasksSuccessful, errorCallback);
+		function getWSVisitTasks(requestParams, visitUuid, patientUuid, status, onLoadVisitTasksSuccessful) {
+			requestParams['rest_entity_name'] = 'task';
+			requestParams['visit_uuid'] = visitUuid;
+			requestParams['patient_uuid'] = patientUuid;
+			requestParams['status'] = status;
+
+			EntityRestFactory.loadEntities(requestParams, onLoadVisitTasksSuccessful, errorCallback);
 		}
 
 		function errorCallback(error) {

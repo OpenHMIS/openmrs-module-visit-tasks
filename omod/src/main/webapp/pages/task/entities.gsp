@@ -23,7 +23,7 @@
     /* load re-usables/common modules */
     ui.includeFragment("openhmis.commons", "load.reusable.modules")
 
-    /* load stockroom modules */
+    /* load visittask modules */
     ui.includeJavascript("visittasks", "task/models/entity.model.js")
     ui.includeJavascript("visittasks", "task/services/entity.restful.services.js")
     ui.includeJavascript("visittasks", "task/controllers/entity.controller.js")
@@ -36,7 +36,6 @@
 ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
 
 <div id="taskApp">
-
     <div ui-view>
         <script type="text/javascript">
             var breadcrumbs = [
@@ -53,6 +52,5 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
 
             jQuery('#breadcrumbs').html(emr.generateBreadcrumbHtml(breadcrumbs));
         </script>
-
     </div>
 </div>
