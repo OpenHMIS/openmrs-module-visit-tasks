@@ -46,7 +46,7 @@
 				}
 			});
 
-			$provide.factory('$excleptionHandler', function($injector) {
+			$provide.factory('$exceptionHandler', function($injector) {
 				return ohmis.handleException;
 			});
 		});

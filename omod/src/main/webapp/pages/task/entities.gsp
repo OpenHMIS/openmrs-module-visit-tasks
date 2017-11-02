@@ -21,7 +21,7 @@
     ui.includeJavascript("openhmis.commons", "reusable-components/lib/bootstrap.min.js")
 
     /* load re-usables/common modules */
-    ui.includeFragment("openhmis.commons", "load.reusable.modules")
+    ui.includeFragment("openhmis.commons", "loadReusableModules")
 
     /* load visittask modules */
     ui.includeJavascript("visittasks", "task/models/entity.model.js")
