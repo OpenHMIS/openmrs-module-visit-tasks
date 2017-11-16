@@ -44,7 +44,7 @@
 	<properties>
 		<openMRSVersion>1.9.9</openMRSVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javaCompilerVersion>1.6</javaCompilerVersion>
+		<javaCompilerVersion>1.7</javaCompilerVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -111,16 +111,15 @@
 
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
-				<artifactId>openhmis.commons-api</artifactId>
+				<artifactId>openhmis.commons-tests</artifactId>
 				<version>3.6.0-SNAPSHOT</version>
-				<type>test-jar</type>
 				<scope>test</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>openhmis.commons-tools</artifactId>
-				<version>3.5.0</version>
+				<version>3.6.0-SNAPSHOT</version>
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
@@ -171,7 +170,7 @@
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>jasperreport-api</artifactId>
-				<version>1.5.9</version>
+				<version>1.6.0-SNAPSHOT</version>
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
@@ -217,6 +216,13 @@
 				<scope>provided</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>legacyui-omod</artifactId>
+				<version>0.2.1</version>
+				<scope>provided</scope>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -239,7 +245,7 @@
 						<dependency>
 							<groupId>org.openmrs.module</groupId>
 							<artifactId>openhmis.commons-tools</artifactId>
-							<version>3.5.0</version>
+							<version>3.6.0-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -260,7 +266,7 @@
 						<dependency>
 							<groupId>org.openmrs.module</groupId>
 							<artifactId>openhmis.commons-tools</artifactId>
-							<version>3.5.0</version>
+							<version>3.6.0-SNAPSHOT</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -346,4 +352,15 @@
 		<module>api</module>
 		<module>omod</module>
 	</modules>
+
+	<profiles>
+		<profile>
+			<id>openmrs-2.0</id>
+			<properties>
+				<openMRSVersion>2.0.5</openMRSVersion>
+				<javaCompilerVersion>1.8</javaCompilerVersion>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>
