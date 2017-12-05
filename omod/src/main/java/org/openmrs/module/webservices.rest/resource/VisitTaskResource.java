@@ -32,7 +32,7 @@ import java.util.Date;
  * REST resource representing a {@link VisitTask}
  */
 @Resource(name = ModuleRestConstants.VISIT_TASKS_RESOURCE, supportedClass = VisitTask.class,
-		supportedOpenmrsVersions = { "1.9.*", "1.10.*", "1.11.*", "1.12.*", "2.0.x" })
+		supportedOpenmrsVersions = { "1.9.*", "1.10.*", "1.11.*", "1.12.*", "2.*" })
 @Handler(supports = { VisitTask.class }, order = 0)
 public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 
