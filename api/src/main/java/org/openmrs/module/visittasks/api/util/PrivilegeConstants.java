@@ -13,16 +13,6 @@
  */
 package org.openmrs.module.visittasks.api.util;
 
-import org.openmrs.Privilege;
-import org.openmrs.api.UserService;
-import org.openmrs.api.context.Context;
-import org.openmrs.module.openhmis.commons.web.PrivilegeConstantsCompatibility;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 /**
  * Constants class for module privilege constants.
  */

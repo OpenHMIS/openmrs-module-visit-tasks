@@ -41,6 +41,7 @@ public class VisitTaskDataServiceTest extends BaseModuleContextSensitiveTest {
 	public void runBeforeAllTests() throws Exception {
 		service = Context.getService(IVisitTaskDataService.class);
 		initializeInMemoryDatabase();
+		executeDataSet(TestConstants.PATIENT_DATASET);
 		executeDataSet(TestConstants.VISIT_TASK_DATASET);
 	}
 

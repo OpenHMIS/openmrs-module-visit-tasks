@@ -36,7 +36,7 @@ import java.util.List;
  * REST resource representing a {@link VisitPredefinedTask}.
  */
 @Resource(name = ModuleRestConstants.VISIT_PREDEFINED_TASK_RESOURCE, supportedClass = VisitPredefinedTask.class,
-		supportedOpenmrsVersions = { "1.9.*", "1.10.*", "1.11.*", "1.12.*", "2.x" })
+		supportedOpenmrsVersions = { "1.9.*", "1.10.*", "1.11.*", "1.12.*", "2.*" })
 @Handler(supports = { VisitPredefinedTask.class }, order = 0)
 public class VisitPredefinedTaskResource extends BaseRestMetadataResource<VisitPredefinedTask> {
 
