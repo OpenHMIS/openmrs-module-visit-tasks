@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/visittasks.iml" filepath="$PROJECT_DIR$/visittasks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/visittasks-api.iml" filepath="$PROJECT_DIR$/api/visittasks-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/omod/visittasks-omod.iml" filepath="$PROJECT_DIR$/omod/visittasks-omod.iml" />
+    </modules>
+  </component>
+</project>

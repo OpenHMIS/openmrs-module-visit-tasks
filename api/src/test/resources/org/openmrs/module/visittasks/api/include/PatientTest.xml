@@ -1,0 +1,17 @@
+<dataset>
+
+	<person person_id="20" gender="M" birthdate="1950-04-01" dead="false" creator="1" date_created="2005-01-01 00:00:00.0"
+			voided="false" uuid="5631b434-78aa-102b-91a0-001e378eb67e"/>
+	<person person_id="21" gender="M" birthdate="1950-04-01" dead="false" creator="1" date_created="2005-01-01 00:00:00.0"
+			voided="false" uuid="0cdac6e4-cad4-11e7-9a3a-3c970eb7c0c3"/>
+	<person person_id="22" gender="M" dead="false" creator="1" date_created="2005-01-01 00:00:00.0" voided="false"
+			uuid="1716432a-4bf9-436c-baad-f03236e960e1"/>
+	<person person_id="23" gender="M" dead="true" creator="1" date_created="2005-01-01 00:00:00.0" voided="true"
+			uuid="d707fad8-dbe4-40bb-bd25-321477ca18b0"/>
+
+    <patient patient_id="20" creator="1" date_created="2005-01-01 00:00:00.0" voided="false"/>
+	<patient patient_id="21" creator="1" date_created="2005-01-01 00:00:00.0" voided="false"/>
+	<patient patient_id="22" creator="1" date_created="2005-01-01 00:00:00.0" voided="false"/>
+	<patient patient_id="23" creator="1" date_created="2005-01-01 00:00:00.0" voided="false"/>
+
+</dataset>

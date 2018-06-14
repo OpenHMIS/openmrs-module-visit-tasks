@@ -17,4 +17,5 @@ public class TestConstants {
 	public static final String BASE_DATASET_DIR = "org/openmrs/module/visittasks/api/include/";
 	public static final String VISIT_TASK_DATASET = BASE_DATASET_DIR + "VisitTaskTest.xml";
 	public static final String VISIT_PREDEFINED_TASK_DATASET = BASE_DATASET_DIR + "VisitPredefinedTaskTest.xml";
+	public static final String PATIENT_DATASET = BASE_DATASET_DIR + "PatientTest.xml";
 }
