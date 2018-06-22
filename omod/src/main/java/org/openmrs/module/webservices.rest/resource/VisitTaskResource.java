@@ -21,6 +21,7 @@ import org.openmrs.module.visittasks.api.model.VisitTask;
 import org.openmrs.module.visittasks.api.model.VisitTaskStatus;
 import org.openmrs.module.visittasks.web.ModuleRestConstants;
 import org.openmrs.module.webservices.rest.web.annotation.Resource;
+import org.openmrs.module.webservices.rest.web.representation.CustomRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.DefaultRepresentation;
 import org.openmrs.module.webservices.rest.web.representation.Representation;
 import org.openmrs.module.webservices.rest.web.resource.impl.DelegatingResourceDescription;
@@ -31,25 +32,30 @@ import java.util.Date;
  * REST resource representing a {@link VisitTask}
  */
 @Resource(name = ModuleRestConstants.VISIT_TASKS_RESOURCE, supportedClass = VisitTask.class,
-		supportedOpenmrsVersions = { "1.9.*", "1.10.*", "1.11.*", "1.12.*" })
+		supportedOpenmrsVersions = { "1.9.*", "1.10.*", "1.11.*", "1.12.*", "2.*" })
 @Handler(supports = { VisitTask.class }, order = 0)
 public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 
 	@Override
 	public DelegatingResourceDescription getRepresentationDescription(Representation rep) {
+		if (rep instanceof CustomRepresentation) {
+			return null;
+		}
+
 		DelegatingResourceDescription description = super.getRepresentationDescription(rep);
-		description.addProperty("name", Representation.DEFAULT);
-		description.addProperty("description", Representation.DEFAULT);
-		description.addProperty("status", Representation.DEFAULT);
-		description.addProperty("creator", Representation.DEFAULT);
-		description.addProperty("dateCreated", Representation.DEFAULT);
-		description.addProperty("voidedBy", Representation.DEFAULT);
-		description.addProperty("dateVoided", Representation.DEFAULT);
-		description.addProperty("closedBy", Representation.DEFAULT);
-		description.addProperty("closedOn", Representation.DEFAULT);
-		description.addProperty("voided", Representation.DEFAULT);
+		description.addProperty("name");
+		description.addProperty("description");
+		description.addProperty("status");
+		description.addProperty("creator", Representation.REF);
+		description.addProperty("dateCreated");
+		description.addProperty("voidedBy", Representation.REF);
+		description.addProperty("dateVoided");
+		description.addProperty("closedBy", Representation.REF);
+		description.addProperty("closedOn");
+		description.addProperty("voided");
 		description.addProperty("patient", Representation.REF);
 		description.addProperty("visit", Representation.REF);
+		description.addProperty("dateChanged");
 
 		return description;
 	}
@@ -78,6 +84,8 @@ public class VisitTaskResource extends BaseRestDataResource<VisitTask> {
 			delegate.setVoidedBy(Context.getAuthenticatedUser());
 			delegate.setDateVoided(new Date());
 		}
+
+		delegate.setDateChanged(new Date());
 
 		return super.save(delegate);
 	}

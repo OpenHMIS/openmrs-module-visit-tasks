@@ -14,6 +14,9 @@
 
 package org.openmrs.module.visittasks.api;
 
+import org.junit.Assert;
+import org.junit.Test;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.openhmis.commons.api.entity.IMetadataDataServiceTest;
 import org.openmrs.module.visittasks.api.model.VisitPredefinedTask;
 
@@ -31,7 +34,7 @@ public class IVisitPredefinedTaskDataServiceTest
 
 	@Override
 	protected int getTestEntityCount() {
-		return 4;
+		return 5;
 	}
 
 	@Override
@@ -58,5 +61,31 @@ public class IVisitPredefinedTaskDataServiceTest
 	@Override
 	protected void assertEntity(VisitPredefinedTask expected, VisitPredefinedTask actual) {
 		super.assertEntity(expected, actual);
+	}
+
+	@Test
+	public void shouldCreateGlobalPredefinedTask() throws Exception {
+		VisitPredefinedTask predefinedTask = createEntity(true);
+		predefinedTask.setGlobal(true);
+
+		IVisitPredefinedTaskDataService service = Context.getService(IVisitPredefinedTaskDataService.class);
+		service.save(predefinedTask);
+
+		Context.flushSession();
+
+		Assert.assertTrue("Should return true", predefinedTask.getGlobal());
+	}
+
+	@Test
+	public void shouldCreateMyPredefinedTask() throws Exception {
+		VisitPredefinedTask predefinedTask = createEntity(true);
+		predefinedTask.setGlobal(false);
+
+		IVisitPredefinedTaskDataService service = Context.getService(IVisitPredefinedTaskDataService.class);
+		service.save(predefinedTask);
+
+		Context.flushSession();
+
+		Assert.assertFalse("Should return false", predefinedTask.getGlobal());
 	}
 }

@@ -18,9 +18,6 @@
 			<div class="col-md-10">
 				<input name="entityName" class="form-control" type="text" ng-model="entity.name" class="maximized"
 				       placeholder="${ui.message('general.name')}" required/>
-				
-				<p class="checkRequired"
-				   ng-hide="nameIsRequiredMsg == '' || nameIsRequiredMsg == undefined">{{nameIsRequiredMsg}}</p>
 			</div>
 		</div>
 		<br/>

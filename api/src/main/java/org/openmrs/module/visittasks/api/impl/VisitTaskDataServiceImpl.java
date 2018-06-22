@@ -1,16 +1,18 @@
-/**
- * This Source Code Form is subject to the terms of the Mozilla Public License,
- * v. 2.0. If a copy of the MPL was not distributed with this file, You can
- * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
- * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
+/*
+ * The contents of this file are subject to the OpenMRS Public License
+ * Version 2.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://license.openmrs.org
  *
- * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
- * graphic logo is a trademark of OpenMRS Inc.
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+ * the License for the specific language governing rights and
+ * limitations under the License.
+ *
+ * Copyright (C) OpenHMIS.  All Rights Reserved.
  */
 package org.openmrs.module.visittasks.api.impl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -24,15 +26,15 @@ import org.openmrs.module.visittasks.api.IVisitTaskDataService;
 import org.openmrs.module.visittasks.api.model.VisitTask;
 import org.openmrs.module.visittasks.api.model.VisitTaskStatus;
 import org.openmrs.module.visittasks.api.util.PrivilegeConstants;
+import org.openmrs.module.visittasks.api.util.VisitTasksHibernateCriteriaConstants;
 
 import java.util.List;
 
 /**
- * provides {@VisitTask} service implementations.
+ * Data service implementation class for {@link VisitTask}s.
  */
 public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTask> implements
         IEntityAuthorizationPrivileges, IVisitTaskDataService {
-	protected final Log LOG = LogFactory.getLog(this.getClass());
 
 	@Override
 	protected IEntityAuthorizationPrivileges getPrivileges() {
@@ -45,43 +47,35 @@ public class VisitTaskDataServiceImpl extends BaseEntityDataServiceImpl<VisitTas
 	}
 
 	@Override
-	public List<VisitTask> getVisitTasksByVisit(VisitTaskStatus status, final Visit visit, PagingInfo pagingInfo) {
-		return getVisitTasksByVisitAndPatient(status, visit, null, pagingInfo);
-	}
+	public List<VisitTask> getVisitTasks(
+	        final VisitTaskStatus status, final Visit visit, PagingInfo pagingInfo) {
+		if (pagingInfo == null) {
+			throw new IllegalArgumentException("pagingInfo must not be null");
+		}
 
-	@Override
-	public List<VisitTask> getVisitTasksByPatient(VisitTaskStatus status, Patient patient, PagingInfo pagingInfo) {
-		return getVisitTasksByVisitAndPatient(status, null, patient, pagingInfo);
-	}
-
-	@Override
-	public List<VisitTask> getVisitTasksByVisitAndPatient(final VisitTaskStatus status, final Visit visit,
-	        final Patient patient, PagingInfo pagingInfo) {
 		return executeCriteria(VisitTask.class, pagingInfo, new Action1<Criteria>() {
 			@Override
 			public void apply(Criteria criteria) {
-				if (status != null) {
-					criteria.add(Restrictions.eq("status", status));
-					if (status.equals(VisitTaskStatus.CLOSED)) {
-						criteria.addOrder(Order.desc("closedOn"));
-					} else {
-						criteria.addOrder(Order.desc("dateCreated"));
-					}
+				if (status == null) {
+					criteria.addOrder(Order.desc(VisitTasksHibernateCriteriaConstants.DATE_CREATED));
 				} else {
-					criteria.addOrder(Order.desc("dateCreated"));
+					criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.STATUS, status));
+
+					if (status.equals(VisitTaskStatus.CLOSED)) {
+						criteria.addOrder(Order.desc(VisitTasksHibernateCriteriaConstants.CLOSED_ON));
+					} else {
+						criteria.addOrder(Order.desc(VisitTasksHibernateCriteriaConstants.DATE_CREATED));
+					}
 				}
 
 				if (visit != null) {
-					criteria.add(Restrictions.eq("visit", visit));
+					criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.VISIT, visit));
 				}
 
-				if (patient != null) {
-					criteria.add(Restrictions.eq("patient", patient));
-				}
-
-				criteria.add(Restrictions.eq("voided", false));
+				criteria.add(Restrictions.eq(VisitTasksHibernateCriteriaConstants.VOIDED, false));
 			}
 		});
+
 	}
 
 	@Override
